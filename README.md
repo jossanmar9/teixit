@@ -8,7 +8,7 @@ La idea és partir d'un nucli comú de gestió associativa i, amb el temps, adap
 
 ## Principis del projecte
 
-- Programari lliure.
+- Programari lliure sota la llicència **GNU AGPL v3 o posterior (AGPL-3.0-or-later)**.
 - Funcionament local o autohostejable.
 - Sense subscripcions obligatòries.
 - Sense telemetria.
