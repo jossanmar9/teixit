@@ -1,0 +1,27 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Teixit
+Upstream-Contact: https://github.com/jossanmar9/teixit/issues
+Source: https://github.com/jossanmar9/teixit
+
+Comment:
+ Teixit es distribueix tal com és, sense cap garantia. L'autor no es fa
+ responsable de la pèrdua de dades ni de cap altre dany derivat de l'ús del
+ programa. Feu còpies de seguretat externes.
+ .
+ Teixit is provided as is, without any warranty. The author is not liable for
+ any data loss or other damage arising from its use. Keep external backups.
+
+Files: *
+Copyright: 2026 José Vicente Sanjuan
+License: AGPL-3.0-or-later
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as published
+ by the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+ .
+ The full text of the license is in /usr/share/teixit/LICENSE.

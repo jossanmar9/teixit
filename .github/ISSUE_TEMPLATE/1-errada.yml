@@ -1,0 +1,73 @@
+name: "🐞 He trobat una errada / He encontrado un error"
+description: "Alguna cosa no funciona com hauria. / Algo no funciona como debería."
+title: "[Errada] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gràcies per avisar! No cal saber d'informàtica: explica-ho amb les teues paraules, com ho contaries a un company.
+        *¡Gracias por avisar! No hace falta saber de informática: explícalo con tus palabras. Puedes escribir en castellano.*
+
+        ⚠️ **No poses dades reals de persones** (noms, DNI, telèfons…) ni en el text ni en les captures. Tapa-les o fes la captura amb les dades d'exemple.
+        *No pongas datos reales de personas, ni en el texto ni en las capturas.*
+  - type: input
+    id: versio
+    attributes:
+      label: "Quina versió de Teixit tens? / ¿Qué versión tienes?"
+      description: "Ix a Ajuda → «Què canvia en cada versió». Si no ho saps, deixa-ho en blanc."
+      placeholder: "Per exemple: 1.2.1"
+  - type: textarea
+    id: feia
+    attributes:
+      label: "Què estaves fent? / ¿Qué estabas haciendo?"
+      description: "Els passos, en ordre, fins que ha passat l'errada."
+      placeholder: |
+        1. He anat a Persones i he premut «+ Nou»
+        2. He omplit el nom i la data de naixement
+        3. He premut «Desa»
+    validations:
+      required: true
+  - type: textarea
+    id: passat
+    attributes:
+      label: "Què ha passat? / ¿Qué ha pasado?"
+      description: "Si ha eixit un missatge d'error, copia'l tal qual."
+      placeholder: "Ha eixit el missatge «…» i no s'ha guardat la persona."
+    validations:
+      required: true
+  - type: textarea
+    id: esperava
+    attributes:
+      label: "Què esperaves que passara? / ¿Qué esperabas que pasara?"
+      placeholder: "Que es guardara la persona i s'obrira la seua fitxa."
+  - type: textarea
+    id: captures
+    attributes:
+      label: "Captures de pantalla / Capturas de pantalla"
+      description: "Opcional. Pots arrossegar les imatges ací. Recorda tapar les dades personals."
+  - type: dropdown
+    id: windows
+    attributes:
+      label: "Sistema / Sistema"
+      options:
+        - "Windows 11"
+        - "Windows 10"
+        - "Linux"
+        - "No ho sé / No lo sé"
+  - type: dropdown
+    id: tipus
+    attributes:
+      label: "Tipus d'entitat / Tipo de entidad"
+      options:
+        - "Associació cultural / Asociación cultural"
+        - "Falla, gaiata o foguera / Falla, gaiata u hoguera"
+        - "Club esportiu / Club deportivo"
+        - "AMPA o AFA"
+  - type: checkboxes
+    id: dades
+    attributes:
+      label: "Dades personals / Datos personales"
+      options:
+        - label: "He comprovat que no hi ha dades reals de persones en el que envie. / He comprobado que no hay datos reales de personas."
+          required: true

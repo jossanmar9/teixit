@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "📖 Manual d'usuari / Manual de usuario"
+    url: https://github.com/jossanmar9/teixit/blob/main/docs/manual-usuari.md
+    about: "Abans d'escriure, mira si el manual ho explica. / Antes de escribir, mira si el manual lo explica."
+  - name: "🌐 Web de Teixit"
+    url: https://jossanmar9.github.io/teixit/
+    about: "Què és Teixit i com començar. / Qué es Teixit y cómo empezar."

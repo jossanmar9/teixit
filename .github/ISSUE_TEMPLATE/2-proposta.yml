@@ -1,0 +1,45 @@
+name: "💡 Tinc una proposta / Tengo una propuesta"
+description: "Una idea per a millorar Teixit o una cosa que vos fa falta. / Una idea o algo que os hace falta."
+title: "[Proposta] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Les propostes de qui porta de veritat una associació, una falla, un club o una AMPA són les més útils. Explica-ho amb les teues paraules.
+        *Las propuestas de quien lleva de verdad una asociación, una falla, un club o un AMPA son las más útiles. Puedes escribir en castellano.*
+  - type: dropdown
+    id: part
+    attributes:
+      label: "De quina part del programa? / ¿De qué parte del programa?"
+      options:
+        - "Persones i socis (o cens)"
+        - "Junta, actes i documents"
+        - "Quotes, rebuts, remeses i caixa"
+        - "Loteria"
+        - "Seccions, equips o comissions"
+        - "Activitats i cursos (tallers, extraescolars, escola esportiva)"
+        - "Inventari i roba"
+        - "Còpies de seguretat"
+        - "Una cosa nova que no hi és / Algo nuevo"
+        - "Altra / Otra"
+    validations:
+      required: true
+  - type: textarea
+    id: necessitat
+    attributes:
+      label: "Què vos fa falta? / ¿Qué os hace falta?"
+      description: "Conta el problema o la tasca, més que la solució: què heu de fer i què vos costa ara."
+      placeholder: "Cada trimestre hem de fer un llistat dels socis que no han pagat la quota i ara el fem a mà amb Excel…"
+    validations:
+      required: true
+  - type: textarea
+    id: com
+    attributes:
+      label: "Com t'imagines que funcionaria? / ¿Cómo te imaginas que funcionaría?"
+      description: "Opcional. Si ho feu d'alguna manera ara (Excel, paper, un altre programa), conta-ho."
+  - type: input
+    id: entitat
+    attributes:
+      label: "Entitat (opcional) / Entidad (opcional)"
+      description: "Ens ajuda a saber qui fa servir Teixit. Deixa-ho en blanc si no ho vols dir."

@@ -1,0 +1,16 @@
+﻿AVISO DE RESPONSABILIDAD
+
+Teixit es software libre y se distribuye tal cual, sin ninguna garantía (licencia AGPL-3.0). El autor no se hace responsable de la pérdida de datos ni de ningún otro daño, directo o indirecto, que pueda derivarse del uso del programa, de un error, de una actualización o de una configuración incorrecta. Cada entidad es responsable de sus datos y de hacer copias de seguridad periódicas en un lugar externo (USB o nube).
+
+Al continuar la instalación, aceptáis este aviso.
+
+PRIVACIDAD DE TEIXIT
+
+En resumen: Teixit no recoge, no envía y no comparte ningún dato. Todo se queda en este ordenador.
+
+- Teixit solo funciona en este ordenador: no se puede entrar desde la red ni desde Internet.
+- No se conecta a Internet para nada: no envía estadísticas, ni informes de errores, ni comprueba actualizaciones.
+- Los datos se guardan en la carpeta del programa (data\teixit.db). Las copias de seguridad, en el ordenador y, si lo configuráis, en la carpeta externa que elijáis (USB o nube), cifradas con contraseña si queréis.
+- La entidad es la responsable de los datos que introduce y debe cumplir el RGPD y la LOPDGDD. El desarrollador de Teixit no tiene acceso a ningún dato.
+
+La declaración completa está en el archivo PRIVACITAT.md de la carpeta del programa y, dentro de Teixit, en el menú Ayuda > Privacidad.

@@ -1,0 +1,2 @@
+# Els scripts de Linux han de tindre finals de línia LF encara que es treballe des de Windows
+*.sh text eol=lf

@@ -1,0 +1,24 @@
+# Dades (mai al repositori: contenen dades personals)
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# Construcció
+dist/
+php.zip
+
+# Sistema i editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.log
+*.tmp
+*.swp
+*~
+
+# Generat: la web i els PDF dels manuals (es fan amb eines/pdf.sh i en publicar)
+_site/
+docs/pdf/

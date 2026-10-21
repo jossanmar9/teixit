@@ -1,0 +1,41 @@
+# Publica la web de presentació (GitHub Pages) cada vegada que canvia el codi o la documentació
+name: Web
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  construeix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Els PDF dels manuals no es guarden al repositori: es fan ací, amb el Chrome del servidor de GitHub
+      - name: Genera els manuals en PDF
+        run: bash eines/pdf.sh
+      - name: Genera la web
+        run: php eines/web.php _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  publica:
+    needs: construeix
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.desplega.outputs.page_url }}
+    steps:
+      - id: desplega
+        uses: actions/deploy-pages@v4

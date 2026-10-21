@@ -1,0 +1,345 @@
+# Construeix Teixit per a Windows i el publica com a «release» quan es puja una etiqueta v*
+name: Publica
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  proves:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_sqlite, mbstring
+      - name: Revisa la sintaxi
+        run: find . -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Prova que arranca
+        run: |
+          export TEIXIT_DADES=$RUNNER_TEMP/dades
+          php -S 127.0.0.1:8750 -t app app/index.php > servidor.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8750/ | grep -q "Configuració inicial"
+          curl -fsS -o /dev/null http://127.0.0.1:8750/assets/estil.css
+
+  windows:
+    needs: proves
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Versió
+        id: versio
+        shell: pwsh
+        run: |
+          $v = if ("${{ github.ref_type }}" -eq "tag") { "${{ github.ref_name }}".TrimStart('v') } else { "0.0.0-prova" }
+          "versio=$v" >> $env:GITHUB_OUTPUT
+          # Versió només amb números, per a les propietats dels fitxers de Windows (1.2.0-prova → 1.2.0)
+          "numerica=$(($v -split '-')[0])" >> $env:GITHUB_OUTPUT
+
+      - name: Baixa PHP portable (8.3, x64, NTS)
+        shell: pwsh
+        run: |
+          # Si el servidor de php.net falla un moment, es torna a provar (fins a 6 vegades)
+          function Reintenta([scriptblock]$accio) {
+            for ($i = 1; $i -le 6; $i++) {
+              try { return & $accio } catch {
+                if ($i -eq 6) { throw }
+                Write-Host "Intent $i fallit ($($_.Exception.Message)); es torna a provar en $(20 * $i) s"
+                Start-Sleep (20 * $i)
+              }
+            }
+          }
+          $rel = Reintenta { Invoke-RestMethod https://windows.php.net/downloads/releases/releases.json }
+          $zip = $rel.'8.3'.'nts-vs16-x64'.zip
+          Write-Host "PHP $($rel.'8.3'.version): $($zip.path)"
+          Reintenta { Invoke-WebRequest "https://windows.php.net/downloads/releases/$($zip.path)" -OutFile php.zip }
+          $hash = (Get-FileHash php.zip -Algorithm SHA256).Hash.ToLower()
+          if ($zip.sha256 -and $hash -ne $zip.sha256.ToLower()) { throw "SHA256 incorrecte" }
+          Expand-Archive php.zip -DestinationPath dist\Teixit\php
+          # Només deixem el que cal
+          $php = "dist\Teixit\php"
+          Remove-Item "$php\dev", "$php\extras", "$php\lib" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "$php\php-cgi.exe", "$php\phpdbg.exe", "$php\php.ini-*" -Force -ErrorAction SilentlyContinue
+          $mantindre = 'php_pdo_sqlite.dll','php_sqlite3.dll','php_mbstring.dll','php_fileinfo.dll','php_opcache.dll','php_sodium.dll'
+          Get-ChildItem "$php\ext" | Where-Object { $mantindre -notcontains $_.Name } | Remove-Item -Force
+          Copy-Item launcher\php.ini "$php\php.ini"
+          # Biblioteques de Visual C++ al costat de php.exe (instal·lació local permesa per Microsoft)
+          foreach ($dll in 'vcruntime140.dll','vcruntime140_1.dll','msvcp140.dll') {
+            if (Test-Path "$env:WINDIR\System32\$dll") { Copy-Item "$env:WINDIR\System32\$dll" $php }
+          }
+
+      - name: Comprova PHP i les extensions
+        shell: pwsh
+        run: |
+          $php = "dist\Teixit\php"
+          & "$php\php.exe" -c "$php\php.ini" -d "extension_dir=$PWD\$php\ext" -m | Tee-Object mods.txt
+          foreach ($m in 'pdo_sqlite','mbstring','sqlite3','sodium','SimpleXML','xmlreader','zlib') { if (-not (Select-String -Path mods.txt -Pattern "^$m$" -Quiet)) { throw "Falta $m" } }
+
+      - name: Baixa WebView2 (el component de Windows per a la finestra de Teixit)
+        shell: pwsh
+        run: |
+          $v = '1.0.4129.50'
+          $zip = Join-Path $env:RUNNER_TEMP 'webview2.zip'
+          $dir = Join-Path $env:RUNNER_TEMP 'webview2'
+          for ($i = 1; $i -le 4; $i++) {
+            try { Invoke-WebRequest "https://www.nuget.org/api/v2/package/Microsoft.Web.WebView2/$v" -OutFile $zip; break }
+            catch { if ($i -eq 4) { throw }; Start-Sleep (15 * $i) }
+          }
+          Expand-Archive $zip $dir -Force
+          $lib = Get-ChildItem "$dir\lib" -Directory | Where-Object Name -like 'net4*' | Sort-Object Name | Select-Object -First 1
+          if (-not $lib) { throw "No s'ha trobat la biblioteca de WebView2 per a .NET Framework" }
+          Copy-Item "$($lib.FullName)\Microsoft.Web.WebView2.Core.dll", "$($lib.FullName)\Microsoft.Web.WebView2.WinForms.dll" dist\Teixit
+          Copy-Item "$dir\runtimes\win-x64\native\WebView2Loader.dll" dist\Teixit
+          $llic = Get-ChildItem $dir -Filter 'LICENSE*' -File | Select-Object -First 1
+          if ($llic) { Copy-Item $llic.FullName dist\Teixit\WebView2-LICENSE.txt }
+          Get-ChildItem dist\Teixit -File
+
+      - name: Compila el llançador
+        shell: pwsh
+        run: |
+          # El compilador de Visual Studio si hi és; si no, el de .NET Framework (C# 5)
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          $csc = if (Test-Path $vswhere) { & $vswhere -latest -products * -find 'MSBuild\**\Bin\Roslyn\csc.exe' | Select-Object -First 1 }
+          if (-not $csc) { $csc = "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe" }
+          Write-Host "Compilador: $csc"
+          # Versió a les propietats de Teixit.exe (el nom, la descripció i la llicència ja són a Teixit.cs)
+          $n = "${{ steps.versio.outputs.numerica }}.0"
+          $info = Join-Path $env:RUNNER_TEMP "Versio.cs"
+          @(
+            'using System.Reflection;'
+            '[assembly: AssemblyCompany("José Vicente Sanjuan")]'
+            "[assembly: AssemblyVersion(""$n"")]"
+            "[assembly: AssemblyFileVersion(""$n"")]"
+            "[assembly: AssemblyInformationalVersion(""${{ steps.versio.outputs.versio }}"")]"
+          ) | Set-Content $info -Encoding utf8
+          & $csc /nologo /codepage:65001 /optimize+ /target:winexe /platform:x64 `
+            /out:dist\Teixit\Teixit.exe /win32icon:launcher\teixit.ico `
+            /resource:app\assets\icona.png,icona.png `
+            /r:System.Windows.Forms.dll /r:System.Drawing.dll `
+            /r:dist\Teixit\Microsoft.Web.WebView2.Core.dll /r:dist\Teixit\Microsoft.Web.WebView2.WinForms.dll `
+            launcher\Teixit.cs launcher\Visor.cs $info
+          if ($LASTEXITCODE -ne 0) { throw "Error compilant el llançador" }
+
+      - name: Copia el programa i la documentació
+        shell: pwsh
+        run: |
+          $d = "dist\Teixit"
+          Copy-Item app, src -Destination $d -Recurse
+          New-Item -ItemType Directory "$d\docs", "$d\data" -Force | Out-Null
+          Copy-Item docs\manual-usuari.md, docs\manual-usuario.md, docs\guia-installacio.md, docs\guia-instalacion.md "$d\docs"
+          Copy-Item docs\imatges -Destination "$d\docs" -Recurse
+          Copy-Item README.md, CHANGELOG.md, PRIVACITAT.md, LLICENCIA.md, LICENSE, teixit.ini $d
+          Set-Content "$d\data\LLEGIX-ME.txt" "Ací es guarden les dades de Teixit (teixit.db) i les còpies automàtiques. No l'esborres."
+
+      - name: Genera els manuals en PDF
+        shell: pwsh
+        run: |
+          $env:TEIXIT_VERSIO = "${{ steps.versio.outputs.versio }}"
+          $php = "dist\Teixit\php"
+          $nav = @("${env:ProgramFiles}\Google\Chrome\Application\chrome.exe",
+                   "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe",
+                   "${env:ProgramFiles}\Microsoft\Edge\Application\msedge.exe") | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (-not $nav) { throw "No hi ha cap navegador per a generar els PDF" }
+          $pdf = "$PWD\dist\Teixit\docs\pdf"
+          New-Item -ItemType Directory $pdf -Force | Out-Null
+          foreach ($d in 'manual-usuari','manual-usuario','guia-installacio','guia-instalacion') {
+            $html = Join-Path $env:RUNNER_TEMP "$d.html"
+            & "$php\php.exe" -c "$php\php.ini" -d "extension_dir=$PWD\$php\ext" eines\document-html.php "docs\$d.md" $html
+            if ($LASTEXITCODE -ne 0) { throw "Error convertint $d" }
+            $url = "file:///" + ($html -replace '\\', '/')
+            Start-Process $nav -Wait -ArgumentList "--headless=new", "--disable-gpu", "--no-first-run", "--user-data-dir=`"$env:RUNNER_TEMP\perfil-nav`"", "--no-pdf-header-footer", "--print-to-pdf=`"$pdf\$d.pdf`"", $url
+            if (-not (Test-Path "$pdf\$d.pdf")) { throw "No s'ha generat $d.pdf" }
+          }
+          Get-ChildItem $pdf
+
+      - name: Prova el paquet
+        shell: pwsh
+        run: |
+          $d = (Resolve-Path dist\Teixit).Path
+          $env:TEIXIT_DADES = "$env:RUNNER_TEMP\dades"
+          $p = Start-Process "$d\php\php.exe" -ArgumentList "-c `"$d\php\php.ini`" -d `"extension_dir=$d\php\ext`" -S 127.0.0.1:8741 -t `"$d\app`" `"$d\app\index.php`"" -PassThru -WindowStyle Hidden
+          Start-Sleep 3
+          $r = Invoke-WebRequest http://127.0.0.1:8741/ -UseBasicParsing
+          Stop-Process $p
+          if ($r.Content -notmatch "Configuraci") { throw "La pàgina inicial no s'ha carregat" }
+
+      - name: Prova la finestra de Teixit (WebView2)
+        # Si l'ordinador de GitHub no pot obrir finestres, només avisa: cal provar-ho a mà
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          $env:TEIXIT_DADES = Join-Path $env:RUNNER_TEMP 'dades-visor'
+          $env:TEIXIT_PROVA_VISOR = Join-Path $env:RUNNER_TEMP 'visor.txt'
+          $p = Start-Process (Resolve-Path dist\Teixit\Teixit.exe).Path -PassThru
+          $acabat = $p.WaitForExit(120000)
+          Get-Content (Join-Path $env:TEIXIT_DADES 'servidor.log') -ErrorAction SilentlyContinue | Select-Object -Last 15
+          if (-not $acabat) { Stop-Process $p -Force; throw "Teixit.exe no s'ha tancat sol" }
+          if (-not (Test-Path $env:TEIXIT_PROVA_VISOR)) { throw "La finestra de Teixit no ha carregat la pàgina" }
+          $r = Get-Content $env:TEIXIT_PROVA_VISOR -Raw -Encoding utf8
+          Write-Host "Resultat: $r"
+          if ($r -notmatch '^ok ') { throw "La finestra de Teixit no ha carregat bé: $r" }
+
+      - name: Crea el zip portable
+        shell: pwsh
+        run: Compress-Archive -Path dist\Teixit -DestinationPath "dist\Teixit-${{ steps.versio.outputs.versio }}-portable.zip"
+
+      - name: Crea l'instal·lador
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress | Out-Null }
+          & $iscc /Q "/DVersio=${{ steps.versio.outputs.versio }}" "/DVersioNum=${{ steps.versio.outputs.numerica }}" "/DOrigen=..\dist\Teixit" launcher\teixit.iss
+          if ($LASTEXITCODE -ne 0) { throw "Error creant l'instal·lador" }
+
+      - name: Guarda els fitxers
+        uses: actions/upload-artifact@v6
+        with:
+          name: Teixit-windows
+          path: |
+            dist/*.zip
+            dist/*.exe
+            dist/Teixit/docs/pdf/*.pdf
+
+  linux:
+    needs: windows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_sqlite, mbstring, xml, sodium
+
+      - name: Baixa els manuals en PDF (fets a Windows)
+        uses: actions/download-artifact@v6
+        with:
+          name: Teixit-windows
+          path: win
+
+      - name: Crea el paquet per a Linux
+        run: |
+          v="${{ github.ref_type == 'tag' && github.ref_name || 'v0.0.0-prova' }}"; v="${v#v}"
+          d=dist/Teixit
+          mkdir -p "$d/docs"
+          cp -a app src "$d/"
+          cp docs/manual-usuari.md docs/manual-usuario.md docs/guia-installacio.md docs/guia-instalacion.md "$d/docs/"
+          cp -a docs/imatges "$d/docs/"
+          cp -a win/Teixit/docs/pdf "$d/docs/"
+          cp README.md CHANGELOG.md PRIVACITAT.md LLICENCIA.md LICENSE teixit.ini "$d/"
+          cp launcher/linux/teixit.sh launcher/linux/teixit-visor.py launcher/linux/installa.sh launcher/linux/desinstalla.sh "$d/"
+          chmod +x "$d"/*.sh
+          tar -czf "dist/Teixit-$v-linux.tar.gz" -C dist Teixit
+          bash eines/construeix-deb.sh dist/Teixit "$v" dist
+          ls -la dist
+
+      - name: Prova el paquet
+        run: |
+          export TEIXIT_DADES=$RUNNER_TEMP/dades TEIXIT_NAVEGADOR=0 TEIXIT_PORT=8742
+          dist/Teixit/teixit.sh > llançador.log 2>&1 &
+          LLANCADOR=$!
+          for i in $(seq 1 30); do curl -fsS -o pagina.html http://127.0.0.1:8742/ && break; sleep 1; done
+          cat llançador.log
+          grep -q "Configuració inicial" pagina.html
+          kill -TERM $LLANCADOR; wait $LLANCADOR || true
+
+      - name: Prova la finestra de Teixit (WebKitGTK)
+        # Si l'ordinador de GitHub no pot obrir la finestra, només avisa: cal provar-ho a mà
+        continue-on-error: true
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q python3-gi gir1.2-gtk-3.0 gir1.2-webkit2-4.1 xvfb
+          export TEIXIT_DADES=$RUNNER_TEMP/dades-visor TEIXIT_PORT=8744 TEIXIT_PROVA_VISOR=$RUNNER_TEMP/visor.txt
+          timeout 120 xvfb-run -a dist/Teixit/teixit.sh < /dev/null > visor.log 2>&1 || true
+          cat visor.log
+          cat "$TEIXIT_DADES/visor.log" 2>/dev/null || true
+          echo "Resultat: $(cat "$TEIXIT_PROVA_VISOR")"
+          grep -q '^ok ' "$TEIXIT_PROVA_VISOR"
+          grep -q "Fent la còpia de seguretat" visor.log
+
+      - name: Prova el paquet .deb
+        run: |
+          sudo apt-get install -y --no-install-recommends ./dist/teixit_*_all.deb
+          export TEIXIT_DADES=$RUNNER_TEMP/dades-deb TEIXIT_NAVEGADOR=0 TEIXIT_PORT=8743
+          teixit > deb.log 2>&1 &
+          LLANCADOR=$!
+          for i in $(seq 1 30); do curl -fsS -o pagina.html http://127.0.0.1:8743/ && break; sleep 1; done
+          cat deb.log
+          grep -q "Configuració inicial" pagina.html
+          kill -TERM $LLANCADOR; wait $LLANCADOR || true
+          sudo apt-get remove -y teixit
+
+      - name: Guarda el paquet
+        uses: actions/upload-artifact@v6
+        with:
+          name: Teixit-linux
+          path: |
+            dist/*.tar.gz
+            dist/*.deb
+
+  publica:
+    needs: [windows, linux]
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Baixa els paquets
+        uses: actions/download-artifact@v6
+        with:
+          path: paquets
+          merge-multiple: true
+
+      - name: Notes de la versió (del CHANGELOG)
+        id: notes
+        run: |
+          python3 - <<'PY'
+          import os, re
+          v = os.environ['GITHUB_REF_NAME'].lstrip('v')
+          repo = 'https://github.com/' + os.environ['GITHUB_REPOSITORY']
+          canvis, dins = [], False
+          for l in open('CHANGELOG.md', encoding='utf-8'):
+              if l.startswith('## '):
+                  if dins:
+                      break
+                  dins = l.startswith(f'## [{v}]')
+                  continue
+              if dins:
+                  canvis.append(l.rstrip('\n'))
+          if not ''.join(canvis).strip():
+              canvis = ['Consulta el registre de canvis.']
+          notes = [
+              f'**Teixit {v}**: Gestió lliure per a associacions.', '',
+              '| Fitxer | Per a |', '|---|---|',
+              '| **Teixit-…-installador.exe** | Windows 10/11 (64 bits). No necessita permisos d\'administrador. |',
+              '| **Teixit-…-portable.zip** | Windows, sense instal·lar: descomprimeix-lo i obri `Teixit.exe`. |',
+              '| **teixit_…_all.deb** | Debian, Ubuntu, Linux Mint…: `sudo apt install ./teixit_…_all.deb` (instal·la també PHP). |',
+              '| **Teixit-…-linux.tar.gz** | Altres Linux: descomprimeix-lo i executa `./installa.sh` (cal PHP 8.1 o posterior). |', '',
+              '> El programa encara no està signat digitalment: Windows pot avisar o bloquejar-lo. '
+              f'Com obrir-lo igualment: [guia d\'instal·lació]({repo}/blob/main/docs/guia-installacio.md).', '',
+              'Manuals i guies en PDF (valencià i castellà) adjunts a esta versió i dins del programa (Ajuda). '
+              f'[Privacitat]({repo}/blob/main/PRIVACITAT.md)', '',
+              '## Què canvia',
+          ] + canvis + ['', f'Tots els canvis: [CHANGELOG.md]({repo}/blob/{os.environ["GITHUB_REF_NAME"]}/CHANGELOG.md)']
+          open('notes.md', 'w', encoding='utf-8').write('\n'.join(notes) + '\n')
+          open(os.environ['GITHUB_OUTPUT'], 'a').write(f'versio={v}\n')
+          PY
+          cat notes.md
+
+      - name: Publica la versió
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Teixit ${{ steps.notes.outputs.versio }}
+          files: |
+            paquets/*.zip
+            paquets/*.exe
+            paquets/*.tar.gz
+            paquets/*.deb
+            paquets/Teixit/docs/pdf/*.pdf
+          body_path: notes.md

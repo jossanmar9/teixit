@@ -1,0 +1,113 @@
+/* Documents A4: consentiments, certificats, llistats i etiquetes — © 2026 José Vicente Sanjuan · SPDX-License-Identifier: AGPL-3.0-or-later */
+/* S'afig a butlleti.css, que porta la pàgina A4, la capçalera i la barra d'impressió */
+
+.centrat { text-align: center; }
+.document h2.centrat { margin: 26px 0 18px; }
+.document h3 { margin: 16px 0 6px; }
+.justificat { text-align: justify; }
+.document p { margin: 8px 0; }
+
+/* Dades en format de formulari en paper */
+.formulari-paper { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
+.formulari-paper th, .formulari-paper td { border: 1px solid #bfc8d6; padding: 6px 8px; text-align: left; vertical-align: bottom; height: 9mm; }
+.formulari-paper th { width: 1%; white-space: nowrap; background: #eef5f5; font-size: 9pt; font-weight: 600; color: #3b4558; }
+.linia { display: inline-block; min-width: 40mm; border-bottom: 1px dotted #8a94a6; height: 1em; }
+.linia.llarga { min-width: 70mm; }
+
+.opcions-paper { display: flex; gap: 22mm; margin: 12px 0 10px 6mm; font-size: 11pt; }
+.casella { display: inline-block; width: 4.5mm; height: 4.5mm; border: 1.5px solid #1d2433; vertical-align: -0.6mm; margin-right: 2mm; }
+.text-legal { font-size: 8pt; color: #5d6778; text-align: justify; margin-top: 14px !important; }
+.document .lloc-data { margin: 0 0 24mm; }
+.document .signatures { justify-content: flex-end; }
+.document .signatures div { flex: 0 0 75mm; }
+
+/* Certificats */
+.certificat { font-size: 11.5pt; line-height: 1.75; }
+.certificat .certifica { font-weight: 700; letter-spacing: .08em; margin: 18px 0 !important; }
+.llista-cert { margin: 4px 0 10px 8mm; }
+.certificat footer { padding-top: 30mm; }
+.certificat .signatures { gap: 20mm; }
+.certificat .signatures div { border-top: 1px solid #1d2433; padding-top: 6px; font-size: 10pt; color: #1d2433; line-height: 1.4; }
+.rol-signa { display: block; font-size: 8.5pt; color: #5d6778; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
+
+/* Llistats */
+.full.llistat { min-height: 0; }
+.llistat h2 { margin-top: 14px; }
+.llistat .subtitol { margin: 0 0 10px; color: #5d6778; }
+.llistat h3 { margin: 16px 0 6px; }
+.taula-llistat { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-bottom: 8px; }
+.taula-llistat th, .taula-llistat td { border: 1px solid #bfc8d6; padding: 4px 6px; text-align: left; vertical-align: top; }
+.taula-llistat th { background: #e8f0fa; font-size: 8.5pt; }
+.taula-llistat td.num, .taula-llistat th.num { text-align: right; white-space: nowrap; }
+.taula-llistat tr.destacat td { background: #fff4c2; }
+.taula-llistat tfoot td { font-weight: 700; background: #eef5f5; }
+.llistat .peu-llistat { color: #5d6778; font-size: 8.5pt; margin-top: 10px; }
+
+/* Etiquetes adhesives: la mida exacta la posa l'estil en línia de cada format */
+.full-etiquetes { width: 210mm; height: 297mm; margin: 20px auto; background: #fff; box-shadow: 0 4px 20px rgba(20,40,75,.15); display: grid; overflow: hidden; }
+.etiqueta { overflow: hidden; padding: 4mm 5mm; font-size: 10pt; line-height: 1.3; display: flex; flex-direction: column; justify-content: center; }
+.etiqueta b { font-weight: 600; }
+.mostra-vores .etiqueta { outline: 1px dashed #c9d2df; outline-offset: -1px; }
+
+@media print {
+    .document .formulari-paper th, .taula-llistat th, .taula-llistat tr.destacat td, .taula-llistat tfoot td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .full.llistat { page-break-after: auto; break-after: auto; }
+    .taula-llistat tr { break-inside: avoid; }
+    .taula-llistat thead { display: table-header-group; }
+    .full-etiquetes { margin: 0; box-shadow: none; page-break-after: always; break-after: page; }
+    .full-etiquetes:last-of-type { page-break-after: auto; break-after: auto; }
+    .mostra-vores .etiqueta { outline: none; }
+}
+
+/* Rebuts: dos per full */
+.full-rebuts { display: flex; flex-direction: column; gap: 0; padding-top: 10mm; padding-bottom: 10mm; }
+.rebut { height: 132mm; box-sizing: border-box; padding: 4mm 0 6mm; border-bottom: 1px dashed #8a94a6; position: relative; overflow: hidden; }
+.rebut:last-child { border-bottom: 0; }
+.rebut .capcalera { margin-bottom: 4mm; }
+.rebut .capcalera img { max-height: 16mm; }
+.rebut .capcalera h1 { font-size: 13pt; }
+.rebut .capcalera p { font-size: 8pt; }
+.rebut-cap { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3mm; }
+.rebut-cap h2 { margin: 0; letter-spacing: .12em; font-size: 15pt; }
+.rebut-cap p { margin: 0; text-align: right; font-size: 9.5pt; }
+.rebut .formulari-paper th, .rebut .formulari-paper td { height: 7mm; padding: 3px 8px; }
+.rebut .taula-llistat { margin-top: 2mm; font-size: 9pt; }
+.rebut .taula-llistat td.num { width: 28mm; }
+.rebut-total { display: flex; justify-content: flex-end; gap: 6mm; align-items: baseline; margin-top: 2mm; font-size: 11pt; }
+.rebut-total b { font-size: 14pt; border: 1.5px solid #1d2433; padding: 1mm 4mm; }
+.rebut-forma { font-size: 9pt; margin: 3mm 0 0; }
+.rebut-signa { position: absolute; right: 0; bottom: 14mm; width: 62mm; border-top: 1px solid #1d2433; padding-top: 2px; text-align: center; font-size: 8.5pt; color: #5d6778; }
+.segell-pagat { display: inline-block; margin-top: 4mm; padding: 2mm 5mm; border: 2.5px solid #1e7d4f; color: #1e7d4f; font-weight: 700; letter-spacing: .06em; transform: rotate(-3deg); }
+.segell-pagat.anullat { border-color: #b3261e; color: #b3261e; }
+.rebut .text-legal { position: absolute; bottom: 4mm; left: 0; right: 0; margin: 0 !important; }
+
+/* Participacions de loteria: 8 per full (2 × 4) */
+.full.full-participacions { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 64mm); gap: 0; padding: 12mm 15mm; }
+.participacio { border: 1px dashed #8a94a6; padding: 4mm 5mm; display: flex; flex-direction: column; gap: 1.2mm; font-size: 8.5pt; line-height: 1.3; overflow: hidden; }
+.participacio .p-cap { display: flex; gap: 3mm; align-items: center; }
+.participacio .p-cap img { max-height: 11mm; max-width: 22mm; object-fit: contain; }
+.participacio .p-cap b { font-size: 9.5pt; }
+.participacio .p-sorteig { font-weight: 600; }
+.participacio .p-numeros { font-size: 17pt; font-weight: 700; letter-spacing: .08em; text-align: center; margin: 1mm 0; }
+.participacio .p-imports { display: flex; justify-content: space-between; gap: 3mm; }
+.participacio .p-imports b { font-size: 11pt; }
+.participacio .p-num { text-align: right; font-weight: 700; }
+.participacio .p-peu { font-size: 6.8pt; color: #5d6778; margin-top: auto; }
+@media print {
+    .full.full-participacions { padding: 0; }
+}
+
+/* Actes, certificats d'acords i full d'alta */
+.acord { margin: 4mm 8mm; padding: 3mm 5mm; border-left: 3px solid #1f5e67; background: #eef5f5; font-style: italic; }
+.full-alta h3 { margin: 10px 0 4px; }
+.full-alta .formulari-paper th, .full-alta .formulari-paper td { height: 8mm; }
+.full-alta .opcions-paper { flex-wrap: wrap; gap: 4mm 12mm; margin: 4px 0 6px 2mm; font-size: 10pt; }
+.bloc-sepa { margin-top: 8px; padding: 3mm 4mm; border: 1px solid #bfc8d6; border-radius: 2mm; }
+.bloc-sepa .formulari-paper { margin: 2mm 0; }
+.caixetes { white-space: nowrap; letter-spacing: 0; }
+.caixeta { display: inline-block; width: 5.2mm; height: 6.5mm; border: 1px solid #8a94a6; margin-right: -1px; vertical-align: middle; }
+.full-alta .lloc-data { margin: 6mm 0 14mm !important; }
+.rgpd .taula-llistat th { width: 32%; background: #eef5f5; text-align: left; font-weight: 600; }
+.rgpd h3 { margin-top: 14px; }
+@media print { .acord, .rgpd .taula-llistat th { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+.full-alta .desc-tipus { color: #555; }

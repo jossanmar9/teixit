@@ -1,0 +1,41 @@
+name: Proves
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proves:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_sqlite, sqlite3, mbstring, dom, sodium
+          coverage: none
+
+      - name: Revisa la sintaxi PHP
+        run: find app src eines tests -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Executa les proves automatitzades
+        run: php tests/run.php
+
+      - name: Proves d'integració (Teixit de veres, en valencià i castellà)
+        run: python3 tests/integracio.py
+
+      - name: Prova d'arrancada
+        run: |
+          export TEIXIT_DADES=$RUNNER_TEMP/dades
+          php -S 127.0.0.1:8750 -t app app/index.php > servidor.log 2>&1 &
+          SERVIDOR=$!
+          trap 'kill $SERVIDOR 2>/dev/null || true' EXIT
+          sleep 2
+          curl -fsS http://127.0.0.1:8750/ | grep -q "Configuració inicial"
+          curl -fsS -o /dev/null http://127.0.0.1:8750/assets/estil.css
