@@ -64,6 +64,8 @@ $T = [
         'qui_contacte' => 'Teniu dubtes o propostes? Obriu una incidència a GitHub: hi ha un formulari senzill que vos guia pas a pas.',
         'qui_lema' => 'Del mateix autor que Compàs, el programa per a societats musicals.',
         'qui_llig' => 'D\'on ve',
+        'germa' => 'Sou una societat musical, una banda o una escola de música? Per a vosaltres hi ha',
+        'germa_nom' => 'Compàs', 'germa_url' => 'https://jossanmar9.github.io/compas/',
         'que_titol' => 'Què pots fer amb Teixit',
         'que_intro' => 'Pensat per a qui porta la secretaria o la tresoreria, encara que no siga informàtic.',
         'moduls' => [
@@ -185,6 +187,8 @@ $T = [
         'qui_contacte' => '¿Tenéis dudas o propuestas? Abrid una incidencia en GitHub: hay un formulario sencillo que os guía paso a paso.',
         'qui_lema' => 'Del mismo autor que Compàs, el programa para sociedades musicales.',
         'qui_llig' => 'De dónde viene',
+        'germa' => '¿Sois una sociedad musical, una banda o una escuela de música? Para vosotros está',
+        'germa_nom' => 'Compàs', 'germa_url' => 'https://jossanmar9.github.io/compas/es/',
         'que_titol' => 'Qué puedes hacer con Teixit',
         'que_intro' => 'Pensado para quien lleva la secretaría o la tesorería, aunque no sea informático.',
         'moduls' => [
@@ -344,6 +348,7 @@ function pagina(array $t, string $l, string $base, string $repo, string $versio,
     </div>
     <p class="versio">{$versioText}</p>
     <p class="qui-lema">{$t['qui_lema']} <a href="#qui">{$t['qui_llig']} →</a></p>
+    <p class="germa">{$t['germa']} <a href="{$t['germa_url']}">{$t['germa_nom']} →</a></p>
   </div>
   <figure class="hero-captura">
     <img src="{$base}img/{$l}/web-inici.jpg" alt="{$t['captures']['web-inici']}" width="1920" height="1200">

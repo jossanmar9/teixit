@@ -215,6 +215,8 @@ code { font-size: .92em; background: color-mix(in srgb, var(--blau) 12%, transpa
 /* Lema de l'autor i contacte */
 .qui-lema { margin-top: 1rem; color: var(--suau); font-size: .98rem; }
 .qui-lema a { font-weight: 600; white-space: nowrap; }
+.germa { margin-top: .4rem; color: var(--suau); font-size: .98rem; }
+.germa a { font-weight: 600; }
 .qui .contacte { font-size: 1.05rem; margin-top: 1.5rem; }
 
 /* Mòbils: mòduls en dues columnes i més compactes */
