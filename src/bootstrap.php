@@ -5,7 +5,7 @@
 
 declare(strict_types=1);
 
-const TEIXIT_VERSIO = '1.1.0';
+const TEIXIT_VERSIO = '1.1.1';
 const SRC_DIR = __DIR__;
 
 define('ARREL_DIR', dirname(__DIR__));

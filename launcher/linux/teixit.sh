@@ -166,7 +166,7 @@ fi
 TOKEN="$(od -An -N24 -tx1 /dev/urandom | tr -d ' \n')"
 TEIXIT_DADES="$DADES" TEIXIT_TOKEN="$TOKEN" "$PHP" \
     -d display_errors=0 -d log_errors=1 -d error_log="$DADES/php-errors.log" \
-    -d memory_limit=256M -d upload_max_filesize=64M -d post_max_size=64M -d max_execution_time=120 \
+    -d memory_limit=256M -d upload_max_filesize=64M -d post_max_size=64M -d max_execution_time=120 -d session.upload_progress.enabled=0 \
     -S "127.0.0.1:$PORT" -t "$ARREL/app" "$ARREL/app/index.php" >>"$DADES/servidor.log" 2>&1 &
 SERVIDOR=$!
 

@@ -65,6 +65,9 @@ jobs:
           $rel = Reintenta { Invoke-RestMethod https://windows.php.net/downloads/releases/releases.json }
           $zip = $rel.'8.3'.'nts-vs16-x64'.zip
           Write-Host "PHP $($rel.'8.3'.version): $($zip.path)"
+          # No es publica mai amb una PHP amb vulnerabilitats conegudes (PHP2Shell, CVE-2026-109618 i CVE-2026-109619: corregides en la 8.3.36)
+          $minima = [version]'8.3.36'
+          if ([version]$rel.'8.3'.version -lt $minima) { throw "PHP $($rel.'8.3'.version) és anterior a la $minima, que corregix vulnerabilitats de seguretat" }
           Reintenta { Invoke-WebRequest "https://windows.php.net/downloads/releases/$($zip.path)" -OutFile php.zip }
           $hash = (Get-FileHash php.zip -Algorithm SHA256).Hash.ToLower()
           if ($zip.sha256 -and $hash -ne $zip.sha256.ToLower()) { throw "SHA256 incorrecte" }
