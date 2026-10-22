@@ -352,6 +352,26 @@ details.fill summary { cursor: pointer; font-weight: 600; margin: 8px 0; }
 .tipus-entitat { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; margin-top: 8px; }
 .tipus-opcio { display: flex; gap: 8px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--vora); border-radius: var(--radi); cursor: pointer; background: var(--fons-camp, transparent); }
 .tipus-opcio:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-.tipus-opcio input { margin-top: 3px; }
+.tipus-opcio input { margin-top: 3px; flex: none; width: auto; }
 .tipus-opcio span { display: flex; flex-direction: column; gap: 2px; }
 .tipus-opcio small { color: var(--suau); font-weight: 400; line-height: 1.35; }
+
+/* Camp de relació amb cerca (moltes opcions) */
+.cerca-ref { position: relative; }
+.cerca-ref input { width: 100%; }
+.resultats-ref { position: absolute; z-index: 20; left: 0; right: 0; top: 100%; margin: 2px 0 0; padding: 4px 0; list-style: none; max-height: 280px; overflow-y: auto;
+    background: var(--superficie); border: 1px solid var(--vora); border-radius: var(--radi); box-shadow: 0 6px 18px rgba(58, 42, 32, .15); }
+.resultats-ref li { padding: 6px 12px; cursor: pointer; }
+.resultats-ref li:hover, .resultats-ref li.actiu { background: var(--blau-clar); }
+.resultats-ref li.buit { color: var(--suau); cursor: default; }
+
+.pagines .salt { padding: 0 4px; color: var(--suau); }
+
+/* Ajuda: manual d'usuari i manual d'administració */
+.pestanyes-manual { display: flex; gap: 6px; margin: 18px 0 0; border-bottom: 2px solid var(--vora); }
+.pestanyes-manual a { padding: 8px 16px; border-radius: var(--radi) var(--radi) 0 0; text-decoration: none; color: var(--suau); font-weight: 600; margin-bottom: -2px; border-bottom: 2px solid transparent; }
+.pestanyes-manual a.actiu { color: var(--blau); border-bottom-color: var(--blau); background: var(--blau-clar); }
+
+.taula td.permis { text-align: center; width: 9rem; font-weight: 600; color: var(--ok); }
+.taula:has(td.permis) th:not(:first-child) { text-align: center; }
+.taula td.permis.no { color: var(--suau, #888); font-weight: 400; }

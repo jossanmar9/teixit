@@ -269,23 +269,23 @@ function pagina_auditoria(): void
 /* ---------- Ajuda ---------- */
 
 /** Manuals i guies que es poden descarregar en PDF */
-const DOCUMENTS_PDF = ['manual-usuari', 'manual-usuario', 'guia-installacio', 'guia-instalacion'];
+const DOCUMENTS_PDF = ['manual-usuari', 'manual-usuario', 'manual-administracio', 'manual-administracion', 'guia-installacio', 'guia-instalacion'];
 
 /** URL d'una captura del manual (docs/imatges/…) per a mostrar-la dins del programa */
 function url_imatge_doc(string $ruta): ?string
 {
     $rel = preg_replace('#^imatges/#', '', $ruta);
-    return preg_match('#^(ca|es)/[\w-]+\.(jpg|png)$#', $rel) && is_file(DOCS_DIR . '/imatges/' . $rel) ? url('doc_img', ['f' => $rel]) : null;
+    return preg_match('#^(ca|es)/[\w-]+\.(jpg|png|webp)$#', $rel) && is_file(DOCS_DIR . '/imatges/' . $rel) ? url('doc_img', ['f' => $rel]) : null;
 }
 
 function serveix_imatge_doc(): never
 {
     $rel = (string)get('f');
-    if (!preg_match('#^(ca|es)/[\w-]+\.(jpg|png)$#', $rel, $m) || !is_file($f = DOCS_DIR . '/imatges/' . $rel)) {
+    if (!preg_match('#^(ca|es)/[\w-]+\.(jpg|png|webp)$#', $rel, $m) || !is_file($f = DOCS_DIR . '/imatges/' . $rel)) {
         http_response_code(404);
         exit;
     }
-    header('Content-Type: image/' . ($m[2] === 'jpg' ? 'jpeg' : 'png'));
+    header('Content-Type: image/' . ['jpg' => 'jpeg', 'png' => 'png', 'webp' => 'webp'][$m[2]]);
     header('Cache-Control: private, max-age=86400');
     header('Content-Length: ' . filesize($f));
     readfile($f);
@@ -321,10 +321,15 @@ function pagina_ajuda(): void
         pagina_llicencia();
         return;
     }
-    $fitxer = DOCS_DIR . '/' . (idioma() === 'es' ? 'manual-usuario.md' : 'manual-usuari.md');
+    // Dos manuals: el d'usuari (la gestió diària) i el d'administració (configuració, comptes, còpies i actualitzacions).
+    // L'administrador/a pot vore els dos; la resta, només el d'usuari.
+    $es = idioma() === 'es';
+    $nomManual = ['usuari' => $es ? 'manual-usuario' : 'manual-usuari', 'admin' => $es ? 'manual-administracion' : 'manual-administracio'];
+    $quin = get('manual') === 'admin' && pot('config.manage') ? 'admin' : 'usuari';
+    $fitxer = DOCS_DIR . '/' . $nomManual[$quin] . '.md';
     $md = is_file($fitxer) ? file_get_contents($fitxer) : t('ajuda.no_manual');
-    $docs = idioma() === 'es' ? ['manual-usuario' => t('ajuda.pdf_manual'), 'guia-instalacion' => t('ajuda.pdf_guia')]
-        : ['manual-usuari' => t('ajuda.pdf_manual'), 'guia-installacio' => t('ajuda.pdf_guia')];
+    $docs = [$nomManual['usuari'] => t('ajuda.pdf_manual')] + (pot('config.manage') ? [$nomManual['admin'] => t('ajuda.pdf_manual_admin')] : [])
+        + [$es ? 'guia-instalacion' : 'guia-installacio' => t('ajuda.pdf_guia')];
     $enllacos = '';
     foreach ($docs as $doc => $text) {
         if (is_file(DOCS_DIR . DIRECTORY_SEPARATOR . 'pdf' . DIRECTORY_SEPARATOR . $doc . '.pdf')) {
@@ -340,7 +345,13 @@ function pagina_ajuda(): void
     if (is_file(ARREL_DIR . DIRECTORY_SEPARATOR . 'LLICENCIA.md')) {
         $enllacos .= '<a class="boto secundari" href="' . h(url('ajuda', ['doc' => 'llicencia'])) . '">⚖ ' . h(t('ajuda.llicencia')) . '</a>';
     }
-    $html = ($enllacos ? '<div class="accions">' . $enllacos . '</div>' : '') . avis_responsabilitat_text()
+    // Teixit no es connecta a Internet: el botó només obri al navegador la pàgina de l'última versió
+    $enllacos .= '<a class="boto secundari" target="_blank" rel="noopener" href="https://github.com/jossanmar9/teixit/releases/latest" title="'
+        . h(t('ajuda.versio_ajuda', TEIXIT_VERSIO)) . '">🔄 ' . h(t('ajuda.versio_nova')) . '</a>';
+    $pestanyes = !pot('config.manage') ? '' : '<nav class="pestanyes-manual">'
+        . '<a href="' . h(url('ajuda')) . '"' . ($quin === 'usuari' ? ' class="actiu"' : '') . '>📘 ' . h(t('ajuda.manual_usuari')) . '</a>'
+        . '<a href="' . h(url('ajuda', ['manual' => 'admin'])) . '"' . ($quin === 'admin' ? ' class="actiu"' : '') . '>🛠 ' . h(t('ajuda.manual_admin')) . '</a></nav>';
+    $html = ($enllacos ? '<div class="accions">' . $enllacos . '</div>' : '') . $pestanyes . '<p class="nota">' . h(t('ajuda.versio_ajuda', TEIXIT_VERSIO)) . '</p>' . avis_responsabilitat_text()
         . '<article class="manual">' . markdown_simple(preg_replace('/^# .*\R/', '', $md), 'url_imatge_doc') . '</article>';
     pagina(t('menu.ajuda'), $html);
 }

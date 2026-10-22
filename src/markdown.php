@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 /**
- * @param callable|null $imatge Rep la ruta relativa d'una imatge (p. ex. «imatges/ca/01.jpg») i retorna l'URL que s'ha d'usar,
+ * @param callable|null $imatge Rep la ruta relativa d'una imatge (p. ex. «imatges/ca/01.webp») i retorna l'URL que s'ha d'usar,
  *                              o null si no existeix.
  */
 function markdown_simple(string $md, ?callable $imatge = null): string
@@ -52,7 +52,8 @@ function markdown_simple(string $md, ?callable $imatge = null): string
                 $html .= '<div class="taula-wrap"><table class="taula"><thead><tr><th>' . implode('</th><th>', array_map($inline, $cells)) . '</th></tr></thead><tbody>';
                 $taula = true;
             } else {
-                $html .= '<tr><td>' . implode('</td><td>', array_map($inline, $cells)) . '</td></tr>';
+                // Les caselles de marca (✔ o —) van centrades, com en una taula de permisos
+                $html .= '<tr>' . implode('', array_map(fn($c) => in_array($c, ['✔', '—'], true) ? '<td class="permis' . ($c === '—' ? ' no' : '') . '">' . $c . '</td>' : '<td>' . $inline($c) . '</td>', $cells)) . '</tr>';
             }
             continue;
         }

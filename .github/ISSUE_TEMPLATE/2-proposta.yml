@@ -6,8 +6,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Les propostes de qui porta de veritat una associació, una falla, un club o una AMPA són les més útils. Explica-ho amb les teues paraules.
-        *Las propuestas de quien lleva de verdad una asociación, una falla, un club o un AMPA son las más útiles. Puedes escribir en castellano.*
+        Les propostes de qui porta de veritat una associació, una falla, un club, una AMPA o una penya són les més útils. Explica-ho amb les teues paraules.
+        *Las propuestas de quien lleva de verdad una asociación, una falla, un club, un AMPA o una peña son las más útiles. Puedes escribir en castellano.*
   - type: dropdown
     id: part
     attributes:

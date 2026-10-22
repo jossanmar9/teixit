@@ -15,7 +15,7 @@ const TIPUS_DOCUMENTS = ['estatuts', 'reglament', 'acta', 'registre', 'fiscal', 
 const CATEGORIES_CAIXA = ['quotes', 'escola', 'loteria', 'subvencions', 'actuacions', 'donatius', 'instruments', 'material', 'personal', 'lloguers',
     'subministraments', 'assegurances', 'federacio', 'desplacaments', 'comissions', 'altres_moviments'];
 /** Categories pròpies de cada tipus d'entitat, que s'afigen abans d'«Altres» */
-const CATEGORIES_CAIXA_TIPUS = ['falla' => ['monument', 'casal'], 'club' => ['arbitratges', 'llicencies'], 'ampa' => ['activitats_alumnat'], 'cultural' => []];
+const CATEGORIES_CAIXA_TIPUS = ['falla' => ['monument', 'casal'], 'club' => ['arbitratges', 'llicencies'], 'ampa' => ['activitats_alumnat'], 'penya' => ['desplacaments', 'menjars'], 'cultural' => []];
 const FITXERS_PERMESOS = ['pdf' => 'application/pdf', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'txt' => 'text/plain',
     'odt' => 'application/vnd.oasis.opendocument.text', 'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
     'doc' => 'application/msword', 'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -23,7 +23,7 @@ const FITXERS_PERMESOS = ['pdf' => 'application/pdf', 'jpg' => 'image/jpeg', 'jp
 const MIDA_DOCUMENT_MB = 20;
 /** Funcions dins d'una secció, equip o comissió */
 const FUNCIONS_MEMBRE = ['membre', 'responsable', 'ajudant'];
-const TIPUS_UNIFORMES = ['samarreta', 'polo', 'camisa', 'dessuadora', 'jaqueta', 'pantalo', 'xandall', 'equipacio', 'bruso', 'mocador', 'motxilla', 'gorra', 'altre_uniforme'];
+const TIPUS_UNIFORMES = ['samarreta', 'polo', 'camisa', 'dessuadora', 'jaqueta', 'pantalo', 'xandall', 'equipacio', 'bruso', 'mocador', 'bufanda', 'motxilla', 'gorra', 'altre_uniforme'];
 
 /**
  * Mòduls que una entitat pot desactivar (Administració → Mòduls i avisos): pantalles i entitats de cadascun.

@@ -37,13 +37,14 @@ DIR = ARREL / 'tests' / 'integracio'
 # Bateries: nom → (fitxers que s'executen en ordre sobre la mateixa instal·lació, instal·lar?)
 # La instal·lació d'exemple és d'una associació cultural, excepte en la bateria «tipus», que es repeteix amb cada tipus d'entitat.
 BATERIES = {
-    'economia': (['economia.py', 'iban.py', 'societat.py', 'repas.py'], True),
+    'economia': (['economia.py', 'iban.py', 'societat.py', 'repas.py', 'actualitzacio.py'], True),
     'uniformes': (['uniformes_moduls.py'], True),
+    'gran': (['gran.py'], True),
     'tipus': (['tipus.py'], True),
     'avis': (['avis.py'], False),
     'importacio': (['importacio.php'], True),
 }
-TIPUS_BATERIA = {'tipus': ['cultural', 'falla', 'club', 'ampa']}
+TIPUS_BATERIA = {'tipus': ['cultural', 'falla', 'club', 'ampa', 'penya']}
 
 ERR_PHP = ['Fatal error', 'Warning:', 'Notice:', 'Deprecated:', 'Uncaught']
 

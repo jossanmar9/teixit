@@ -99,7 +99,7 @@ Si no hi ha res d'això (o si es posa `finestra = 0` a `teixit.ini`), s'obri el 
 
 Teixit només es pot utilitzar des d'este ordinador: no és accessible des de la xarxa ni des d'Internet, i no envia cap dada fora (vegeu la [declaració de privacitat](https://github.com/jossanmar9/teixit/blob/main/PRIVACITAT.md)).
 
-La primera vegada demana el tipus i el nom de l'entitat i crea el compte d'administrador i, opcionalment, el d'administratiu/va. Després mostra un **codi de recuperació**: imprimeix-lo o apunta'l, perquè és el que permet posar una contrasenya nova si l'administrador/a l'oblida.
+La primera vegada demana el tipus i el nom de l'entitat i crea el compte d'administrador i, opcionalment, el d'usuari/ària. Després mostra un **codi de recuperació**: imprimeix-lo o apunta'l, perquè és el que permet posar una contrasenya nova si l'administrador/a l'oblida.
 
 ## Carpeta del programa (Windows)
 

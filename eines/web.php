@@ -19,10 +19,10 @@ $T = [
     'ca' => [
         'lang' => 'ca-valencia', 'altre' => 'es', 'altre_nom' => 'Castellano', 'altre_url' => 'es/',
         'titol' => 'Teixit: gestió lliure per a associacions',
-        'descripcio' => "Programa lliure i gratuït per a la gestió interna d'associacions culturals, falles, clubs esportius i AMPA des d'un ordinador amb Windows o Linux: socis, junta i actes, quotes, rebuts i remeses, loteria, caixa, documents, seccions i activitats.",
+        'descripcio' => "Programa lliure i gratuït per a la gestió interna d'associacions culturals, falles, clubs esportius, AMPA i penyes des d'un ordinador amb Windows o Linux: socis, junta i actes, quotes, rebuts i remeses, loteria, caixa, documents, seccions i activitats.",
         'lema' => 'Gestió lliure per a associacions',
         'hero' => 'Tota l\'associació, en un sol programa.',
-        'hero_text' => "Socis, junta i actes, quotes i rebuts, caixa, documents i activitats, en un ordinador de l'entitat. Per a associacions culturals, falles, clubs esportius i AMPA. Sense núvol, sense Internet i sense recollir cap dada. Gratuït i en valencià i castellà.",
+        'hero_text' => "Socis, junta i actes, quotes i rebuts, caixa, documents i activitats, en un ordinador de l'entitat. Per a associacions culturals, falles, clubs esportius, AMPA i penyes. Sense núvol, sense Internet i sense recollir cap dada. Gratuït i en valencià i castellà.",
         'nav_priv' => 'Privacitat',
         'priv_titol' => 'La privacitat, al centre',
         'priv_intro' => 'Teixit està fet al revés que les plataformes en línia: les dades de les persones de l\'entitat (també les dels menors) no ixen mai de l\'ordinador de l\'entitat.',
@@ -46,19 +46,20 @@ $T = [
         'versio' => 'Versió %s. Gratuït i lliure.',
         'manual' => 'Llig el manual',
         'nav_que' => 'Què fa', 'nav_veure' => 'Captures', 'nav_com' => 'Com començar', 'nav_qui' => 'Per a qui', 'nav_codi' => 'Codi',
-        'tipus_titol' => 'Un programa, quatre tipus d\'entitat',
+        'tipus_titol' => 'Un programa, cinc tipus d\'entitat',
         'tipus_intro' => 'En instal·lar-lo, tries quin tipus d\'entitat és la teua. Teixit adapta el vocabulari, els apartats que s\'activen i els tipus de soci.',
         'tipus' => [
             ['Associació cultural', 'Culturals, veïnals, juvenils, de gent gran, colles… Socis, seccions (teatre, ball…) i tallers i cursos.'],
             ['Falla, gaiata o foguera', 'El cens per categories, seccions, brusons i mocadors, la loteria i les despeses del monument i del casal.'],
             ['Club esportiu', 'Equips per categories, esportistes i tècnics, llicències federatives amb avís de caducitat, equipacions i escola esportiva.'],
             ['AMPA o AFA', 'Famílies associades, comissions (menjador, festes…) i activitats extraescolars amb rebuts per família.'],
+            ['Penya d\'un club', 'Penyes d\'aficionats de futbol o d\'un altre esport: socis, comissions, loteria, samarretes i bufandes, i els desplaçaments.'],
         ],
         'qui_titol' => 'D\'on ve Teixit',
         'qui' => [
             'Teixit naix de Compàs, el programa lliure per a societats musicals que vaig fer després de sis anys com a president de la Societat Musical de Massalfassar.',
             'Molta de la feina d\'una societat musical és la mateixa que la de qualsevol associació: els socis i les quotes, la junta i les actes, els rebuts i el banc, la loteria, els documents i les còpies de seguretat. Teixit agafa eixe nucli comú i l\'adapta a altres entitats que també viuen amb els comptes justos i amb gent voluntària al capdavant.',
-            'No és perfecte, però crec que és útil. Proveu-lo i, si vos agrada, gasteu-lo i parleu-ne amb altres associacions, falles, clubs o AMPA.',
+            'No és perfecte, però crec que és útil. Proveu-lo i, si vos agrada, gasteu-lo i parleu-ne amb altres associacions, falles, clubs, AMPA o penyes.',
         ],
         'qui_signa' => 'José Vicente Sanjuan',
         'qui_contacte' => 'Teniu dubtes o propostes? Obriu una incidència a GitHub: hi ha un formulari senzill que vos guia pas a pas.',
@@ -105,13 +106,13 @@ $T = [
         'passos' => [
             ['Descarrega l\'instal·lador', 'Des de la pàgina de descàrregues, baixa <code>Teixit-…-installador.exe</code>. També hi ha una versió portable que no cal instal·lar i paquets per a Linux (<code>.deb</code> per a Debian i Ubuntu, i <code>.tar.gz</code>).'],
             ['Instal·la\'l', 'No demana permisos d\'administrador. Com que encara no està signat, Windows pot avisar: llig el quadre de baix.'],
-            ['Comença', 'Tria el tipus d\'entitat, escriu-ne el nom i crea els comptes d\'administrador i d\'administratiu. Si vols, carrega dades d\'exemple per a provar-lo.'],
+            ['Comença', 'Tria el tipus d\'entitat, escriu-ne el nom i crea els comptes d\'administrador/a i d\'usuari/ària. Si vols, carrega dades d\'exemple per a provar-lo.'],
         ],
         'dades_titol' => 'Les dades es queden a l\'entitat',
         'dades' => [
             'Teixit funciona en un ordinador de l\'entitat i no envia res a Internet.',
             'Les dades de socis, famílies i menors no passen per cap servidor de fora.',
-            'Té dos comptes: administrador i administratiu, i un registre de qui ha fet cada canvi.',
+            'Té dos comptes: administrador/a i usuari/ària, i un registre de qui ha fet cada canvi.',
             'Esta web tampoc no té galetes ni analítica, i les tipografies (lliures) se serveixen des d\'ací mateix.',
         ],
         'avis_titol' => 'Si Windows no et deixa obrir-lo',
@@ -122,8 +123,44 @@ $T = [
         'avis_mes' => 'Explicació pas a pas a la guia d\'instal·lació',
         'req_titol' => 'Què cal',
         'req' => ['Un ordinador amb Windows 10 o 11 de 64 bits, o amb Linux i PHP 8.1 o posterior', 'Uns 100 MB de disc', 'Un llapis USB o una carpeta al núvol per a les còpies (recomanat)'],
+        'nav_faq' => 'Preguntes',
+        'faq_titol' => 'Preguntes freqüents',
+        'faq_intro' => 'El que més es pregunta abans de provar-lo. Si teniu un altre dubte, obriu una incidència a GitHub.',
+        'comptes_titol' => 'Qui pot fer què',
+        'comptes_intro' => 'Teixit té dos comptes: el de l\'administrador/a (normalment, la presidència o qui porta l\'informàtica) i el d\'usuari/ària (la secretaria o la tresoreria). Els dos fan tota la feina del dia a dia; només l\'administrador/a pot tocar la configuració, els comptes i la restauració de còpies.',
+        'comptes_cols' => ['Què es pot fer', 'Administrador/a', 'Usuari/ària'],
+        'comptes' => [
+            ['Persones, socis i tipus de soci', true],
+            ['Seccions o equips, activitats i cursos, monitors i matrícules', true],
+            ['Inventari, préstecs i roba', true],
+            ['Quotes, rebuts, domiciliacions, remeses i loteria', true],
+            ['Llibre de caixa', true],
+            ['Junta, actes, documents i comunicats', true],
+            ['Llistats, certificats i importació des d\'Excel', true],
+            ['Fer i baixar còpies de seguretat', true],
+            ['Canviar la pròpia contrasenya', true],
+            ['Configuració de l\'entitat, tipus d\'entitat, logotip, mòduls i avisos', false],
+            ['Dades bancàries i descomptes de les activitats', false],
+            ['Crear i gestionar els comptes', false],
+            ['Registre d\'activitat', false],
+            ['Restaurar i eliminar còpies, carpeta externa i xifrat', false],
+            ['Recuperar l\'accés amb el codi de recuperació', false],
+        ],
+        'faq' => [
+            ['És gratis de veres?', 'Sí. És programari lliure: sense quotes, sense límit de socis i sense versió «de pagament». No hi ha res a contractar.'],
+            ['Cal Internet?', 'No. Teixit funciona sense connexió. Els fitxers de remeses per al banc i els correus es preparen al programa i els envieu vosaltres des de la banca electrònica o el vostre correu.'],
+            ['Teixit envia les nostres dades a algun lloc?', 'No. Les dades es queden a l\'ordinador de l\'entitat i, si la configureu, a la carpeta externa de còpies (un USB o una carpeta al núvol que trieu vosaltres). Ni el programa ni esta web recullen res.'],
+            ['Serveix per a la nostra entitat?', 'Si sou una associació cultural, una falla (o gaiata o foguera), un club esportiu, una AMPA o una penya, sí: en instal·lar-lo trieu el tipus i Teixit s\'hi adapta. Altres entitats semblants poden triar «associació cultural». Si sou una societat musical, mireu Compàs.'],
+            ['Funciona en Windows i en Linux?', 'Sí. Per a Windows 10 o 11 de 64 bits hi ha un instal·lador i una versió portable; per a Linux, un paquet .deb i un .tar.gz. No hi ha versió per a Mac ni per al mòbil.'],
+            ['Es pot gastar des de diversos ordinadors alhora?', 'No: Teixit s\'instal·la en un ordinador de l\'entitat i s\'usa en eixe ordinador. Per a canviar d\'ordinador, n\'hi ha prou de restaurar l\'última còpia al nou.'],
+            ['Puc provar-lo sense posar les dades de l\'entitat?', 'Sí. En instal·lar-lo, podeu demanar que es carreguen dades d\'exemple del vostre tipus d\'entitat: socis, seccions, activitats, rebuts… inventats. Quan el conegueu, comenceu de zero amb les dades de veres.'],
+            ['Tenim els socis en un Excel. Cal escriure\'ls tots?', 'No. Importa dades llig fitxers .xlsx i .csv: trieu quina columna és cada dada, reviseu la vista prèvia i s\'importen. Les persones que ja hi ha no es dupliquen.'],
+            ['Teixit fa factures?', 'No, fa rebuts. Les factures s\'han de fer amb un programa de facturació que complisca la normativa (Verifactu).'],
+            ['I si s\'espatlla l\'ordinador?', 'Per això hi ha les còpies de seguretat. Teixit en fa una cada vegada que es tanca, i convé configurar una carpeta externa perquè també es guarden fora de l\'ordinador. Amb l\'última còpia, ho recupereu tot en un altre ordinador.'],
+            ['Com s\'actualitza?', 'A Ajuda, el botó «Hi ha versió nova?» obri la pàgina de l\'última versió. Si n\'hi ha una de nova, s\'instal·la damunt de l\'anterior i les dades es conserven; abans d\'actualitzar, Teixit en fa una còpia.'],
+        ],
         'docs_titol' => 'Manuals',
-        'docs' => [['manual-usuari.pdf', 'Manual d\'usuari, pas a pas amb captures'], ['guia-installacio.pdf', 'Guia d\'instal·lació']],
+        'docs' => [['manual-usuari.pdf', 'Manual d\'usuari, pas a pas amb captures'], ['manual-administracio.pdf', 'Manual d\'administració: configuració, comptes, còpies i actualitzacions'], ['guia-installacio.pdf', 'Guia d\'instal·lació']],
         'lliure_titol' => 'Programari lliure',
         'lliure' => 'Teixit es distribueix sota la llicència GNU AGPL v3 o posterior: el pots utilitzar, estudiar, modificar i compartir. Les versions modificades que s’oferisquen a través d’una xarxa també han de posar el seu codi font a disposició dels usuaris. El codi és públic a GitHub.',
         'autor' => 'Un projecte de José Vicente Sanjuan.',
@@ -142,10 +179,10 @@ $T = [
     'es' => [
         'lang' => 'es', 'altre' => 'ca', 'altre_nom' => 'Valencià', 'altre_url' => '../',
         'titol' => 'Teixit: gestión libre para asociaciones',
-        'descripcio' => 'Programa libre y gratuito para la gestión interna de asociaciones culturales, fallas, clubes deportivos y AMPA desde un ordenador con Windows o Linux: socios, junta y actas, cuotas, recibos y remesas, lotería, caja, documentos, secciones y actividades.',
+        'descripcio' => 'Programa libre y gratuito para la gestión interna de asociaciones culturales, fallas, clubes deportivos, AMPA y peñas desde un ordenador con Windows o Linux: socios, junta y actas, cuotas, recibos y remesas, lotería, caja, documentos, secciones y actividades.',
         'lema' => 'Gestión libre para asociaciones',
         'hero' => 'Toda la asociación, en un solo programa.',
-        'hero_text' => 'Socios, junta y actas, cuotas y recibos, caja, documentos y actividades, en un ordenador de la entidad. Para asociaciones culturales, fallas, clubes deportivos y AMPA. Sin nube, sin Internet y sin recopilar ningún dato. Gratuito y en valenciano y castellano.',
+        'hero_text' => 'Socios, junta y actas, cuotas y recibos, caja, documentos y actividades, en un ordenador de la entidad. Para asociaciones culturales, fallas, clubes deportivos, AMPA y peñas. Sin nube, sin Internet y sin recopilar ningún dato. Gratuito y en valenciano y castellano.',
         'nav_priv' => 'Privacidad',
         'priv_titol' => 'La privacidad, en el centro',
         'priv_intro' => 'Teixit está hecho al revés que las plataformas en línea: los datos de las personas de la entidad (también los de los menores) no salen nunca del ordenador de la entidad.',
@@ -169,19 +206,20 @@ $T = [
         'versio' => 'Versión %s. Gratuito y libre.',
         'manual' => 'Leer el manual',
         'nav_que' => 'Qué hace', 'nav_veure' => 'Capturas', 'nav_com' => 'Cómo empezar', 'nav_qui' => 'Para quién', 'nav_codi' => 'Código',
-        'tipus_titol' => 'Un programa, cuatro tipos de entidad',
+        'tipus_titol' => 'Un programa, cinco tipos de entidad',
         'tipus_intro' => 'Al instalarlo, eliges qué tipo de entidad es la tuya. Teixit adapta el vocabulario, los apartados que se activan y los tipos de socio.',
         'tipus' => [
             ['Asociación cultural', 'Culturales, vecinales, juveniles, de mayores, peñas… Socios, secciones (teatro, baile…) y talleres y cursos.'],
             ['Falla, gaiata u hoguera', 'El censo por categorías, secciones, blusones y pañuelos, la lotería y los gastos del monumento y del casal.'],
             ['Club deportivo', 'Equipos por categorías, deportistas y técnicos, licencias federativas con aviso de caducidad, equipaciones y escuela deportiva.'],
             ['AMPA o AFA', 'Familias asociadas, comisiones (comedor, fiestas…) y actividades extraescolares con recibos por familia.'],
+            ['Peña de un club', 'Peñas de aficionados de fútbol o de otro deporte: socios, comisiones, lotería, camisetas y bufandas, y los desplazamientos.'],
         ],
         'qui_titol' => 'De dónde viene Teixit',
         'qui' => [
             'Teixit nace de Compàs, el programa libre para sociedades musicales que hice después de seis años como presidente de la Societat Musical de Massalfassar.',
             'Mucho del trabajo de una sociedad musical es el mismo que el de cualquier asociación: los socios y las cuotas, la junta y las actas, los recibos y el banco, la lotería, los documentos y las copias de seguridad. Teixit toma ese núcleo común y lo adapta a otras entidades que también viven con las cuentas justas y con gente voluntaria al frente.',
-            'No es perfecto, pero creo que es útil. Probadlo y, si os gusta, usadlo y habladlo con otras asociaciones, fallas, clubes o AMPA.',
+            'No es perfecto, pero creo que es útil. Probadlo y, si os gusta, usadlo y habladlo con otras asociaciones, fallas, clubes, AMPA o peñas.',
         ],
         'qui_signa' => 'José Vicente Sanjuan',
         'qui_contacte' => '¿Tenéis dudas o propuestas? Abrid una incidencia en GitHub: hay un formulario sencillo que os guía paso a paso.',
@@ -228,13 +266,13 @@ $T = [
         'passos' => [
             ['Descarga el instalador', 'Desde la página de descargas, baja <code>Teixit-…-installador.exe</code>. También hay una versión portable que no hace falta instalar y paquetes para Linux (<code>.deb</code> para Debian y Ubuntu, y <code>.tar.gz</code>).'],
             ['Instálalo', 'No pide permisos de administrador. Como todavía no está firmado, Windows puede avisar: lee el cuadro de abajo.'],
-            ['Empieza', 'Elige el tipo de entidad, escribe su nombre y crea las cuentas de administrador y de administrativo. Si quieres, carga datos de ejemplo para probarlo.'],
+            ['Empieza', 'Elige el tipo de entidad, escribe su nombre y crea las cuentas de administrador/a y de usuario/a. Si quieres, carga datos de ejemplo para probarlo.'],
         ],
         'dades_titol' => 'Los datos se quedan en la entidad',
         'dades' => [
             'Teixit funciona en un ordenador de la entidad y no envía nada a Internet.',
             'Los datos de socios, familias y menores no pasan por ningún servidor de fuera.',
-            'Tiene dos cuentas: administrador y administrativo, y un registro de quién ha hecho cada cambio.',
+            'Tiene dos cuentas: administrador/a y usuario/a, y un registro de quién ha hecho cada cambio.',
             'Esta web tampoco tiene cookies ni analítica, y las tipografías (libres) se sirven desde aquí mismo.',
         ],
         'avis_titol' => 'Si Windows no te deja abrirlo',
@@ -245,8 +283,44 @@ $T = [
         'avis_mes' => 'Explicación paso a paso en la guía de instalación',
         'req_titol' => 'Qué hace falta',
         'req' => ['Un ordenador con Windows 10 u 11 de 64 bits, o con Linux y PHP 8.1 o posterior', 'Unos 100 MB de disco', 'Un lápiz USB o una carpeta en la nube para las copias (recomendado)'],
+        'nav_faq' => 'Preguntas',
+        'faq_titol' => 'Preguntas frecuentes',
+        'faq_intro' => 'Lo que más se pregunta antes de probarlo. Si tenéis otra duda, abrid una incidencia en GitHub.',
+        'comptes_titol' => 'Quién puede hacer qué',
+        'comptes_intro' => 'Teixit tiene dos cuentas: la del administrador/a (normalmente, la presidencia o quien lleva la informática) y la de usuario/a (la secretaría o la tesorería). Las dos hacen todo el trabajo del día a día; solo el administrador/a puede tocar la configuración, las cuentas y la restauración de copias.',
+        'comptes_cols' => ['Qué se puede hacer', 'Administrador/a', 'Usuario/a'],
+        'comptes' => [
+            ['Personas, socios y tipos de socio', true],
+            ['Secciones o equipos, actividades y cursos, monitores y matrículas', true],
+            ['Inventario, préstamos y ropa', true],
+            ['Cuotas, recibos, domiciliaciones, remesas y lotería', true],
+            ['Libro de caja', true],
+            ['Junta, actas, documentos y comunicados', true],
+            ['Listados, certificados e importación desde Excel', true],
+            ['Hacer y descargar copias de seguridad', true],
+            ['Cambiar la propia contraseña', true],
+            ['Configuración de la entidad, tipo de entidad, logotipo, módulos y avisos', false],
+            ['Datos bancarios y descuentos de las actividades', false],
+            ['Crear y gestionar las cuentas', false],
+            ['Registro de actividad', false],
+            ['Restaurar y eliminar copias, carpeta externa y cifrado', false],
+            ['Recuperar el acceso con el código de recuperación', false],
+        ],
+        'faq' => [
+            ['¿Es gratis de verdad?', 'Sí. Es software libre: sin cuotas, sin límite de socios y sin versión «de pago». No hay nada que contratar.'],
+            ['¿Hace falta Internet?', 'No. Teixit funciona sin conexión. Los ficheros de remesas para el banco y los correos se preparan en el programa y los enviáis vosotros desde la banca electrónica o vuestro correo.'],
+            ['¿Teixit envía nuestros datos a algún sitio?', 'No. Los datos se quedan en el ordenador de la entidad y, si la configuráis, en la carpeta externa de copias (un USB o una carpeta en la nube que elegís vosotros). Ni el programa ni esta web recogen nada.'],
+            ['¿Sirve para nuestra entidad?', 'Si sois una asociación cultural, una falla (o gaiata u hoguera), un club deportivo, un AMPA o una peña, sí: al instalarlo elegís el tipo y Teixit se adapta. Otras entidades parecidas pueden elegir «asociación cultural». Si sois una sociedad musical, mirad Compàs.'],
+            ['¿Funciona en Windows y en Linux?', 'Sí. Para Windows 10 u 11 de 64 bits hay un instalador y una versión portable; para Linux, un paquete .deb y un .tar.gz. No hay versión para Mac ni para el móvil.'],
+            ['¿Se puede usar desde varios ordenadores a la vez?', 'No: Teixit se instala en un ordenador de la entidad y se usa en ese ordenador. Para cambiar de ordenador, basta con restaurar la última copia en el nuevo.'],
+            ['¿Puedo probarlo sin poner los datos de la entidad?', 'Sí. Al instalarlo, podéis pedir que se carguen datos de ejemplo de vuestro tipo de entidad: socios, secciones, actividades, recibos… inventados. Cuando lo conozcáis, empezad de cero con los datos reales.'],
+            ['Tenemos los socios en un Excel. ¿Hay que escribirlos todos?', 'No. Importar datos lee ficheros .xlsx y .csv: elegís qué columna es cada dato, revisáis la vista previa y se importan. Las personas que ya están no se duplican.'],
+            ['¿Teixit hace facturas?', 'No, hace recibos. Las facturas se tienen que hacer con un programa de facturación que cumpla la normativa (Verifactu).'],
+            ['¿Y si se estropea el ordenador?', 'Para eso están las copias de seguridad. Teixit hace una cada vez que se cierra, y conviene configurar una carpeta externa para que también se guarden fuera del ordenador. Con la última copia, lo recuperáis todo en otro ordenador.'],
+            ['¿Cómo se actualiza?', 'En Ayuda, el botón «¿Hay versión nueva?» abre la página de la última versión. Si hay una nueva, se instala encima de la anterior y los datos se conservan; antes de actualizar, Teixit hace una copia.'],
+        ],
         'docs_titol' => 'Manuales',
-        'docs' => [['manual-usuario.pdf', 'Manual de usuario, paso a paso con capturas'], ['guia-instalacion.pdf', 'Guía de instalación']],
+        'docs' => [['manual-usuario.pdf', 'Manual de usuario, paso a paso con capturas'], ['manual-administracion.pdf', 'Manual de administración: configuración, cuentas, copias y actualizaciones'], ['guia-instalacion.pdf', 'Guía de instalación']],
         'lliure_titol' => 'Software libre',
         'lliure' => 'Teixit se distribuye bajo la licencia GNU AGPL v3 o posterior: puedes utilizarlo, estudiarlo, modificarlo y compartirlo. Las versiones modificadas que se ofrezcan a través de una red también deben poner su código fuente a disposición de los usuarios. El código es público en GitHub.',
         'autor' => 'Un proyecto de José Vicente Sanjuan.',
@@ -288,6 +362,9 @@ function pagina(array $t, string $l, string $base, string $repo, string $versio,
     }
     $dades = implode('', array_map(fn($d) => '<li>' . e($d) . '</li>', $t['dades']));
     $req = implode('', array_map(fn($d) => '<li>' . e($d) . '</li>', $t['req']));
+    $comptesCap = implode('', array_map(fn($c) => '<th>' . e($c) . '</th>', $t['comptes_cols']));
+    $comptes = implode('', array_map(fn($f) => '<tr><th>' . e($f[0]) . '</th><td class="permis">✔</td><td class="permis' . ($f[1] ? '">✔' : ' no">—') . '</td></tr>', $t['comptes']));
+    $faq = implode('', array_map(fn($f) => '<details><summary>' . e($f[0]) . '</summary><p>' . e($f[1]) . '</p></details>', $t['faq']));
     $avisos = implode('', array_map(fn($a) => '<dt>' . e($a[0]) . '</dt><dd>' . e($a[1]) . '</dd>', $t['avis']));
     $guia = $repo . '/blob/main/docs/' . ($l === 'es' ? 'guia-instalacion.md#si-windows-no-te-deja-abrirlo' : 'guia-installacio.md#si-windows-no-et-deixa-obrir-lo');
     // Els PDF es generen en publicar la web (workflow web.yml); si no hi són, s'enllacen els de l'última versió de GitHub
@@ -298,7 +375,7 @@ function pagina(array $t, string $l, string $base, string $repo, string $versio,
     $miniatures = '';
     $primera = $captures[0];
     foreach ($captures as $i => $c) {
-        $src = $base . 'img/' . $l . '/' . $c . '.jpg';
+        $src = $base . 'img/' . $l . '/' . $c . '.webp';
         $miniatures .= '<li><button type="button" data-src="' . e($src) . '" data-peu="' . e($t['captures'][$c]) . '"' . ($i === 0 ? ' aria-current="true"' : '')
             . ' aria-label="' . e($t['captures'][$c]) . '"><img src="' . e($src) . '" alt="" loading="lazy"></button></li>';
     }
@@ -330,6 +407,7 @@ function pagina(array $t, string $l, string $base, string $repo, string $versio,
     <a href="#captures">{$t['nav_veure']}</a>
     <a href="#tipus">{$t['nav_qui']}</a>
     <a href="#comencar">{$t['nav_com']}</a>
+    <a href="#preguntes">{$t['nav_faq']}</a>
     <a href="{$repo}">{$t['nav_codi']}</a>
     <a class="idioma" href="{$t['altre_url']}" hreflang="{$t['altre']}" lang="{$t['altre']}">{$t['altre_nom']}</a>
   </nav>
@@ -351,7 +429,7 @@ function pagina(array $t, string $l, string $base, string $repo, string $versio,
     <p class="germa">{$t['germa']} <a href="{$t['germa_url']}">{$t['germa_nom']} →</a></p>
   </div>
   <figure class="hero-captura">
-    <img src="{$base}img/{$l}/web-inici.jpg" alt="{$t['captures']['web-inici']}" width="1920" height="1200">
+    <img src="{$base}img/{$l}/web-inici.webp" alt="{$t['captures']['web-inici']}" width="1920" height="1200">
   </figure>
 </section>
 
@@ -388,7 +466,7 @@ function pagina(array $t, string $l, string $base, string $repo, string $versio,
   </div>
   <figure class="principal">
     <div class="visor">
-      <img id="captura" src="{$base}img/{$l}/{$primera}.jpg" alt="{$t['captures'][$primera]}">
+      <img id="captura" src="{$base}img/{$l}/{$primera}.webp" alt="{$t['captures'][$primera]}">
       <button type="button" class="fletxa ant" aria-label="{$t['anterior']}">‹</button>
       <button type="button" class="fletxa seg" aria-label="{$t['seguent']}">›</button>
     </div>
@@ -427,6 +505,17 @@ function pagina(array $t, string $l, string $base, string $repo, string $versio,
     <h2 class="h2-segon">{$t['docs_titol']}</h2>
     <ul class="docs">{$docs}</ul>
   </div>
+</section>
+
+<section id="preguntes" class="seccio preguntes">
+  <div class="cap">
+    <h2>{$t['faq_titol']}</h2>
+    <p>{$t['faq_intro']}</p>
+  </div>
+  <div class="faq">{$faq}</div>
+  <h3 class="comp-titol">{$t['comptes_titol']}</h3>
+  <p class="comptes-intro">{$t['comptes_intro']}</p>
+  <div class="taula-comp-wrap"><table class="taula-comp taula-comptes"><thead><tr>{$comptesCap}</tr></thead><tbody>{$comptes}</tbody></table></div>
 </section>
 
 <section class="seccio lliure">
@@ -517,7 +606,7 @@ foreach (glob(__DIR__ . '/fonts/*') as $f) {
 }
 foreach (['ca', 'es'] as $l) {
     foreach ($captures as $c) {
-        copy("$arrel/docs/imatges/$l/$c.jpg", "$eixida/img/$l/$c.jpg");
+        copy("$arrel/docs/imatges/$l/$c.webp", "$eixida/img/$l/$c.webp");
     }
 }
 foreach (glob($arrel . '/docs/pdf/*.pdf') as $pdf) {

@@ -16,7 +16,7 @@ fi
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 mkdir -p docs/pdf
-for d in manual-usuari manual-usuario guia-installacio guia-instalacion; do
+for d in manual-usuari manual-usuario manual-administracio manual-administracion guia-installacio guia-instalacion; do
     php eines/document-html.php "docs/$d.md" "$TMP/$d.html"
     "$NAV" --headless=new --no-sandbox --disable-gpu --no-first-run --user-data-dir="$TMP/perfil" \
         --no-pdf-header-footer --print-to-pdf="$PWD/docs/pdf/$d.pdf" "file://$TMP/$d.html" >/dev/null 2>&1

@@ -1,11 +1,11 @@
 <?php
-// Tipus d'entitat: associació cultural, falla (o gaiata o foguera), club esportiu o AMPA/AFA.
+// Tipus d'entitat: associació cultural, falla (o gaiata o foguera), club esportiu, AMPA/AFA o penya d'un club.
 // El tipus canvia el vocabulari (claus «text@tipus» de lang/), els mòduls actius per defecte,
 // els tipus de soci inicials i alguns camps (per exemple, la llicència federativa dels clubs).
 // Copyright (C) 2026 José Vicente Sanjuan
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-const TIPUS_ENTITAT = ['cultural', 'falla', 'club', 'ampa'];
+const TIPUS_ENTITAT = ['cultural', 'falla', 'club', 'ampa', 'penya'];
 
 /** Mòduls que es desactiven en la configuració inicial segons el tipus (després cada entitat els canvia) */
 const MODULS_DESACTIVATS_TIPUS = [
@@ -13,6 +13,7 @@ const MODULS_DESACTIVATS_TIPUS = [
     'falla' => ['escola', 'qualificacions'],
     'club' => ['escola', 'qualificacions'],
     'ampa' => ['qualificacions', 'instruments', 'uniformes'],
+    'penya' => ['escola', 'qualificacions'],
 ];
 
 /** Tipus de soci inicials: [valencià, castellà, va al full d'alta] */
@@ -21,6 +22,7 @@ const TIPUS_SOCI_TIPUS = [
     'falla' => [['Adult', 'Adulto', 1], ['Juvenil', 'Juvenil', 1], ['Infantil', 'Infantil', 1], ['D\'honor', 'De honor', 0]],
     'club' => [['Ordinari', 'Ordinario', 1], ['Esportista', 'Deportista', 1], ['Protector', 'Protector', 1], ['D\'honor', 'De honor', 0]],
     'ampa' => [['Família', 'Familia', 1], ['Col·laborador', 'Colaborador', 1]],
+    'penya' => [['Ordinari', 'Ordinario', 1], ['Jove', 'Joven', 1], ['Infantil', 'Infantil', 1], ['D\'honor', 'De honor', 0]],
 ];
 
 /** Tipus de l'entitat, guardat a la configuració (si encara no n'hi ha, «cultural») */

@@ -60,6 +60,8 @@ Name: "{app}\data"; Flags: uninsneveruninstall
 Name: "{group}\Teixit"; Filename: "{app}\Teixit.exe"
 Name: "{group}\Manual de Teixit"; Filename: "{app}\docs\pdf\manual-usuari.pdf"; Languages: ca
 Name: "{group}\Manual de Teixit"; Filename: "{app}\docs\pdf\manual-usuario.pdf"; Languages: es
+Name: "{group}\Manual d'administració de Teixit"; Filename: "{app}\docs\pdf\manual-administracio.pdf"; Languages: ca
+Name: "{group}\Manual de administración de Teixit"; Filename: "{app}\docs\pdf\manual-administracion.pdf"; Languages: es
 Name: "{autodesktop}\Teixit"; Filename: "{app}\Teixit.exe"; Tasks: escriptori
 
 [UninstallDelete]

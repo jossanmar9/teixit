@@ -12,12 +12,12 @@ Homepage: https://jossanmar9.github.io/teixit/
 Description: Gestió lliure per a associacions
  Teixit porta en un sol lloc les persones i els socis, les quotes i els
  rebuts, la junta i les actes, les activitats, les seccions o equips i
- l'inventari d'una associació cultural, una falla, un club esportiu o una
- AMPA. Funciona sense Internet en un sol ordinador: només
+ l'inventari d'una associació cultural, una falla, un club esportiu, una
+ AMPA o una penya. Funciona sense Internet en un sol ordinador: només
  escolta a 127.0.0.1 i no envia cap dada fora. En valencià i castellà.
  Es distribueix sense cap garantia: l'autor no es fa responsable de la
  pèrdua de dades. Feu còpies de seguretat externes.
  .
  Free management software for non-profit associations (cultural groups,
- falles, sports clubs and parents' associations). Runs offline on one
- computer and never sends any data.
+ falles, sports clubs, parents' associations and supporters' clubs).
+ Runs offline on one computer and never sends any data.

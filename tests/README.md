@@ -31,9 +31,10 @@ Arranquen Teixit de veres (el servidor de PHP amb dades d'exemple en una carpeta
 
 | Bateria | Fitxers (a `tests/integracio/`) | Què comprova |
 |---|---|---|
-| `economia` | `economia.py`, `iban.py`, `societat.py`, `repas.py` | Tarifes, rebuts, remeses SEPA, domiciliacions i loteria; IBAN a les fitxes i en importar; junta, actes, documents, full d'alta, comunicats, RGPD i caixa; i un repàs de totes les pantalles (llistats, CSV, fitxes i formularis) sense errors de PHP. |
+| `economia` | `economia.py`, `iban.py`, `societat.py`, `repas.py`, `actualitzacio.py` | Tarifes, rebuts, remeses SEPA, domiciliacions i loteria; IBAN a les fitxes i en importar; junta, actes, documents, full d'alta, comunicats, RGPD i caixa; un repàs de totes les pantalles (llistats, CSV, fitxes i formularis) sense errors de PHP; i que la base de dades només s'actualitza una vegada per versió, amb una còpia abans. |
 | `uniformes` | `uniformes_moduls.py` | Tipus de soci propis, roba per talla, mòduls i avisos desactivables. |
 | `tipus` | `tipus.py` | Es repeteix amb els quatre tipus d'entitat: mòduls i tipus de soci inicials, vocabulari, totes les pantalles sense errors ni textos de Compàs, llicències federatives dels clubs i canvi de tipus a la configuració. |
+| `gran` | `gran.py` | Entitats grans: el camp de persona amb cerca quan n'hi ha centenars i els llistats llargs. |
 | `avis` | `avis.py` | La configuració inicial: el tipus d'entitat i l'avís de responsabilitat (també en les instal·lacions que encara no l'han acceptat). |
 | `importacio` | `importacio.php` | Importació de socis i alumnat amb IBAN (crida les funcions de PHP directament). |
 

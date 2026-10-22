@@ -1,5 +1,5 @@
 <?php
-// Rols i capacitats. Teixit té dos rols fixos: administrador i administratiu.
+// Rols i capacitats. Teixit té dos rols fixos: administrador i usuari.
 // Copyright (C) 2026 José Vicente Sanjuan
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -39,7 +39,10 @@ function sembra_rols(PDO $pdo): void
     if ($st->fetchColumn() === $versio) {
         return;
     }
-    $pdo->beginTransaction();
+    $propia = !$pdo->inTransaction();
+    if ($propia) {
+        $pdo->beginTransaction();
+    }
     foreach (rols_per_defecte() as $clau => $caps) {
         $pdo->prepare('INSERT OR IGNORE INTO rols(clau, nom) VALUES(?, NULL)')->execute([$clau]);
         $st = $pdo->prepare('SELECT id FROM rols WHERE clau = ?');
@@ -52,7 +55,9 @@ function sembra_rols(PDO $pdo): void
         }
     }
     $pdo->prepare('INSERT INTO config(clau, valor) VALUES(?, ?) ON CONFLICT(clau) DO UPDATE SET valor = excluded.valor')->execute(['versio_rols', $versio]);
-    $pdo->commit();
+    if ($propia) {
+        $pdo->commit();
+    }
 }
 
 function nom_rol(array $rol): string

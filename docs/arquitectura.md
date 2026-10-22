@@ -1,6 +1,6 @@
 # Arquitectura de Teixit
 
-Teixit és un programa de gestió per a una única associació o entitat sense ànim de lucre (associació cultural, falla, club esportiu o AMPA), en un sol ordinador amb Windows o Linux i amb dos comptes (administrador/a i administratiu/va). No té web pública ni accés per xarxa.
+Teixit és un programa de gestió per a una única associació o entitat sense ànim de lucre (associació cultural, falla, club esportiu, AMPA o penya), en un sol ordinador amb Windows o Linux i amb dos comptes (administrador/a i usuari/ària). No té web pública ni accés per xarxa.
 
 ## Peces
 
@@ -31,7 +31,7 @@ app/index.php  ──►  src/  (lògica en PHP)
 | `src/bootstrap.php` | Connexió, sessió, CSRF, usuari actual, permisos, auditoria. |
 | `src/schema.sql` | Esquema de la base de dades (es crea sol la primera vegada). |
 | `src/capacitats.php` | Capacitats i rols per defecte. |
-| `src/tipus.php` | Tipus d'entitat (`cultural`, `falla`, `club`, `ampa`): mòduls desactivats i tipus de soci inicials de cadascun, i `tipus_entitat()`. |
+| `src/tipus.php` | Tipus d'entitat (`cultural`, `falla`, `club`, `ampa`, `penya`): mòduls desactivats i tipus de soci inicials de cadascun, i `tipus_entitat()`. |
 | `src/entitats.php` | Definició declarativa de cada entitat: camps, relacions i validacions. |
 | `src/crud.php` | Llistats, fitxes, formularis i exportació CSV genèrics a partir de `entitats.php`. |
 | `src/pages/*.php` | Pantalles específiques: inici, horari, qualificacions, butlletins i logotip, documents (consentiments i certificats), llistats i informes, importació, passar de curs, economia (generació de rebuts, remeses, rebuts i mandats per a imprimir, configuració), loteria, caixa (llibre de caixa), societat (junta, actes, documents, full d'alta, comunicats), rgpd, uniformes, repertori, usuaris, configuració, auditoria, còpies, recuperació, ajuda. |
@@ -63,6 +63,10 @@ Teixit naix de Compàs, i les taules i els mòduls conserven els noms interns d'
 | `uniformes` | Roba i articles |
 | `societat_*` (configuració), `menu.societat` | Dades de l'entitat, secció del menú amb el nom del tipus |
 
+L'esquema i les migracions no es repassen en cada clic: `PRAGMA user_version` guarda un número calculat amb la versió de Teixit i el contingut de `schema.sql`. Quan no coincideix (una versió nova o una còpia restaurada d'una versió anterior), `actualitza_esquema()` fa primer una còpia «abans d'actualitzar» i després tot el procés en una sola transacció: si alguna cosa falla, la base de dades queda com estava.
+
+Els camps de relació (`ref`) amb més de `MAX_DESPLEGABLE` opcions (400) no fan un desplegable: es busca escrivint i `?r=cerca_ref` torna les 30 primeres que coincideixen, sense tindre en compte els accents.
+
 ## Model de dades
 
 - **Persona** és l'entitat central. Cada persona existeix una sola vegada.
@@ -70,7 +74,7 @@ Teixit naix de Compàs, i les taules i els mòduls conserven els noms interns d'
 - Escola: `cursos` → `periodes`, `grups` (assignatura + curs + professor + aula) → `horaris`; `matricules` (alumne + curs) → `matricula_grups`; `qualificacions` (grup + alumne + període). Teixit no registra l'assistència: és un programa de gestió.
 - Inventari: `instruments` → `cessions`, `manteniments`.
 - Drets d'imatge: `persones.consentiment_imatge` (`pendent`, `autoritza`, `no_autoritza`) i `consentiment_data`.
-- Accés: `usuaris`, `rols` (dos fixos: `admin` i `administratiu`), `rol_capacitats`, `usuari_rols`. Es comproven **capacitats**, no rols.
+- Accés: `usuaris`, `rols` (dos fixos: `admin` i `administratiu`, que a la pantalla es diu «usuari/ària»), `rol_capacitats`, `usuari_rols`. Es comproven **capacitats**, no rols.
 - Economia: `tarifes`, `mandats`, `remeses`, `rebuts` → `rebut_linies`, `loteries` → `talonaris`, `moviments` (llibre de caixa: només els apunts manuals; rebuts, remeses i loteria s'hi sumen en llegir-lo).
 - Entitat: `carrecs` (persona + càrrec + dates; vigent si no té `data_fi`), `reunions` (convocatòria, acta i acords en text, un per línia), `comunicats`.
 - Tipus de soci: `tipus_socis`, definits per cada entitat. `socis.tipus` i `tarifes.tipus_soci` guarden l'id (en text). En la configuració inicial, `sembra_tipus_socis()` crea els del tipus d'entitat (`TIPUS_SOCI_TIPUS`, a `src/tipus.php`).
@@ -88,7 +92,7 @@ Teixit naix de Compàs, i les taules i els mòduls conserven els noms interns d'
 - Token CSRF en tots els formularis. Cookies `HttpOnly` i `SameSite=Strict`.
 - Tota l'eixida s'escapa amb `htmlspecialchars`.
 - La carpeta de dades queda fora de la carpeta pública (`app/`); el servidor només serveix `app/assets/`.
-- L'administratiu/va no pot gestionar usuaris, configuració, registre d'activitat ni restaurar còpies.
+- L'usuari/ària no pot gestionar usuaris, configuració, registre d'activitat ni restaurar còpies.
 - Còpies amb `VACUUM INTO` (consistents encara que el programa estiga obert): diària, en tancar si hi ha canvis, manual, abans de restaurar i abans d'importar; duplicades a una carpeta externa opcional.
 - Còpies externes xifrades (opcional): clau derivada de la contrasenya amb Argon2id (`crypto_pwhash`) i xifrat en blocs d'1 MB amb XChaCha20-Poly1305 (`crypto_secretstream`), que detecta qualsevol modificació o tall del fitxer. A l'ordinador només es guarda la clau derivada, per a poder fer les còpies automàtiques; la contrasenya fa falta per a restaurar.
 - Importació: els .xlsx es llegeixen sense DTD (`LIBXML_NONET`, sense entitats externes); les dades entre passos es guarden en un fitxer temporal de la carpeta de dades amb un nom aleatori lligat a la sessió, i s'esborren en acabar o al cap d'un dia.

@@ -39,7 +39,7 @@ ARREL = Path(__file__).resolve().parent.parent
 EIXIDA = ARREL / 'docs' / 'imatges'
 AMPLE, ALT = 1280, 800
 ESCALA = 1.5
-QUALITAT = 80
+QUALITAT = 82  # WebP: ocupa un 40 % menys que el JPG amb la mateixa qualitat
 RESSALT = '3px solid #ff6a00'
 
 # Les captures són d'una associació cultural (el tipus d'entitat més general), amb tots els mòduls actius
@@ -135,9 +135,9 @@ class Captures:
         if not cal_desar(nom):
             await self.lleva_ressalt()
             return
-        im.save(self.dir / f'{nom}.jpg', 'JPEG', quality=QUALITAT, optimize=True, progressive=True)
+        im.save(self.dir / f'{nom}.webp', 'WEBP', quality=QUALITAT, method=6)
         await self.lleva_ressalt()
-        print(f'  {self.l}/{nom}.jpg  {im.size[0]}x{im.size[1]}')
+        print(f'  {self.l}/{nom}.webp  {im.size[0]}x{im.size[1]}')
 
     async def omple(self, camps: dict):
         for nom, valor in camps.items():
@@ -358,15 +358,15 @@ async def fes_captures(l: str):
             caixa = await p.locator('section.fill:has(input[name="copia_externa"])').bounding_box()
             png = await p.screenshot(clip=caixa)
             if cal_desar('35-copies-carpeta'):
-                retalla_buit(Image.open(io.BytesIO(png)).convert('RGB')).save(c.dir / '35-copies-carpeta.jpg', 'JPEG', quality=QUALITAT, optimize=True)
-                print(f'  {l}/35-copies-carpeta.jpg')
+                retalla_buit(Image.open(io.BytesIO(png)).convert('RGB')).save(c.dir / '35-copies-carpeta.webp', 'WEBP', quality=QUALITAT, method=6)
+                print(f'  {l}/35-copies-carpeta.webp')
             await c.lleva_ressalt()
             caixa = await p.locator('table.taula').first.bounding_box()
             png = await p.screenshot(clip=caixa)
             await p.set_viewport_size({'width': AMPLE, 'height': ALT})
             if cal_desar('36-copies-llista'):
-                Image.open(io.BytesIO(png)).convert('RGB').save(c.dir / '36-copies-llista.jpg', 'JPEG', quality=QUALITAT, optimize=True)
-                print(f'  {l}/36-copies-llista.jpg')
+                Image.open(io.BytesIO(png)).convert('RGB').save(c.dir / '36-copies-llista.webp', 'WEBP', quality=QUALITAT, method=6)
+                print(f'  {l}/36-copies-llista.webp')
 
             # --- Usuaris i compte ---
             await c.ves('?r=usuaris&id=2')
@@ -505,8 +505,8 @@ async def fes_captures(l: str):
                 if not cal_desar(nom):
                     continue
                 png = await p.screenshot()
-                Image.open(io.BytesIO(png)).convert('RGB').save(c.dir / f'{nom}.jpg', 'JPEG', quality=QUALITAT, optimize=True, progressive=True)
-                print(f'  {l}/{nom}.jpg')
+                Image.open(io.BytesIO(png)).convert('RGB').save(c.dir / f'{nom}.webp', 'WEBP', quality=QUALITAT, method=6)
+                print(f'  {l}/{nom}.webp')
 
             # --- Entrada ---
             ctx2 = await nav.new_context(viewport={'width': AMPLE, 'height': ALT}, device_scale_factor=ESCALA)

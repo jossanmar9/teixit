@@ -191,6 +191,8 @@ try {
         case 'avis_accepta':
             accio_accepta_avis();
             break;
+        case 'cerca_ref':
+            cerca_ref((string)get('e'), (string)get('q'));
         case 'uniformes':
             pagina_uniformes();
             break;

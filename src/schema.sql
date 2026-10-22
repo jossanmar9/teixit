@@ -375,7 +375,7 @@ CREATE TABLE IF NOT EXISTS moviments (
     observacions TEXT
 );
 
--- Accés: usuaris i dos rols fixos (administrador i administratiu)
+-- Accés: usuaris i dos rols fixos (administrador i usuari)
 CREATE TABLE IF NOT EXISTS usuaris (
     id          INTEGER PRIMARY KEY,
     usuari      TEXT NOT NULL UNIQUE COLLATE NOCASE,

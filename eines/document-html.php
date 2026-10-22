@@ -20,13 +20,23 @@ $titol = preg_match('/^# (.+)$/m', $md, $m) ? trim($m[1]) : 'Teixit';
 $docsDir = dirname(realpath($argv[1]));
 $cos = markdown_simple(preg_replace('/^# .*\R/', '', $md, 1), function (string $ruta) use ($docsDir) {
     $f = $docsDir . '/' . $ruta;
-    if (!preg_match('#^imatges/(ca|es)/[\w-]+\.(jpg|png)$#', $ruta) || !is_file($f)) {
+    if (!preg_match('#^imatges/(ca|es)/[\w-]+\.(jpg|png|webp)$#', $ruta) || !is_file($f)) {
         fwrite(STDERR, "Falta la imatge $ruta\n");
         return null;
     }
-    return 'data:image/' . (str_ends_with($f, '.png') ? 'png' : 'jpeg') . ';base64,' . base64_encode(file_get_contents($f));
+    // Les captures són WebP; Chrome les guardaria al PDF sense comprimir (i el manual passaria de 12 a 40 MB),
+    // així que, si PHP té GD, es converteixen a JPEG per al PDF
+    if (str_ends_with($f, '.webp') && function_exists('imagecreatefromwebp') && ($im = @imagecreatefromwebp($f))) {
+        ob_start();
+        imagejpeg($im, null, 78);
+        return 'data:image/jpeg;base64,' . base64_encode((string)ob_get_clean());
+    }
+    if (str_ends_with($f, '.webp') && !isset($GLOBALS['avis_gd'])) {
+        $GLOBALS['avis_gd'] = fwrite(STDERR, "Avís: PHP no té GD amb WebP; el PDF serà més gran\n");
+    }
+    return 'data:image/' . (str_ends_with($f, '.png') ? 'png' : (str_ends_with($f, '.webp') ? 'webp' : 'jpeg')) . ';base64,' . base64_encode(file_get_contents($f));
 });
-$castella = str_contains(basename($argv[1]), 'usuario') || str_contains(basename($argv[1]), 'instalacion');
+$castella = str_contains(basename($argv[1]), 'usuario') || str_contains(basename($argv[1]), 'instalacion') || str_contains(basename($argv[1]), 'administracion');
 $lema = $castella ? 'Gestión libre para asociaciones' : 'Gestió lliure per a associacions';
 $versio = ($castella ? 'Versión ' : 'Versió ') . (getenv('TEIXIT_VERSIO') ?: TEIXIT_VERSIO);
 $logo = 'data:image/png;base64,' . base64_encode(file_get_contents(ARREL_DIR . '/app/assets/logo.png'));
@@ -69,6 +79,9 @@ pre { background: #f4f6fa; border: 1px solid #dde3ec; border-radius: 2mm; paddin
 blockquote { margin: 4mm 0; padding: 2.5mm 4mm; background: #fdf3e1; border-left: 3px solid #e39c27; border-radius: 1mm; page-break-inside: avoid; }
 table { width: 100%; border-collapse: collapse; margin: 3mm 0; page-break-inside: avoid; }
 th, td { border: 1px solid #c9d2df; padding: 1.8mm 2.5mm; text-align: left; vertical-align: top; }
+table:has(td.permis) th:not(:first-child) { text-align: center; }
+td.permis { text-align: center; width: 28mm; font-weight: 600; color: #4c6a2a; }
+td.permis.no { color: #888; font-weight: 400; }
 th { background: #e3eff0; font-size: 9.5pt; }
 a { color: #1f5e67; text-decoration: none; }
 .taula-wrap { overflow: visible; }

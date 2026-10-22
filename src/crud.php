@@ -4,6 +4,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 const PER_PAGINA = 50;
+/** A partir de quantes opcions un camp de relació (persona…) es tria escrivint en lloc d'un desplegable */
+const MAX_DESPLEGABLE = 400;
 
 function opcions_ref(string $entitat): array
 {
@@ -13,6 +15,56 @@ function opcions_ref(string $entitat): array
         $cache[$entitat] = $sql ? array_column(q($sql)->fetchAll(), 'e', 'id') : [];
     }
     return $cache[$entitat];
+}
+
+/**
+ * Enllaços de pàgina: la primera, l'última i les de prop de l'actual («1 … 7 8 [9] 10 11 … 120»).
+ * Manté la resta de paràmetres de l'adreça i canvia «p».
+ */
+function html_pagines(int $pag, int $pagines): string
+{
+    if ($pagines <= 1) {
+        return '';
+    }
+    $enllac = function (int $i) use ($pag): string {
+        $qs = $_GET;
+        $qs['p'] = $i;
+        return $i === $pag ? '<strong>' . $i . '</strong>' : '<a href="?' . h(http_build_query($qs)) . '">' . $i . '</a>';
+    };
+    $html = '<nav class="pagines">';
+    $anterior = 0;
+    for ($i = 1; $i <= $pagines; $i++) {
+        if ($i === 1 || $i === $pagines || abs($i - $pag) <= 3) {
+            if ($anterior && $i - $anterior > 1) {
+                $html .= '<span class="salt">…</span>';
+            }
+            $html .= $enllac($i);
+            $anterior = $i;
+        }
+    }
+    return $html . '</nav>';
+}
+
+/** Cerca per als camps de relació amb moltes opcions: JSON [{id, text}] amb les que contenen el text (sense accents) */
+function cerca_ref(string $entitat, string $q): never
+{
+    $e = entitat($entitat);
+    requereix($e['cap'] . '.view');
+    $q = normalitza_text($q);
+    $res = [];
+    if ($q !== '') {
+        foreach (opcions_ref($entitat) as $id => $text) {
+            if (str_contains(normalitza_text((string)$text), $q)) {
+                $res[] = ['id' => $id, 'text' => $text];
+                if (count($res) >= 30) {
+                    break;
+                }
+            }
+        }
+    }
+    header('Content-Type: application/json; charset=UTF-8');
+    echo json_encode($res, JSON_UNESCAPED_UNICODE);
+    exit;
 }
 
 /** Camps que són columnes de la taula (no els «virtuals», com l'IBAN de la fitxa de persona, que es desa en una altra taula) */
@@ -173,16 +225,7 @@ function pagina_llista(string $nom): void
         echo '<div class="buit">' . h(t('cap_resultat')) . '</div>';
     } else {
         echo taula_files($e, $files, $cols);
-        $pagines = (int)ceil($total / PER_PAGINA);
-        if ($pagines > 1) {
-            echo '<nav class="pagines">';
-            for ($i = 1; $i <= $pagines; $i++) {
-                $qs = $_GET;
-                $qs['p'] = $i;
-                echo $i === $pag ? '<strong>' . $i . '</strong>' : '<a href="?' . h(http_build_query($qs)) . '">' . $i . '</a>';
-            }
-            echo '</nav>';
-        }
+        echo html_pagines($pag, (int)ceil($total / PER_PAGINA));
     }
     $suma = '';
     if (isset($e['suma']) && $total) {
@@ -372,6 +415,14 @@ function camp_formulari(string $c, array $d, $v): string
                 }
             } else {
                 $ops = opcions_ref($d['ref']);
+                // Amb moltes opcions (societats grans), es busca escrivint i el servidor torna les que coincideixen
+                if (count($ops) > MAX_DESPLEGABLE) {
+                    $in = '<input type="hidden" name="' . $nom . '" value="' . h($v) . '"><div class="cerca-ref">'
+                        . '<input type="search" id="c_' . $nom . '" autocomplete="off" data-cerca-ref="' . h($d['ref']) . '" data-camp="' . $nom . '" value="'
+                        . h($v !== null && $v !== '' ? ($ops[(int)$v] ?? '') : '') . '" placeholder="' . h(t('cerca_ref.placeholder')) . '"' . $req . '>'
+                        . '<ul class="resultats-ref" hidden></ul></div>';
+                    break;
+                }
             }
             $gran = count($ops) > 12 ? ' data-cerca="1"' : '';
             $buit = $d['tipus'] !== 'select' || !empty($d['buit']);

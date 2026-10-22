@@ -10,6 +10,7 @@ permissions:
   contents: write
 
 jobs:
+  # Si alguna prova falla, no es construeix ni es publica res
   proves:
     runs-on: ubuntu-latest
     steps:
@@ -17,9 +18,14 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: pdo_sqlite, mbstring
+          extensions: pdo_sqlite, sqlite3, mbstring, dom, sodium
+          coverage: none
       - name: Revisa la sintaxi
         run: find . -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Proves automatitzades
+        run: php tests/run.php
+      - name: Proves d'integració (valencià i castellà)
+        run: python3 tests/integracio.py
       - name: Prova que arranca
         run: |
           export TEIXIT_DADES=$RUNNER_TEMP/dades
@@ -67,8 +73,18 @@ jobs:
           $php = "dist\Teixit\php"
           Remove-Item "$php\dev", "$php\extras", "$php\lib" -Recurse -Force -ErrorAction SilentlyContinue
           Remove-Item "$php\php-cgi.exe", "$php\phpdbg.exe", "$php\php.ini-*" -Force -ErrorAction SilentlyContinue
+          # Biblioteques d'extensions que Teixit no carrega (intl, curl, openssl, postgres, ldap…) i fitxers de text de PHP.
+          # Si en falta alguna de necessària, el pas següent («Comprova PHP») falla i no es publica res.
+          $abans = (Get-ChildItem $php -Recurse -File | Measure-Object Length -Sum).Sum
+          Remove-Item "$php\php-win.exe", "$php\deplister.exe", "$php\icu*.dll", "$php\libpq.dll", "$php\libsasl.dll", "$php\libssh2.dll",
+            "$php\nghttp2.dll", "$php\libenchant*.dll", "$php\glib-*.dll", "$php\gmodule-*.dll", "$php\libcrypto*.dll", "$php\libssl*.dll",
+            "$php\news.txt", "$php\snapshot.txt", "$php\readme-redist-bins.txt", "$php\install.txt", "$php\README.md" -Force -ErrorAction SilentlyContinue
+          # GD no va al paquet, però es guarda a part per a convertir les captures (WebP) en fer els manuals en PDF
+          Copy-Item "$php\ext\php_gd.dll" "$env:RUNNER_TEMP\php_gd.dll" -ErrorAction SilentlyContinue
           $mantindre = 'php_pdo_sqlite.dll','php_sqlite3.dll','php_mbstring.dll','php_fileinfo.dll','php_opcache.dll','php_sodium.dll'
           Get-ChildItem "$php\ext" | Where-Object { $mantindre -notcontains $_.Name } | Remove-Item -Force
+          $despres = (Get-ChildItem $php -Recurse -File | Measure-Object Length -Sum).Sum
+          Write-Host ("PHP empaquetat: {0:N1} MB (s'han llevat {1:N1} MB)" -f ($despres / 1MB), (($abans - $despres) / 1MB))
           Copy-Item launcher\php.ini "$php\php.ini"
           # Biblioteques de Visual C++ al costat de php.exe (instal·lació local permesa per Microsoft)
           foreach ($dll in 'vcruntime140.dll','vcruntime140_1.dll','msvcp140.dll') {
@@ -79,7 +95,8 @@ jobs:
         shell: pwsh
         run: |
           $php = "dist\Teixit\php"
-          & "$php\php.exe" -c "$php\php.ini" -d "extension_dir=$PWD\$php\ext" -m | Tee-Object mods.txt
+          & "$php\php.exe" -c "$php\php.ini" -d "extension_dir=$PWD\$php\ext" -m 2>&1 | Tee-Object mods.txt
+          if (Select-String -Path mods.txt -Pattern 'Unable to load|Warning|not found' -Quiet) { throw "PHP no arranca net: falta alguna biblioteca" }
           foreach ($m in 'pdo_sqlite','mbstring','sqlite3','sodium','SimpleXML','xmlreader','zlib') { if (-not (Select-String -Path mods.txt -Pattern "^$m$" -Quiet)) { throw "Falta $m" } }
 
       - name: Baixa WebView2 (el component de Windows per a la finestra de Teixit)
@@ -133,7 +150,7 @@ jobs:
           $d = "dist\Teixit"
           Copy-Item app, src -Destination $d -Recurse
           New-Item -ItemType Directory "$d\docs", "$d\data" -Force | Out-Null
-          Copy-Item docs\manual-usuari.md, docs\manual-usuario.md, docs\guia-installacio.md, docs\guia-instalacion.md "$d\docs"
+          Copy-Item docs\manual-usuari.md, docs\manual-usuario.md, docs\manual-administracio.md, docs\manual-administracion.md, docs\guia-installacio.md, docs\guia-instalacion.md "$d\docs"
           Copy-Item docs\imatges -Destination "$d\docs" -Recurse
           Copy-Item README.md, CHANGELOG.md, PRIVACITAT.md, LLICENCIA.md, LICENSE, teixit.ini $d
           Set-Content "$d\data\LLEGIX-ME.txt" "Ací es guarden les dades de Teixit (teixit.db) i les còpies automàtiques. No l'esborres."
@@ -149,9 +166,10 @@ jobs:
           if (-not $nav) { throw "No hi ha cap navegador per a generar els PDF" }
           $pdf = "$PWD\dist\Teixit\docs\pdf"
           New-Item -ItemType Directory $pdf -Force | Out-Null
-          foreach ($d in 'manual-usuari','manual-usuario','guia-installacio','guia-instalacion') {
+          foreach ($d in 'manual-usuari','manual-usuario','manual-administracio','manual-administracion','guia-installacio','guia-instalacion') {
             $html = Join-Path $env:RUNNER_TEMP "$d.html"
-            & "$php\php.exe" -c "$php\php.ini" -d "extension_dir=$PWD\$php\ext" eines\document-html.php "docs\$d.md" $html
+            $gd = if (Test-Path "$env:RUNNER_TEMP\php_gd.dll") { @('-d', "extension=$env:RUNNER_TEMP\php_gd.dll") } else { @() }
+            & "$php\php.exe" -c "$php\php.ini" -d "extension_dir=$PWD\$php\ext" @gd eines\document-html.php "docs\$d.md" $html
             if ($LASTEXITCODE -ne 0) { throw "Error convertint $d" }
             $url = "file:///" + ($html -replace '\\', '/')
             Start-Process $nav -Wait -ArgumentList "--headless=new", "--disable-gpu", "--no-first-run", "--user-data-dir=`"$env:RUNNER_TEMP\perfil-nav`"", "--no-pdf-header-footer", "--print-to-pdf=`"$pdf\$d.pdf`"", $url
@@ -229,7 +247,7 @@ jobs:
           d=dist/Teixit
           mkdir -p "$d/docs"
           cp -a app src "$d/"
-          cp docs/manual-usuari.md docs/manual-usuario.md docs/guia-installacio.md docs/guia-instalacion.md "$d/docs/"
+          cp docs/manual-usuari.md docs/manual-usuario.md docs/manual-administracio.md docs/manual-administracion.md docs/guia-installacio.md docs/guia-instalacion.md "$d/docs/"
           cp -a docs/imatges "$d/docs/"
           cp -a win/Teixit/docs/pdf "$d/docs/"
           cp README.md CHANGELOG.md PRIVACITAT.md LLICENCIA.md LICENSE teixit.ini "$d/"

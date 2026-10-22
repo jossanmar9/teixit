@@ -5,7 +5,7 @@
 
 declare(strict_types=1);
 
-const TEIXIT_VERSIO = '1.0.0';
+const TEIXIT_VERSIO = '1.1.0';
 const SRC_DIR = __DIR__;
 
 define('ARREL_DIR', dirname(__DIR__));
@@ -52,9 +52,13 @@ function db(): PDO
     $pdo->exec('PRAGMA foreign_keys = ON');
     $pdo->exec('PRAGMA journal_mode = WAL');
     $pdo->exec('PRAGMA busy_timeout = 5000');
-    $pdo->exec(file_get_contents(SRC_DIR . '/schema.sql'));
-    migra_esquema($pdo);
-    sembra_rols($pdo);
+    // L'esquema i les migracions només es repassen quan canvia la versió de Teixit o l'esquema:
+    // la base de dades guarda en «user_version» amb quina combinació s'ha preparat.
+    $esquema = (string)file_get_contents(SRC_DIR . '/schema.sql');
+    $versio = crc32(TEIXIT_VERSIO . "\n" . $esquema) & 0x7fffffff;
+    if ((int)$pdo->query('PRAGMA user_version')->fetchColumn() !== $versio) {
+        actualitza_esquema($pdo, $esquema, $versio);
+    }
     // Després de restaurar es manté la configuració de còpies que hi havia
     $conservada = DADES_DIR . DIRECTORY_SEPARATOR . 'restaura-config.json';
     if (is_file($conservada)) {
@@ -64,6 +68,38 @@ function db(): PDO
         unlink($conservada);
     }
     return $pdo;
+}
+
+/**
+ * Prepara la base de dades per a esta versió: taules i índexs, columnes noves, dades inicials i rols.
+ * Si ja hi havia dades, abans en fa una còpia («abans d'actualitzar»). Tot va en una sola transacció:
+ * si alguna cosa falla, la base de dades es queda com estava i es mostra l'error.
+ */
+function actualitza_esquema(PDO $pdo, string $esquema, int $versio): void
+{
+    $installat = (bool)$pdo->query("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'usuaris'")->fetchColumn()
+        && (int)$pdo->query('SELECT COUNT(*) FROM usuaris')->fetchColumn() > 0;
+    if ($installat) {
+        $copies = DADES_DIR . DIRECTORY_SEPARATOR . 'copies';
+        if (!is_dir($copies)) {
+            mkdir($copies, 0770, true);
+        }
+        $pdo->prepare('VACUUM INTO ?')->execute([$copies . DIRECTORY_SEPARATOR . 'teixit-' . date('Ymd-His') . '-abans-actualitzar.db']);
+    }
+    $pdo->beginTransaction();
+    try {
+        $pdo->exec($esquema);
+        migra_esquema($pdo);
+        sembra_rols($pdo);
+        $pdo->exec('PRAGMA user_version = ' . $versio);
+        $pdo->commit();
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+        throw new RuntimeException("No s'ha pogut actualitzar la base de dades (" . $e->getMessage() . '). Les dades no s\'han tocat'
+            . ($installat ? " i hi ha una còpia «abans d'actualitzar» a la carpeta de còpies." : '.'), 0, $e);
+    }
 }
 
 /**

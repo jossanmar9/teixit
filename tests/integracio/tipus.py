@@ -1,5 +1,5 @@
 # Tipus d'entitat: vocabulari, mòduls i tipus de soci inicials, dades d'exemple i llicències federatives.
-# Es repeteix amb cada tipus (cultural, falla, club, ampa) i en els dos idiomes.
+# Es repeteix amb cada tipus (cultural, falla, club, ampa, penya) i en els dos idiomes.
 # Copyright (C) 2026 José Vicente Sanjuan
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # L'executa tests/integracio.py, que hi posa les funcions comunes (G, P, ok, n, db, TIPUS…).
@@ -8,12 +8,12 @@ ca = L == 'ca'
 ok(n("select valor from config where clau='tipus_entitat'") == TIPUS, f'tipus desat: {TIPUS}')
 
 # Mòduls que es desactiven en instal·lar
-esperats = {'cultural': 'uniformes,loteria', 'falla': 'escola,qualificacions', 'club': 'escola,qualificacions', 'ampa': 'qualificacions,instruments,uniformes'}[TIPUS]
+esperats = {'cultural': 'uniformes,loteria', 'falla': 'escola,qualificacions', 'club': 'escola,qualificacions', 'ampa': 'qualificacions,instruments,uniformes', 'penya': 'escola,qualificacions'}[TIPUS]
 ok(n("select valor from config where clau='moduls_desactivats'") == esperats, f'mòduls desactivats per defecte ({TIPUS})')
 
 # Tipus de soci inicials
 noms = [r[0] for r in db.execute('select nom from tipus_socis order by ordre')]
-primer = {'cultural': ('Ordinari', 'Ordinario'), 'falla': ('Adult', 'Adulto'), 'club': ('Ordinari', 'Ordinario'), 'ampa': ('Família', 'Familia')}[TIPUS]
+primer = {'cultural': ('Ordinari', 'Ordinario'), 'falla': ('Adult', 'Adulto'), 'club': ('Ordinari', 'Ordinario'), 'ampa': ('Família', 'Familia'), 'penya': ('Ordinari', 'Ordinario')}[TIPUS]
 ok(noms and noms[0] == primer[0 if ca else 1], f'tipus de soci inicials: {noms}')
 
 # Vocabulari del menú
@@ -23,6 +23,7 @@ vocab = {
     'falla': ('Cens', 'Censo', 'Comissió', 'Comisión'),
     'club': ('Equips', 'Equipos', 'Club', 'Club'),
     'ampa': ('Comissions', 'Comisiones', 'AMPA', 'AMPA'),
+    'penya': ('Comissions', 'Comisiones', 'Penya', 'Peña'),
 }[TIPUS]
 ok(not err(h) and vocab[0 if ca else 1] in h and vocab[2 if ca else 3] in h, f'vocabulari del menú ({TIPUS})')
 ok('Escola de música' not in h and 'Escuela de música' not in h and 'Músics' not in h and 'Músicos' not in h, 'sense vocabulari musical a l inici')
@@ -56,6 +57,9 @@ if TIPUS == 'club':
     h = G('r=fitxa&e=agrupacions&id=1'); ok(('Equip' if ca else 'Equipo') in h, 'fitxa d equip')
 else:
     h = G('r=edita&e=membres&id=1'); ok('name="llicencia"' not in h, 'sense llicència fora dels clubs')
+if TIPUS == 'penya':
+    h = G('r=caixa'); ok(('Desplaçaments i entrades' if ca else 'Desplazamientos y entradas') in h, 'categoria de caixa de la penya')
+    h = G('r=uniformes'); ok(('Roba i marxandatge' if ca else 'Ropa y merchandising') in h and 'Bufanda' in h, 'roba i marxandatge de la penya')
 
 # Canviar el tipus a la configuració: canvia el vocabulari, però no els mòduls
 h, f = form('r=configuracio')

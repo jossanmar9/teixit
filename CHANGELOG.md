@@ -2,6 +2,26 @@
 
 Tots els canvis destacats de Teixit s'apunten ací. Les versions segueixen el format `MAJOR.MENOR.CORRECCIÓ`.
 
+## [1.1.0] - 2026-10-22
+
+### Afegit
+- **Penya d'un club**, un tipus d'entitat nou per a les penyes d'aficionats d'un club de futbol o d'un altre esport: socis (ordinari, jove, infantil, d'honor), **comissions** (viatges, festes, animació…), **roba i marxandatge** amb bufandes, loteria i dos categories noves al llibre de caixa: **desplaçaments i entrades** i **dinars i sopars**. També té les seues dades d'exemple.
+- **Manual d'administració**, separat del manual d'usuari: configuració inicial i tipus d'entitat, dades de l'entitat i logotip, mòduls i avisos, banc i descomptes, còpies de seguretat, comptes i contrasenyes, com actualitzar Teixit i preguntes freqüents. A **Ajuda** hi ha una pestanya per a cada manual (la d'administració només la veu l'administrador/a), i els dos tenen el seu PDF i accés directe al menú d'inici de Windows.
+- **Taula de permisos**: què pot fer cada compte, al començament dels dos manuals, al README i a la web.
+- **Preguntes freqüents a la web**.
+- **Hi ha versió nova?** a l'ajuda: obri al navegador la pàgina de l'última versió de Teixit, i davall es veu la versió que tens. Teixit continua sense connectar-se a Internet.
+- Entitats grans: quan hi ha més de 400 persones (o d'altres opcions), el camp de persona dels formularis es busca escrivint, sense tindre en compte els accents, en lloc d'un desplegable amb tota la llista. Els llistats llargs ja no mostren totes les pàgines.
+
+### Canviat
+- El compte «administratiu/va» ara es diu **usuari/ària** («usuario/a» en castellà), per a no confondre'l amb l'administrador/a. Només canvia el nom: els permisos són els mateixos.
+- El manual d'usuari ja només explica la feina del dia a dia; el que és de l'administrador/a remet al manual d'administració.
+- **Actualitzacions més segures**: la base de dades només es prepara una vegada per versió (abans es repassava en cada clic), en una sola transacció i amb una còpia «abans d'actualitzar». Les pantalles carreguen més ràpid.
+- **Cap versió no es publica si alguna prova falla**: el workflow de publicació passa abans totes les proves, també les d'integració.
+- L'instal·lador de Windows ja no porta les parts de PHP que Teixit no fa servir (intl, curl, openssl…).
+- Les captures dels manuals i de la web són WebP: ocupen un 40 % menys.
+
+Totes estes millores, excepte la penya, venen de [Compàs](https://github.com/jossanmar9/compas) 1.13.4 i 1.14.0.
+
 ## [1.0.0] - 2026-10-22
 
 Primera versió de Teixit, la gestió lliure per a associacions. Naix de [Compàs](https://github.com/jossanmar9/compas) 1.13.3, el programa per a societats musicals del mateix autor, i en conserva tot el que serveix a qualsevol entitat.

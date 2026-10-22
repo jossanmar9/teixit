@@ -68,6 +68,21 @@ function dades_exemple_tipus(string $tipus): array
             'despesa' => ['activitats_alumnat', "Material per a la festa de l'alumnat", 'Material para la fiesta del alumnado', 145],
             'tipus_tutors' => 0,
         ],
+        'penya' => [
+            'activitats' => [['Torneig de futbolí', 'Torneo de futbolín', 'Torneig'], ['Torneig de guinyot', 'Torneo de guiñote', 'Torneig'], ['Futbol de veterans', 'Fútbol de veteranos', 'Esport']],
+            'aules' => [['Local de la penya', 'Local de la peña', 60], ['Camp municipal', 'Campo municipal', 40]],
+            'seccions' => [['Viatges', 'Viajes', 'Viatges', 'Viajes'], ['Festes', 'Fiestas', 'Festes', 'Fiestas'], ['Animació', 'Animación', 'Animació', 'Animación']],
+            'funcions' => [['Coordinació', 'Coordinación'], ['Reserves', 'Reservas'], ['Tambor', 'Tambor'], ['Pancartes', 'Pancartas'], ['Voluntariat', 'Voluntariado']],
+            'inventari' => [['Bandera gran de la penya', 'Bandera grande de la peña', null, null], ['Bombo', 'Bombo', null, null], ['Pancarta', 'Pancarta', null, null], ['Televisor del local', 'Televisor del local', 'Samsung', 'UE55']],
+            'manteniment' => ['Reparació del bombo', 'Reparación del bombo'],
+            'roba' => [['Samarreta de la penya', 'Camiseta de la peña', 'samarreta', 'S, M, L, XL, XXL', 15], ['Bufanda', 'Bufanda', 'bufanda', null, 12], ['Gorra', 'Gorra', 'gorra', null, 8]],
+            'proveidor' => ['Estampats La Plana', 'Estampados La Plana'],
+            'vocal' => ['Vocal de viatges', 'Vocal de viajes'],
+            'junta_odd' => ["Viatge al pròxim partit de fora\nSopar de germanor de la penya\nPrecs i preguntes", "Viaje al próximo partido fuera\nCena de hermandad de la peña\nRuegos y preguntas"],
+            'comunicat' => ['Viatge en autobús al pròxim partit de fora', 'Viaje en autobús al próximo partido fuera'],
+            'despesa' => ['desplacaments', 'Autobús per al partit de fora', 'Autobús para el partido fuera', 650],
+            'tipus_tutors' => 0,
+        ],
     ];
     return $d[$tipus] ?? $d['cultural'];
 }

@@ -9,7 +9,7 @@
 
 require_once SRC_DIR . '/rotacio.php';
 
-const PATRO_COPIA = '/^teixit-\d{8}-\d{6}-(auto|manual|tancament|abans-restaurar|abans-importar)\.db$/';
+const PATRO_COPIA = '/^teixit-\d{8}-\d{6}-(auto|manual|tancament|abans-restaurar|abans-importar|abans-actualitzar)\.db$/';
 const ACCIONS_SENSE_CANVIS = ['entrada', 'eixida', 'entrada_fallida', 'exporta', 'copia_baixada', 'copia_feta'];
 
 function carpeta_copies(): string

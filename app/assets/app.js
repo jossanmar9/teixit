@@ -27,6 +27,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Camps de relació amb moltes opcions: s'escriu i el servidor proposa (societats amb milers de persones)
+    document.querySelectorAll('input[data-cerca-ref]').forEach(inp => {
+        const ocult = inp.form.querySelector('input[type="hidden"][name="' + inp.dataset.camp + '"]');
+        const llista = inp.parentNode.querySelector('.resultats-ref');
+        let temps = null, actiu = -1, triat = inp.value;
+        const tanca = () => { llista.hidden = true; actiu = -1; };
+        const tria = li => { ocult.value = li.dataset.id; inp.value = triat = li.textContent; tanca(); };
+        const marca = i => {
+            const els = llista.querySelectorAll('li');
+            if (!els.length) return;
+            actiu = (i + els.length) % els.length;
+            els.forEach((li, j) => li.classList.toggle('actiu', j === actiu));
+        };
+        inp.addEventListener('input', () => {
+            if (inp.value !== triat) ocult.value = '';
+            clearTimeout(temps);
+            const q = inp.value.trim();
+            if (q.length < 2) { tanca(); return; }
+            temps = setTimeout(async () => {
+                const r = await fetch('?r=cerca_ref&e=' + encodeURIComponent(inp.dataset.cercaRef) + '&q=' + encodeURIComponent(q));
+                const dades = r.ok ? await r.json() : [];
+                llista.replaceChildren(...dades.map(d => {
+                    const li = document.createElement('li');
+                    li.textContent = d.text;
+                    li.dataset.id = d.id;
+                    return li;
+                }));
+                if (!dades.length) llista.append(Object.assign(document.createElement('li'), { textContent: '—', className: 'buit' }));
+                llista.hidden = false;
+                actiu = -1;
+            }, 200);
+        });
+        llista.addEventListener('mousedown', e => { const li = e.target.closest('li[data-id]'); if (li) { e.preventDefault(); tria(li); } });
+        inp.addEventListener('keydown', e => {
+            if (llista.hidden) return;
+            if (e.key === 'ArrowDown') { e.preventDefault(); marca(actiu + 1); }
+            else if (e.key === 'ArrowUp') { e.preventDefault(); marca(actiu - 1); }
+            else if (e.key === 'Enter' && actiu >= 0) { e.preventDefault(); tria(llista.querySelectorAll('li')[actiu]); }
+            else if (e.key === 'Escape') tanca();
+        });
+        inp.addEventListener('blur', () => setTimeout(() => { tanca(); if (!ocult.value) inp.value = triat = ''; }, 150));
+    });
+
     // DNI i telèfon obligatoris només per a majors d'edat
     const naix = document.querySelector('input[name="data_naixement"]');
     const majors = document.querySelectorAll('input[data-major]');

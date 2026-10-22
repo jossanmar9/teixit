@@ -64,6 +64,7 @@ body:
         - "Falla, gaiata o foguera / Falla, gaiata u hoguera"
         - "Club esportiu / Club deportivo"
         - "AMPA o AFA"
+        - "Penya d'un club / Peña de un club"
   - type: checkboxes
     id: dades
     attributes:

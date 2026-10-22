@@ -11,7 +11,7 @@
 
 **Gestió lliure per a associacions.** Teixit és un programa per a un ordinador amb Windows o Linux que porta en un sol lloc la gestió interna d'una associació o entitat sense ànim de lucre: les persones i els socis, la junta directiva i les actes, les quotes, els rebuts i les remeses bancàries, la loteria, el llibre de caixa, els documents, els comunicats, les seccions o equips, les activitats i cursos, l'inventari i la roba.
 
-Està pensat per a associacions culturals, **falles, gaiates i fogueres**, **clubs esportius** i **AMPA/AFA**, i per a qui porta la secretaria o la tresoreria encara que no siga informàtic: s'instal·la com qualsevol altre programa, funciona sense Internet i les dades es queden a l'ordinador de l'entitat.
+Està pensat per a associacions culturals, **falles, gaiates i fogueres**, **clubs esportius**, **AMPA/AFA** i **penyes** d'un club de futbol o d'un altre esport, i per a qui porta la secretaria o la tresoreria encara que no siga informàtic: s'instal·la com qualsevol altre programa, funciona sense Internet i les dades es queden a l'ordinador de l'entitat.
 
 > 🔒 **La privacitat és el centre del projecte.** Teixit **no té servidor, no demana registrar-se ni pagar una subscripció i no recull cap dada**: ni de l'entitat, ni dels socis, ni dels menors. Tot es queda en un fitxer de l'ordinador de l'entitat, que en controla les còpies. No hi ha telemetria, ni publicitat, ni comptes en el núvol de ningú.
 
@@ -19,15 +19,15 @@ Està pensat per a associacions culturals, **falles, gaiates i fogueres**, **clu
 >
 > *Aviso de responsabilidad: Teixit es software libre y se distribuye tal cual, sin ninguna garantía (licencia AGPL-3.0). El autor no se hace responsable de la pérdida de datos ni de ningún otro daño, directo o indirecto, que pueda derivarse del uso del programa, de un error, de una actualización o de una configuración incorrecta. Cada entidad es responsable de sus datos y de hacer copias de seguridad periódicas en un lugar externo (USB o nube).*
 
-*Teixit es un programa libre para la gestión interna de asociaciones culturales, fallas, gaiatas y hogueras, clubes deportivos y AMPA/AFA desde un ordenador con Windows o Linux: personas, socios, junta directiva y actas, cuotas, recibos y remesas, lotería, caja, documentos, comunicados, secciones o equipos, actividades e inventario. Funciona en valenciano y castellano, sin Internet, sin servidores y sin recoger ningún dato. [Manual de usuario en castellano](docs/manual-usuario.md).*
+*Teixit es un programa libre para la gestión interna de asociaciones culturales, fallas, gaiatas y hogueras, clubes deportivos, AMPA/AFA y peñas desde un ordenador con Windows o Linux: personas, socios, junta directiva y actas, cuotas, recibos y remesas, lotería, caja, documentos, comunicados, secciones o equipos, actividades e inventario. Funciona en valenciano y castellano, sin Internet, sin servidores y sin recoger ningún dato. [Manual de usuario en castellano](docs/manual-usuario.md).*
 
 Un projecte de **José Vicente Sanjuan**, germà de [Compàs](https://github.com/jossanmar9/compas), el programa per a societats musicals.
 
-⬇️ **Descàrrega:** [última versió](../../releases/latest) · 📖 **Manual:** [en línia](docs/manual-usuari.md) · 🔒 [Privacitat](PRIVACITAT.md)
+🌐 **Web:** [jossanmar9.github.io/teixit](https://jossanmar9.github.io/teixit/) · ⬇️ **Descàrrega:** [última versió](../../releases/latest) · 📖 **Manual:** [en línia](docs/manual-usuari.md) · 🔒 [Privacitat](PRIVACITAT.md)
 
 ## Contingut
 
-- [Un programa, quatre tipus d'entitat](#un-programa-quatre-tipus-dentitat)
+- [Un programa, cinc tipus d'entitat](#un-programa-cinc-tipus-dentitat)
 - [Què fa](#què-fa)
 - [Per què sense núvol](#per-què-sense-núvol)
 - [Instal·lació](#installació)
@@ -43,7 +43,7 @@ Un projecte de **José Vicente Sanjuan**, germà de [Compàs](https://github.com
 - [Avís de responsabilitat](#avís-de-responsabilitat)
 - [Llicència](#llicència)
 
-## Un programa, quatre tipus d'entitat
+## Un programa, cinc tipus d'entitat
 
 Teixit parteix d'un **nucli comú** de gestió associativa i l'adapta al tipus d'entitat que es tria en instal·lar-lo. El tipus canvia el vocabulari, els mòduls que s'activen i els tipus de soci inicials; es pot canviar després sense perdre res.
 
@@ -53,6 +53,7 @@ Teixit parteix d'un **nucli comú** de gestió associativa i l'adapta al tipus d
 | **Falla, gaiata o foguera** | El **cens** amb categories (adult, juvenil, infantil, d'honor), seccions (teatre, playback, infantil…), **roba** (brusons, mocadors…), **loteria** i les despeses del **monument** i del **casal**. |
 | **Club esportiu** | **Equips** amb categoria, esportistes i tècnics amb la seua posició, **llicències federatives** amb avís de caducitat, **equipacions**, escola esportiva i arbitratges. |
 | **AMPA o AFA** | **Famílies associades**, **comissions** (menjador, festes…) i **activitats extraescolars** amb monitors, horaris i rebuts per família. |
+| **Penya d'un club** (de futbol o d'un altre esport) | Socis (ordinari, jove, infantil, d'honor), **comissions** (viatges, festes, animació…), **roba i marxandatge** (samarretes, bufandes…), **loteria** i les despeses de **desplaçaments i entrades** i de **dinars i sopars**. |
 
 ## Què fa
 
@@ -76,7 +77,7 @@ Teixit parteix d'un **nucli comú** de gestió associativa i l'adapta al tipus d
 | **Llistats i certificats** | Socis per número, membres per funció, alumnes d'un grup amb els telèfons dels tutors, dades per a la memòria anual i les subvencions, certificats de soci, de secció i de matrícula. Tot s'imprimeix, es guarda en PDF o s'exporta a CSV. |
 | **Importació** | Porta des d'Excel o CSV les persones, els socis i l'alumnat (amb els tutors), amb revisió prèvia i sense duplicar qui ja hi és. |
 | **A la mida** | Cada entitat activa o desactiva els mòduls i els avisos de l'inici. Les dades no s'esborren. |
-| **Administració** | Dos comptes (administrador/a i administratiu/va), configuració i logotip, registre d'activitat i còpies de seguretat (les externes, xifrades amb contrasenya si es vol). |
+| **Administració** | Dos comptes (administrador/a i usuari/ària), configuració i logotip, registre d'activitat i còpies de seguretat (les externes, xifrades amb contrasenya si es vol). |
 
 Tot el programa està en **valencià i castellà**, i cada usuari pot triar el seu idioma.
 
@@ -115,7 +116,7 @@ Més detalls i solució de problemes a la [guia d'instal·lació](docs/guia-inst
 
 ## Primers passos
 
-La primera vegada, Teixit demana el **tipus d'entitat** i el nom, i crea el compte d'administrador (i, si vols, el d'administratiu). També pot carregar **dades d'exemple**, adaptades al tipus d'entitat, per a provar-lo.
+La primera vegada, Teixit demana el **tipus d'entitat** i el nom, i crea el compte d'administrador (i, si vols, el d'usuari/ària). També pot carregar **dades d'exemple**, adaptades al tipus d'entitat, per a provar-lo.
 
 Ordre recomanat per a començar:
 
@@ -130,10 +131,23 @@ El [manual d'usuari](docs/manual-usuari.md) explica cada procés pas a pas amb c
 
 ## Usuaris i permisos
 
-| Compte | Pot fer |
-|---|---|
-| **Administrador/a** | Tot, incloent-hi usuaris, configuració, registre d'activitat i restauració de còpies. |
-| **Administratiu/va** | Tota la gestió diària (persones, socis, junta, actes, economia, documents, comunicats, seccions, activitats, inventari i roba) i fer còpies. |
+| Què es pot fer | Administrador/a | Usuari/ària |
+|---|:---:|:---:|
+| Persones, socis i tipus de soci | ✔ | ✔ |
+| Seccions o equips, activitats i cursos, monitors i matrícules | ✔ | ✔ |
+| Inventari, préstecs i roba | ✔ | ✔ |
+| Quotes, rebuts, domiciliacions, remeses i loteria | ✔ | ✔ |
+| Llibre de caixa | ✔ | ✔ |
+| Junta, actes, documents i comunicats | ✔ | ✔ |
+| Llistats, certificats i importació des d'Excel | ✔ | ✔ |
+| Fer i baixar còpies de seguretat | ✔ | ✔ |
+| Canviar la pròpia contrasenya | ✔ | ✔ |
+| Configuració de l'entitat, tipus d'entitat, logotip, mòduls i avisos | ✔ | — |
+| Dades bancàries i descomptes de les activitats | ✔ | — |
+| Crear i gestionar els comptes | ✔ | — |
+| Registre d'activitat | ✔ | — |
+| Restaurar i eliminar còpies, carpeta externa i xifrat | ✔ | — |
+| Recuperar l'accés amb el codi de recuperació | ✔ | — |
 
 Les contrasenyes es guarden xifrades, hi ha un bloqueig temporal després de cinc intents fallits i el **registre d'activitat** anota qui ha creat, modificat o eliminat cada cosa.
 
@@ -147,6 +161,7 @@ Si l'administrador/a oblida la contrasenya, la pot canviar des de la pantalla d'
 - **Carpeta externa:** cada còpia es guarda també en un USB o en una carpeta sincronitzada amb el núvol. L'inici avisa si no està configurada o si fa més de 7 dies que no s'hi guarda res.
 - **Còpies xifrades:** les de la carpeta externa es poden xifrar amb contrasenya, perquè un USB perdut no expose dades de menors.
 - **Restaurar** una còpia es fa amb un clic. Abans, Teixit guarda una còpia de les dades actuals, de manera que sempre es pot tornar arrere.
+- **Actualitzar:** en obrir per primera vegada una versió nova, Teixit fa una còpia «abans d'actualitzar» i prepara la base de dades en una sola operació; si alguna cosa falla, les dades es queden com estaven.
 - Els **documents** de l'entitat (PDF, imatges, fulls de càlcul…) es guarden dins de `teixit.db`, de manera que entren en totes les còpies.
 - Res no s'elimina si té historial: les baixes es marquen amb estat i data de baixa.
 
@@ -157,12 +172,13 @@ Si l'administrador/a oblida la contrasenya, la pot canviar des de la pantalla d'
 | Document | Valencià | Castellano |
 |---|---|---|
 | Manual d'usuari, pas a pas amb captures | [MD](docs/manual-usuari.md) · [PDF](https://github.com/jossanmar9/teixit/releases/latest/download/manual-usuari.pdf) | [MD](docs/manual-usuario.md) · [PDF](https://github.com/jossanmar9/teixit/releases/latest/download/manual-usuario.pdf) |
+| Manual d'administració: configuració, comptes, còpies i actualitzacions | [MD](docs/manual-administracio.md) · [PDF](https://github.com/jossanmar9/teixit/releases/latest/download/manual-administracio.pdf) | [MD](docs/manual-administracion.md) · [PDF](https://github.com/jossanmar9/teixit/releases/latest/download/manual-administracion.pdf) |
 | Guia d'instal·lació | [MD](docs/guia-installacio.md) · [PDF](https://github.com/jossanmar9/teixit/releases/latest/download/guia-installacio.pdf) | [MD](docs/guia-instalacion.md) · [PDF](https://github.com/jossanmar9/teixit/releases/latest/download/guia-instalacion.pdf) |
 | Declaració de privacitat | [PRIVACITAT](PRIVACITAT.md) | [PRIVACITAT](PRIVACITAT.md#privacidad-de-teixit) |
 | Arquitectura i detalls tècnics | [MD](docs/arquitectura.md) | |
 | Registre de canvis de cada versió | [CHANGELOG](CHANGELOG.md) | |
 
-El manual també es pot consultar dins del programa, al menú **Ajuda**.
+Els manuals també es poden consultar dins del programa, al menú **Ajuda** (el d'administració, només l'administrador/a).
 
 ## Per a desenvolupar
 
@@ -205,7 +221,7 @@ i obri `http://127.0.0.1:8750`. Les dades es guarden a `data/` o a la carpeta qu
 
 | Ordre | Què fa |
 |---|---|
-| `python3 eines/captures.py [números]` | Torna a fer les captures dels manuals (`docs/imatges/ca` i `es`) recorrent cada procés amb dades d'exemple. Requereix Pillow i Playwright. |
+| `python3 eines/captures.py [números]` | Torna a fer les captures dels manuals (`docs/imatges/ca` i `es`, en WebP) recorrent cada procés amb dades d'exemple. Requereix Pillow i Playwright. |
 | `bash eines/pdf.sh` | Fa els manuals i les guies en PDF (`docs/pdf/`) amb Chrome o Chromium. No es guarden al repositori: els fa GitHub Actions en publicar cada versió i la web. |
 | `php eines/web.php _site` | Genera la web de presentació en valencià i castellà. |
 | `php tests/run.php` | Proves automàtiques (IBAN, SEPA, còpies xifrades, rotació de còpies). Vegeu [tests/README.md](tests/README.md). |
@@ -233,6 +249,7 @@ Les versions segueixen el format `MAJOR.MENOR.CORRECCIÓ`: `v1.0.1` per a correc
 - Falles: la presentació, la cavalcada, l'ofrena i els representants de la comissió (fallera major, president infantil…).
 - Clubs: calendari de partits i convocatòries.
 - AMPA: menjador i beques.
+- Penyes: viatges als partits de fora, amb les places de l'autobús i qui ha pagat.
 - Subvencions: sol·licituds, terminis i justificacions.
 
 Les propostes de qui porta de veritat una entitat decidiran l'ordre.

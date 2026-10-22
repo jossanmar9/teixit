@@ -2,12 +2,27 @@
 
 ## 1. Abans de començar
 
-Teixit és un programa de gestió per a associacions i entitats sense ànim de lucre: persones, socis, junta directiva i actes, quotes i rebuts, remeses bancàries, loteria, llibre de caixa, documents, comunicats, seccions o equips, activitats i cursos, inventari, roba i còpies de seguretat. Funciona en **un sol ordinador amb Windows o Linux**, sense Internet, i té dos comptes:
+Teixit és un programa de gestió per a associacions i entitats sense ànim de lucre: persones, socis, junta directiva i actes, quotes i rebuts, remeses bancàries, loteria, llibre de caixa, documents, comunicats, seccions o equips, activitats i cursos, inventari, roba i còpies de seguretat. Funciona en **un sol ordinador amb Windows o Linux**, sense Internet, i té dos comptes. Esta taula resumeix què pot fer cadascun:
 
-| Compte | Què pot fer |
-|---|---|
-| **Administrador/a** | Tot. També gestionar usuaris, la configuració (també les dades bancàries), el registre d'activitat i restaurar còpies. |
-| **Administratiu/va** | La gestió diària: persones, socis, junta, actes, rebuts, remeses, loteria, caixa, documents, comunicats, seccions, activitats, inventari, roba i fer còpies. |
+| Què es pot fer | Administrador/a | Usuari/ària |
+|---|:---:|:---:|
+| Persones, socis i tipus de soci | ✔ | ✔ |
+| Seccions o equips, activitats i cursos, monitors i matrícules | ✔ | ✔ |
+| Inventari, préstecs i roba | ✔ | ✔ |
+| Quotes, rebuts, domiciliacions, remeses i loteria | ✔ | ✔ |
+| Llibre de caixa | ✔ | ✔ |
+| Junta, actes, documents i comunicats | ✔ | ✔ |
+| Llistats, certificats i importació des d'Excel | ✔ | ✔ |
+| Fer i baixar còpies de seguretat | ✔ | ✔ |
+| Canviar la pròpia contrasenya | ✔ | ✔ |
+| Configuració de l'entitat, tipus d'entitat, logotip, mòduls i avisos | ✔ | — |
+| Dades bancàries i descomptes de les activitats | ✔ | — |
+| Crear i gestionar els comptes | ✔ | — |
+| Registre d'activitat | ✔ | — |
+| Restaurar i eliminar còpies, carpeta externa i xifrat | ✔ | — |
+| Recuperar l'accés amb el codi de recuperació | ✔ | — |
+
+Este manual és per a les persones que porten la gestió diària. La configuració inicial, les dades de l'entitat, els comptes, la restauració de còpies i les actualitzacions les fa l'administrador/a: són al **Manual d'administració**.
 
 ### Tipus d'entitat
 
@@ -19,6 +34,7 @@ En instal·lar-lo, Teixit pregunta quin tipus d'entitat és. El tipus canvia **e
 | **Falla, gaiata o foguera** | Comissions falleres, gaiates, fogueres, comparses i filaes. | El **cens** (amb categories: adult, juvenil, infantil…), seccions, roba (brusons, mocadors…) i loteria. |
 | **Club esportiu** | Clubs i escoles esportives. | Socis, **equips** amb categories, esportistes i tècnics, **llicències federatives**, equipacions i escola esportiva. |
 | **AMPA o AFA** | Associacions de mares i pares de l'alumnat. | **Famílies associades**, **comissions** (menjador, festes…) i **extraescolars**. |
+| **Penya d'un club** | Penyes d'aficionats d'un club de futbol o d'un altre esport. | Socis, **comissions** (viatges, festes, animació…), roba i marxandatge (samarretes, bufandes…), loteria i desplaçaments a la caixa. |
 
 > En este manual, el botó o el camp que cal utilitzar en cada pas apareix **marcat en taronja** a les captures. Les captures són d'una associació cultural: en altres tipus d'entitat, alguns apartats tenen un altre nom (per exemple, «Equips» en lloc de «Seccions»).
 
@@ -42,34 +58,17 @@ La finestra utilitza el component WebView2, que porten Windows 10 i 11. En l'ord
 
 Escriu el teu usuari i la contrasenya i prem **Entra**. A baix pots triar l'idioma.
 
-![Pantalla d'entrada](imatges/ca/00-entrada.jpg)
+![Pantalla d'entrada](imatges/ca/00-entrada.webp)
 
-Si oblides la contrasenya, l'administrador te'n pot posar una de nova. Si qui l'ha oblidada és l'administrador/a, prem **Recupera l'accés** (vegeu l'apartat 19).
+Si oblides la contrasenya, l'administrador te'n pot posar una de nova. Si qui l'ha oblidada és l'administrador/a, prem **Recupera l'accés** (vegeu el Manual d'administració).
 
-### La primera vegada: configuració inicial
+### La primera vegada
 
-La primera vegada que s'obri Teixit apareix la **Configuració inicial**:
-
-1. Tria el **tipus d'entitat**: associació cultural, falla (gaiata o foguera), club esportiu o AMPA/AFA.
-2. Escriu el **nom de l'entitat**.
-3. Tria l'**idioma** per defecte.
-4. Crea l'**usuari administrador** i la seua contrasenya (almenys 8 caràcters). Apunta-la en un lloc segur.
-5. Si vols, crea també el compte d'**administratiu/va** (es pot fer després).
-6. Marca **Carrega dades d'exemple** només si vols provar el programa amb dades inventades. Les dades d'exemple s'adapten al tipus d'entitat.
-7. Llig l'**avís de responsabilitat** i marca que l'acceptes.
-8. Prem **Comença**.
-
-![Configuració inicial](imatges/ca/01-configuracio-inicial.jpg)
-
-Tot seguit, Teixit mostra el **codi de recuperació**. Serveix per a posar una contrasenya nova si l'administrador/a l'oblida, i **només es mostra esta vegada**. Prem **Imprimeix** (o apunta'l) i guarda'l amb els papers de l'entitat, no a l'ordinador. Després prem **Ja l'he guardat, continua**.
-
-![Codi de recuperació](imatges/ca/01b-codi-recuperacio.jpg)
-
-> Per a començar a treballar de veres sense les dades d'exemple, tanca Teixit, esborra la carpeta `data` del programa i torna a obrir-lo.
+La primera vegada que s'obri Teixit, l'administrador/a tria el tipus d'entitat, fa la **configuració inicial** i crea els comptes (**Manual d'administració**). Després, cada persona entra amb el seu usuari i la seua contrasenya.
 
 ## 2. La pantalla principal
 
-![Pantalla d'inici](imatges/ca/02-inici.jpg)
+![Pantalla d'inici](imatges/ca/02-inici.webp)
 
 - **Menú lateral** (esquerra): totes les seccions, agrupades per Activitats i cursos, Seccions (o Equips, o Comissions), Material, Economia, l'entitat (junta, actes, documents i comunicats), Documents i dades (llistats, informes i importació) i Administració. Només hi apareixen els mòduls actius.
 - **Dalt a la dreta**: canvi d'idioma (`VAL` / `ES`), el teu nom d'usuari (per a canviar la contrasenya) i **Ix** per a eixir.
@@ -82,7 +81,7 @@ Totes les seccions funcionen igual. Si n'aprens una, les saps totes.
 
 ### Llistats
 
-![Llistat de persones](imatges/ca/04-persones-llista.jpg)
+![Llistat de persones](imatges/ca/04-persones-llista.webp)
 
 - **Cerca**: escriu un nom, cognom, telèfon… i prem **Filtra**.
 - **Mostra també les baixes**: per defecte s'amaguen les persones inactives i les baixes.
@@ -94,7 +93,7 @@ Totes les seccions funcionen igual. Si n'aprens una, les saps totes.
 
 La fitxa mostra totes les dades d'un element i tot el que hi està relacionat. Per exemple, la fitxa d'una persona mostra si és sòcia, si forma part d'una secció, si és de la junta, si participa en una activitat, si és monitora o tutora d'algú…
 
-![Fitxa d'una persona](imatges/ca/06-persona-fitxa.jpg)
+![Fitxa d'una persona](imatges/ca/06-persona-fitxa.webp)
 
 - **Edita**: canvia les dades.
 - **Elimina**: només es pot si no té res relacionat (vegeu «Baixes» més avall).
@@ -117,33 +116,7 @@ Les baixes desapareixen dels llistats, però es poden tornar a vore marcant **Mo
 
 ## 4. Configuració de l'entitat
 
-Menú **Administració → Configuració** (només l'administrador/a).
-
-1. Omple les dades de l'entitat: nom, CIF, adreça, telèfon, correu i web. Ixen als certificats, les actes i els rebuts.
-2. **Tipus d'entitat**: el que es va triar en instal·lar. Si es canvia, canvien els noms d'alguns apartats; els mòduls actius es queden com estaven.
-3. A **Logotip de l'entitat**, prem el botó de triar fitxer i selecciona la imatge del logotip (PNG, JPG o WEBP, fins a 3 MB).
-4. Prem **Desa**. El logotip apareix al menú i als documents per a imprimir.
-
-![Configuració i logotip](imatges/ca/03-configuracio.jpg)
-
-### Mòduls i avisos
-
-No totes les entitats fan servir tot: n'hi ha que no fan activitats amb inscripció, que no venen loteria o que porten la comptabilitat en un altre lloc. Al menú **Administració → Mòduls i avisos** es pot activar o desactivar cada apartat: activitats i cursos, qualificacions i butlletins, seccions, inventari, roba i articles, quotes i rebuts, loteria, llibre de caixa, junta i actes, documents i comunicats.
-
-En instal·lar, Teixit deixa desactivats els que normalment no fan falta a cada tipus d'entitat:
-
-| Tipus | Desactivats en instal·lar |
-|---|---|
-| Associació cultural | Roba i articles, loteria |
-| Falla, gaiata o foguera | Activitats i cursos, qualificacions |
-| Club esportiu | Escola esportiva (activitats i cursos), qualificacions |
-| AMPA o AFA | Qualificacions, inventari, roba i articles |
-
-Un mòdul desactivat desapareix del menú, de l'inici, dels llistats i de les fitxes de les persones, però **no s'esborra cap dada**: si es torna a activar, tot està com estava. Persones, socis, llistats, importació i administració sempre estan actius. **Qualificacions i butlletins** només funciona si també està actiu **Activitats i cursos**.
-
-A la mateixa pantalla es poden amagar els **avisos de l'inici** que l'entitat no vol vore: la carpeta externa de les còpies, la renovació de la junta, els documents que caduquen, el certificat de delictes dels monitors, el material per tornar, el curs actual i les llicències federatives.
-
-![Mòduls i avisos](imatges/ca/80-moduls.jpg)
+Les dades de l'entitat, el tipus d'entitat, el logotip, els mòduls que es fan servir i els avisos de l'inici els configura l'administrador/a (**Manual d'administració**). Si en la teua entitat no veus algun apartat d'este manual (les activitats, la loteria, la roba…), segurament està desactivat.
 
 ## 5. Persones
 
@@ -164,7 +137,7 @@ En posar una data de naixement de major d'edat, els camps DNI i telèfon passen 
 
 Si la persona és major d'edat i pagarà rebuts pel banc (un soci, o el pare o la mare d'un alumne), escriu el seu **IBAN**. Teixit crea la domiciliació (apartat 8.4). També s'hi pot escriure el número de compte antic de 20 xifres: Teixit el converteix en IBAN.
 
-![Formulari de persona nova](imatges/ca/05-persona-nova.jpg)
+![Formulari de persona nova](imatges/ca/05-persona-nova.webp)
 
 S'obri la **fitxa de la persona**, amb un apartat per a cada funció: socis, membres de les seccions, alumnat, monitors, tutors legals (quan és tutor d'algú), càrrecs de la junta, préstecs de material, rebuts…
 
@@ -176,11 +149,11 @@ Dels menors no cal tindre el DNI ni el telèfon. Quan una persona fa 18 anys i n
 - La seua fila es marca **en groc** amb el símbol ⚠. Si passes el ratolí per damunt, diu quines dades falten.
 - A la seua fitxa també apareix l'avís, amb un enllaç per a editar-la.
 
-![Avís de persones amb dades que falten](imatges/ca/04-persones-llista.jpg)
+![Avís de persones amb dades que falten](imatges/ca/04-persones-llista.webp)
 
 Prem **Mostra-les** (o tria el filtre **Falten dades obligatòries**) per a vore només eixes persones. Obri cadascuna, prem **Edita**, completa el DNI i el telèfon i desa. L'avís desapareix quan ja no en falta cap.
 
-![Persones amb dades que falten](imatges/ca/04b-persones-avis.jpg)
+![Persones amb dades que falten](imatges/ca/04b-persones-avis.webp)
 
 ### Drets d'imatge (fotos i vídeos)
 
@@ -189,9 +162,9 @@ Abans de publicar fotos o vídeos en la web o les xarxes, l'entitat ha de tindre
 1. Obri la fitxa de la persona i prem **🖨 Full de consentiment**. Ix un full A4 amb les dades de la persona (i del tutor/a, si és menor), el text de l'autorització i l'espai per a signar.
 2. Quan el tornen signat, edita la persona i, a **Drets d'imatge**, tria **Autoritza fotos i vídeos** o **No autoritza**. Si no poses la **data de la signatura**, es posa la de hui.
 
-![Drets d'imatge a la fitxa de la persona](imatges/ca/41-persona-consentiment.jpg)
+![Drets d'imatge a la fitxa de la persona](imatges/ca/41-persona-consentiment.webp)
 
-![Full de consentiment per a signar](imatges/ca/42-consentiment-full.jpg)
+![Full de consentiment per a signar](imatges/ca/42-consentiment-full.webp)
 
 Per a repartir-los, a **Llistats i informes → Drets d'imatge** pots imprimir de colp els fulls de tots els pendents o els d'un grup (apartat 16). Al llistat de **Persones**, el filtre **Alumnes sense consentiment d'imatge signat** mostra quins participants en les activitats encara no l'han tornat.
 
@@ -211,6 +184,7 @@ Cada entitat té els tipus de soci que diuen els seus estatuts. Teixit en porta 
 | Falla, gaiata o foguera | Adult, juvenil, infantil, d'honor |
 | Club esportiu | Ordinari, esportista, protector, d'honor |
 | AMPA o AFA | Família, col·laborador |
+| Penya d'un club | Activitats i cursos, qualificacions |
 
 Es poden canviar, afegir-ne i donar-ne de baixa: al llistat de socis, prem **Tipus de soci** (o **Categories del cens**).
 
@@ -220,7 +194,7 @@ Es poden canviar, afegir-ne i donar-ne de baixa: al llistat de socis, prem **Tip
 
 Un tipus que ja tenen alguns socis o que té tarifa no es pot eliminar: es posa de **baixa** i deixa d'aparéixer en els socis nous.
 
-![Tipus de soci](imatges/ca/77-tipus-socis.jpg)
+![Tipus de soci](imatges/ca/77-tipus-socis.webp)
 
 ### Alta d'un soci
 
@@ -230,17 +204,17 @@ Un tipus que ja tenen alguns socis o que té tarifa no es pot eliminar: es posa 
 4. Si les quotes es cobraran pel banc, escriu l'**IBAN** (si encara no el té a la seua fitxa de persona).
 5. Prem **Desa**.
 
-![Alta d'un soci](imatges/ca/15-soci-nou.jpg)
+![Alta d'un soci](imatges/ca/15-soci-nou.webp)
 
 ### Llistat de socis
 
 El menú **Socis** mostra tots els socis actius. Pots buscar pel nom o pel número i exportar la llista a CSV.
 
-![Llistat de socis](imatges/ca/16-socis-llista.jpg)
+![Llistat de socis](imatges/ca/16-socis-llista.webp)
 
 **Full d'alta de soci.** Al llistat de socis, **Full d'alta de soci** fa un full en blanc per a qui vol fer-se soci: dades personals, tipus de soci (amb la quota, si hi ha tarifes), forma de pagament, ordre de domiciliació SEPA, autorització d'imatge, signatura i la informació de protecció de dades. Els textos de dalt i del peu es poden canviar a **Configuració**.
 
-![Full d'alta de soci](imatges/ca/73-full-alta.jpg)
+![Full d'alta de soci](imatges/ca/73-full-alta.webp)
 
 ### Baixa d'un soci
 
@@ -248,7 +222,7 @@ El menú **Socis** mostra tots els socis actius. Pots buscar pel nom o pel núme
 2. Canvia l'**estat** a **Baixa** i posa la **data de baixa**.
 3. Prem **Desa**.
 
-![Baixa d'un soci](imatges/ca/17-soci-baixa.jpg)
+![Baixa d'un soci](imatges/ca/17-soci-baixa.webp)
 
 El soci desapareix del llistat, però es conserva amb el seu historial.
 
@@ -258,7 +232,7 @@ El soci desapareix del llistat, però es conserva amb el seu historial.
 
 Menú **Junta directiva** (en la secció del menú que porta el nom del tipus d'entitat: Associació, Comissió, Club o AMPA). Mostra la junta actual i les anteriors. Per a posar un càrrec, prem **+ Afig un càrrec**: tria la persona, el càrrec (president/a, vicepresident/a, secretari/ària, tresorer/a, vocal…), una descripció si cal («Vocal de festes») i la data d'inici. La data de fi es deixa buida mentre el càrrec està vigent.
 
-![Junta directiva](imatges/ca/68-junta.jpg)
+![Junta directiva](imatges/ca/68-junta.webp)
 
 - **Anys de mandat:** posa els que diguen els estatuts. Teixit avisarà a l'inici quatre mesos abans que s'haja de renovar la junta.
 - **Junta nova:** quan s'elegeix una junta nova, prem **Tanca els càrrecs actuals** amb la data de l'elecció i després afig els càrrecs nous. Els anteriors queden a l'historial. Recordeu que els canvis de junta s'han de comunicar al Registre d'Associacions.
@@ -276,15 +250,15 @@ A la fitxa de la reunió hi ha tres documents per a imprimir:
 2. **Acta**. Després de la reunió, edita-la i completa els **assistents**, el **desenvolupament** i els **acords** (un per línia), i marca-la com a celebrada. En les reunions de junta, si no poses els assistents, l'acta posa la junta actual.
 3. **Certificat d'un acord**: tria l'acord i Teixit fa el certificat que demanen sovint el banc o les administracions.
 
-![Fitxa d'una reunió](imatges/ca/69-reunio.jpg)
+![Fitxa d'una reunió](imatges/ca/69-reunio.webp)
 
-![Acta d'una assemblea](imatges/ca/70-acta.jpg)
+![Acta d'una assemblea](imatges/ca/70-acta.webp)
 
 ## 8. Economia: quotes, activitats i rebuts
 
 L'apartat **Economia** del menú porta els diners de l'entitat: les quotes dels socis, la matrícula i les quotes de les activitats, els rebuts, les remeses al banc i la loteria. **Resum econòmic** mostra el que hi ha per cobrar, el que s'ha cobrat enguany, els rebuts retornats pel banc i qui deu diners.
 
-![Resum econòmic](imatges/ca/55-economia.jpg)
+![Resum econòmic](imatges/ca/55-economia.webp)
 
 > Teixit fa **rebuts**, no factures. Si l'entitat ha de fer una factura (per exemple, d'un servei que presta a una empresa), l'ha de fer amb un programa de facturació que complisca la normativa, o la gestoria.
 
@@ -296,17 +270,11 @@ Menú **Economia → Tarifes**. Cada tarifa té un nom (el que apareixerà al re
 - **Matrícula**: una sola vegada per curs i alumne, si les activitats tenen matrícula.
 - **Activitats**: mensual, trimestral o anual. Si es posa una **activitat**, es cobra a cada alumne inscrit en algun grup d'eixa activitat. Si no, es cobra una vegada per alumne (una quota fixa).
 
-![Tarifes](imatges/ca/56-tarifes.jpg)
+![Tarifes](imatges/ca/56-tarifes.webp)
 
 ### 8.2 Dades del banc i descomptes
 
-L'administrador/a ho configura una sola vegada a **Resum econòmic → Configuració d'Economia**:
-
-- **Dades bancàries de l'entitat**: el NIF i l'IBAN on es cobren els rebuts. Les dona el banc quan es contracta el servei d'adeutaments directes SEPA («remeses» o «quadern 19»). Teixit calcula l'**identificador de creditor**: comprova que és el mateix que t'ha donat el banc.
-- **Descomptes de les activitats**: un percentatge per a qui és soci (l'alumne o qui paga) i un altre per a cada germà a partir del segon. S'apliquen a les quotes de les activitats, no a la matrícula. A la fitxa de l'alumne es pot posar, a més, un **descompte propi** (família nombrosa, beca…) i **qui paga** les activitats, si no és el tutor principal.
-- **Text al peu dels rebuts**, si l'entitat en vol posar un.
-
-![Configuració d'Economia](imatges/ca/57-economia-config.jpg)
+Les dades bancàries de l'entitat i els descomptes de les activitats els configura l'administrador/a (**Manual d'administració**). A la fitxa de cada alumne sí que pots posar un **descompte propi** (família nombrosa, beca…) i **qui paga** les activitats, si no és el tutor principal.
 
 ### 8.3 Generar els rebuts
 
@@ -317,7 +285,7 @@ Menú **Economia → Genera rebuts**. Hi ha dues opcions:
 
 Prem **Previsualitza**: Teixit mostra qui pagarà, el detall i l'import, i avisa dels alumnes que no tenen qui pague. Si està bé, prem **Crea**. Si tornes a generar el mateix període, no es duplica res: els que ja existeixen apareixen com a «Ja generat».
 
-![Generar els rebuts de les activitats](imatges/ca/58-genera-rebuts.jpg)
+![Generar els rebuts de les activitats](imatges/ca/58-genera-rebuts.webp)
 
 Els rebuts de qui té una **domiciliació** activa es cobraran pel banc; els altres, en **efectiu**. També es pot fer un rebut a mà amb **Rebuts → + Nou** (per exemple, un donatiu o la venda d'una samarreta).
 
@@ -325,17 +293,17 @@ Els rebuts de qui té una **domiciliació** activa es cobraran pel banc; els alt
 
 Per a cobrar un rebut pel banc, qui paga ha d'haver signat l'**ordre de domiciliació** (el mandat SEPA). La manera més senzilla és escriure l'**IBAN a la fitxa de la persona o del soci**: en desar, Teixit crea la domiciliació amb la data de hui. Si després es canvia l'IBAN, l'anterior es dona de baixa i se'n crea una de nova (s'ha de tornar a signar); si s'esborra, es dona de baixa. També es pot fer des de **Economia → Domiciliacions → + Nou**, on es pot posar la data de signatura i un titular del compte diferent. Teixit comprova que l'IBAN és correcte i li posa una referència. Només es pot domiciliar a nom d'un major d'edat. Als llistats, l'IBAN només es veu en part.
 
-![Domiciliacions](imatges/ca/59-domiciliacions.jpg)
+![Domiciliacions](imatges/ca/59-domiciliacions.webp)
 
 A la fitxa de la domiciliació, **Imprimeix l'ordre de domiciliació** fa el full per a signar. L'entitat ha de guardar-lo signat mentre es cobre i 14 mesos més.
 
-![Ordre de domiciliació](imatges/ca/60-ordre-domiciliacio.jpg)
+![Ordre de domiciliació](imatges/ca/60-ordre-domiciliacio.webp)
 
 ### 8.5 Remeses: cobrar pel banc
 
 Menú **Economia → Remeses bancàries**. Apareixen els rebuts domiciliats pendents de cobrar (també els que el banc ha retornat). Tria'ls, posa la **data de cobrament** (molts bancs demanen almenys dos dies hàbils) i prem **Prepara la remesa**.
 
-![Preparar una remesa](imatges/ca/61-remeses.jpg)
+![Preparar una remesa](imatges/ca/61-remeses.webp)
 
 Després:
 
@@ -343,7 +311,7 @@ Després:
 2. Entra a la banca electrònica de l'entitat i puja'l a l'apartat d'adeutaments directes SEPA (esquema CORE). Si el banc rebutja el fitxer, canvia el **format** a la configuració d'Economia i torna a descarregar-lo.
 3. Quan el banc l'haja cobrada, prem **Marca-la com a cobrada**: tots els rebuts queden pagats.
 
-![Una remesa](imatges/ca/62-remesa.jpg)
+![Una remesa](imatges/ca/62-remesa.webp)
 
 Si el banc **retorna** un rebut, obri'l i prem **Retornat pel banc**. Tornarà a estar per cobrar: el pots cobrar en mà o posar-lo en la remesa següent. Mentre una remesa no s'ha pujat al banc, se'n pot traure un rebut o desfer-la.
 
@@ -351,9 +319,9 @@ Si el banc **retorna** un rebut, obri'l i prem **Retornat pel banc**. Tornarà a
 
 Obri el rebut, tria com s'ha pagat (**efectiu** o **transferència**) i la data, i prem **Pagat**. Amb **Imprimeix el rebut** es fa el rebut amb el logotip; si està pagat, porta el segell «PAGAT». Des del **Resum econòmic**, **Imprimeix els rebuts per cobrar en mà** els fa tots de colp, dos per full.
 
-![Fitxa d'un rebut](imatges/ca/63-rebut.jpg)
+![Fitxa d'un rebut](imatges/ca/63-rebut.webp)
 
-![Rebut imprés](imatges/ca/64-rebut-imprés.jpg)
+![Rebut imprés](imatges/ca/64-rebut-imprés.webp)
 
 Al llistat de **Rebuts**, els filtres mostren els que estan per cobrar, els retornats, els que cal cobrar en mà o els domiciliats que encara no són en cap remesa. A baix es veu el total. A la fitxa de cada persona hi ha els seus rebuts i la seua domiciliació.
 
@@ -367,7 +335,7 @@ Menú **Economia → Llibre de caixa**. Mostra tots els ingressos i despeses de 
 
 La resta (factures, subvencions, la quota de la federació…) s'apunta amb **+ Nou moviment**: data, ingrés o despesa, banc o caixa, categoria, concepte i import. A més de les categories generals, cada tipus d'entitat en té de pròpies: el **monument i el casal** en les falles, els **arbitratges i les llicències** en els clubs i les **activitats per a l'alumnat** en les AMPA. Al final de la pàgina es posa el **saldo inicial** de l'1 de gener del banc i de la caixa, perquè els saldos siguen els reals. Es pot vore només el banc o només la caixa, imprimir-lo i exportar-lo a CSV. El resum **per categories** serveix per a presentar els comptes a l'assemblea i per a la memòria.
 
-![Llibre de caixa](imatges/ca/76-caixa.jpg)
+![Llibre de caixa](imatges/ca/76-caixa.webp)
 
 ## 9. Loteria
 
@@ -377,19 +345,19 @@ Menú **Economia → Loteria → + Nou**. Escriu el nom del sorteig (per exemple
 
 Tria la persona i quants talonaris s'endú, i prem **Reparteix talonaris**. Teixit els numera seguits: el talonari 1 porta les participacions 0001–0050, el 2 les 0051–0100, etc.
 
-![Talonaris i liquidació](imatges/ca/65-loteria.jpg)
+![Talonaris i liquidació](imatges/ca/65-loteria.webp)
 
 ### Imprimir les participacions
 
 A la fitxa de cada talonari, **Imprimeix les participacions** fa les seues 50 participacions (8 per full), amb el logotip, els números, el preu i el número de participació. Des del resum es poden imprimir totes de colp. El text legal del peu es canvia a la fitxa del sorteig.
 
-![Participacions](imatges/ca/67-participacions.jpg)
+![Participacions](imatges/ca/67-participacions.webp)
 
 ### Liquidar
 
 Quan algú torna el talonari, obri'l i apunta quantes participacions ha **venut**, quantes **torna** sense vendre i quants **diners lliura**. El resum mostra el que falta per lliurar (en roig), quant cal comprar a l'administració de loteria i el que queda per a l'entitat.
 
-![Liquidar un talonari](imatges/ca/66-talonari.jpg)
+![Liquidar un talonari](imatges/ca/66-talonari.webp)
 
 ## 10. Seccions, equips o comissions
 
@@ -406,7 +374,7 @@ Menú **Seccions → + Nou**: el nom, el tipus si vols (en els clubs, la **categ
 3. Tria la **secció**, escriu la **funció o especialitat** si vols (vestuari, escenografia…; en els clubs, la **posició**) i tria el seu paper: **membre** o **responsable**, o **ajudant**. En els clubs, estos tres es diuen **esportista**, **entrenador/a** i **segon entrenador/a o delegat/da**.
 4. Prem **Desa**.
 
-![Alta en una secció](imatges/ca/18-membre-nou.jpg)
+![Alta en una secció](imatges/ca/18-membre-nou.webp)
 
 Una persona pot ser de diverses seccions: repeteix-ho per a cadascuna.
 
@@ -414,7 +382,7 @@ Una persona pot ser de diverses seccions: repeteix-ho per a cadascuna.
 
 Menú **Seccions** → obri la secció. Mostra tots els seus membres amb la funció i el paper de cadascú. Des d'ací també pots afegir membres amb **+ Afig**.
 
-![Fitxa d'una secció](imatges/ca/19-agrupacio-fitxa.jpg)
+![Fitxa d'una secció](imatges/ca/19-agrupacio-fitxa.webp)
 
 ### Llicències federatives (clubs esportius)
 
@@ -435,7 +403,7 @@ Abans d'inscriure ningú cal tindre el curs preparat. Ordre recomanat: **curs �
 
 Si l'entitat fa servir les **qualificacions** (apartat 12), a la fitxa del curs crea també els **períodes d'avaluació** (`1r trimestre`, `2n trimestre`…), amb l'ordre 1, 2, 3.
 
-![Fitxa del curs](imatges/ca/21-curs-fitxa.jpg)
+![Fitxa del curs](imatges/ca/21-curs-fitxa.webp)
 
 ### 11.2 Activitats i aules
 
@@ -452,7 +420,7 @@ Un monitor és una **persona** amb fitxa de monitor:
 2. A la seua fitxa, en l'apartat **Monitors i professorat**, prem **+ Afig**.
 3. Comprova la data d'alta i prem **Desa**.
 
-![Alta d'un monitor](imatges/ca/20-professor-nou.jpg)
+![Alta d'un monitor](imatges/ca/20-professor-nou.webp)
 
 **Certificat de delictes de naturalesa sexual.** És obligatori per a tothom que treballa amb menors, també els voluntaris. A la fitxa de monitor, posa'n la **data**. Si falta el d'algun monitor en actiu, Teixit ho avisa a l'inici i el llistat té el filtre **Sense certificat de delictes sexuals**.
 
@@ -464,19 +432,19 @@ Un **grup** és una activitat d'un curs amb un monitor: per exemple *Teatre · G
 2. Tria el **curs**, l'**activitat**, escriu el **nom** del grup i tria el **monitor** i l'**aula o espai**.
 3. Prem **Desa**. S'obri la fitxa del grup.
 
-![Nou grup](imatges/ca/22-grup-nou.jpg)
+![Nou grup](imatges/ca/22-grup-nou.webp)
 
 4. A l'apartat **Horari**, prem **+ Afig**, tria el **dia** i les hores d'inici i de fi, i prem **Desa**. Repeteix-ho si el grup es reunix més d'un dia.
 
-![Afegir una franja horària](imatges/ca/23-horari-nou.jpg)
+![Afegir una franja horària](imatges/ca/23-horari-nou.webp)
 
-![Fitxa del grup amb l'horari](imatges/ca/24-grup-fitxa.jpg)
+![Fitxa del grup amb l'horari](imatges/ca/24-grup-fitxa.webp)
 
 ### 11.5 Horari general
 
 El menú **Horari** mostra totes les activitats de la setmana. Pots filtrar per monitor o per aula per a imprimir l'horari de cadascú.
 
-![Horari general](imatges/ca/25-horari.jpg)
+![Horari general](imatges/ca/25-horari.webp)
 
 ### 11.6 Inscriure un alumne (pas a pas)
 
@@ -486,25 +454,25 @@ Exemple complet: una xiqueta nova que s'apunta a dues activitats. El tutor legal
 
 **Pas 2. La fitxa d'alumne.** A la fitxa de la persona, en l'apartat **Alumnat**, prem **+ Afig**. La persona ja ve triada: comprova la **data d'alta** i prem **Desa**.
 
-![Fitxa d'alumne nova](imatges/ca/07-alumne-nou.jpg)
+![Fitxa d'alumne nova](imatges/ca/07-alumne-nou.webp)
 
 **Pas 3. El tutor legal.** A la fitxa de l'alumne, en l'apartat **Tutors legals**, prem **+ Afig**. Tria el pare, la mare o el tutor (escriu el nom a la lupa), la **relació** i marca **Principal** si és el contacte principal. Prem **Desa** i repeteix-ho si hi ha més d'un tutor.
 
-![Afegir el tutor legal](imatges/ca/09-tutor-nou.jpg)
+![Afegir el tutor legal](imatges/ca/09-tutor-nou.webp)
 
 > Germans: tots dos alumnes poden tindre el mateix tutor. No cal donar-lo d'alta dues vegades.
 
 **Pas 4. La matrícula del curs.** A la fitxa de l'alumne, en l'apartat **Matrícules**, prem **+ Afig**, comprova que el **curs** és l'actual i prem **Desa**.
 
-![Matrícula nova](imatges/ca/10-matricula-nova.jpg)
+![Matrícula nova](imatges/ca/10-matricula-nova.webp)
 
 **Pas 5. Els grups.** A la fitxa de la matrícula, en l'apartat **Inscripcions als grups**, prem **+ Afig**, tria el **grup** i prem **Desa**. Repeteix-ho per a cada activitat.
 
-![Inscripció en un grup](imatges/ca/12-inscripcio-grup.jpg)
+![Inscripció en un grup](imatges/ca/12-inscripcio-grup.webp)
 
 La fitxa de l'alumne mostra el resum del curs: grups, monitors i horari (i les notes, si l'entitat fa servir les qualificacions), els tutors legals i les matrícules de tots els cursos.
 
-![Fitxa de l'alumne amb el resum del curs](imatges/ca/14-alumne-resum.jpg)
+![Fitxa de l'alumne amb el resum del curs](imatges/ca/14-alumne-resum.webp)
 
 Quan un alumne deixa les activitats, edita la seua fitxa d'alumne i posa l'estat **Baixa** i la **data de baixa**. Si a més ja no és res de l'entitat, desmarca **Actiu** a la seua fitxa de persona.
 
@@ -518,7 +486,7 @@ Quan s'acosta el curs nou no cal crear-ho tot des de zero:
 4. Deixa marcat **Marca el curs nou com a curs actual** i, si vols, **Tanca** el curs anterior.
 5. Prem **Crea el curs nou**.
 
-![Assistent per a passar de curs](imatges/ca/50-passa-curs.jpg)
+![Assistent per a passar de curs](imatges/ca/50-passa-curs.webp)
 
 Després només cal ajustar el que canvie (un grup nou, un altre monitor…) i inscriure els alumnes als grups. El curs anterior es conserva sencer.
 
@@ -534,7 +502,7 @@ Este mòdul és per a les entitats que avaluen les activitats (una escola de dan
 4. Si el monitor ha passat observacions, escriu-les a **Observacions acadèmiques**. Ixen al butlletí.
 5. Prem **Desa**.
 
-![Introduir les notes](imatges/ca/27-qualificacions.jpg)
+![Introduir les notes](imatges/ca/27-qualificacions.webp)
 
 Per a esborrar una nota, deixa en blanc la nota i les observacions i desa.
 
@@ -546,7 +514,7 @@ Per a esborrar una nota, deixa en blanc la nota i les observacions i desa.
 4. Si vols, escriu un **text al peu** (per exemple, la data de la mostra de final de trimestre). Es recorda per a la pròxima vegada.
 5. Prem **Prepara els butlletins**: s'obri un full A4 per alumne. Prem **Imprimeix el butlletí** (dalt de tot).
 
-![Butlletí preparat per a imprimir](imatges/ca/29-butlleti-impres.jpg)
+![Butlletí preparat per a imprimir](imatges/ca/29-butlleti-impres.webp)
 
 > Per a guardar-los en PDF (per a enviar-los per correu), tria **Microsoft Print to PDF** com a impressora.
 
@@ -558,7 +526,7 @@ Per a esborrar una nota, deixa en blanc la nota i les observacions i desa.
 2. Omple el **número d'inventari** i el **tipus** (obligatoris: carpa, equip de so, porteries…) i la resta de dades: marca, model, número de sèrie, estat, ubicació i data d'adquisició.
 3. Prem **Desa**.
 
-![Alta de material](imatges/ca/30-instrument-nou.jpg)
+![Alta de material](imatges/ca/30-instrument-nou.webp)
 
 A la fitxa de cada article hi ha l'historial de **préstecs** i de **manteniments** (reparacions, revisions…).
 
@@ -568,13 +536,13 @@ A la fitxa de cada article hi ha l'historial de **préstecs** i de **manteniment
 2. Tria la **persona**, comprova la **data d'entrega** i posa la **devolució prevista**, l'estat en què s'entrega i la fiança si n'hi ha.
 3. Prem **Desa**.
 
-![Nou préstec](imatges/ca/31-cessio-nova.jpg)
+![Nou préstec](imatges/ca/31-cessio-nova.webp)
 
 Un mateix article no es pot deixar a dues persones alhora. Quan el tornen, obri el préstec, prem **Edita**, posa la **data de devolució** i l'**estat en la devolució** i desa: torna a estar disponible.
 
 Menú **Préstecs de material**: amb el filtre pots vore els **préstecs actius** o només els que tenen la **devolució vençuda**. Els vençuts també apareixen a l'inici.
 
-![Llistat de préstecs](imatges/ca/33-cessions-llista.jpg)
+![Llistat de préstecs](imatges/ca/33-cessions-llista.webp)
 
 ### Roba i articles
 
@@ -588,9 +556,9 @@ Quan es torna un préstec, s'edita el lliurament i es posa la **data de devoluci
 
 La pantalla mostra, per a cada article i talla, el **total** de peces que té l'entitat (les comprades, menys les venudes i les gratuïtes), les que estan **en préstec** i les **disponibles**. Si d'una talla s'han lliurat més de les que consten com a comprades, el número ix en roig: falta apuntar alguna compra. Els lliuraments de cada persona apareixen també a la seua fitxa.
 
-![Roba per talla](imatges/ca/78-uniformes.jpg)
+![Roba per talla](imatges/ca/78-uniformes.webp)
 
-![Lliurament d'un article](imatges/ca/79-uniforme-lliurament.jpg)
+![Lliurament d'un article](imatges/ca/79-uniforme-lliurament.webp)
 
 > Teixit no fa rebuts de les vendes de roba. Si cal, apunta els diners al llibre de caixa (apartat 8.7).
 
@@ -598,11 +566,11 @@ La pantalla mostra, per a cada article i talla, el **total** de peces que té l'
 
 Menú **Documents**. Ací es guarden els estatuts, el reglament de règim intern, les actes signades, la inscripció al registre, el CIF, les pòlisses d'assegurança, els contractes, els convenis, les llicències i permisos…
 
-![Documents](imatges/ca/71-documents.jpg)
+![Documents](imatges/ca/71-documents.webp)
 
 Per a afegir-ne un, prem **+ Nou**, escriu el títol, tria el tipus i el **fitxer** (PDF, imatge, Word, Excel, LibreOffice o text, fins a 20 MB). Si és d'una persona (un contracte, per exemple), tria-la: apareixerà també a la seua fitxa. Si el document caduca (una assegurança, una llicència, un conveni), posa la **data de caducitat**: Teixit avisarà a l'inici 60 dies abans.
 
-![Afegir un document](imatges/ca/72-document-nou.jpg)
+![Afegir un document](imatges/ca/72-document-nou.webp)
 
 El fitxer es guarda **dins de Teixit**, no en una carpeta a part. Així entra a les còpies de seguretat (i, si les xifreu, també va xifrat). A canvi, les còpies ocupen més si hi guardeu molts documents grans.
 
@@ -610,7 +578,7 @@ El fitxer es guarda **dins de Teixit**, no en una carpeta a part. Així entra a 
 
 Des del llistat de documents, **Registre d'activitats de tractament (RGPD)** fa el document que el Reglament de protecció de dades demana a les entitats. Teixit el prepara amb les dades que tracta l'entitat (només dels mòduls actius) i les mesures de seguretat que té configurades. És un model orientatiu: reviseu-lo, adapteu-lo i guardeu-lo signat amb la documentació de l'entitat.
 
-![Registre d'activitats de tractament](imatges/ca/75-rgpd.jpg)
+![Registre d'activitats de tractament](imatges/ca/75-rgpd.webp)
 
 ## 15. Comunicats
 
@@ -623,13 +591,13 @@ Menú **Comunicats**. Teixit no envia correus ni es connecta a Internet: prepara
 
 Les persones del grup que no tenen correu apareixen en una llista a part, per a avisar-les d'una altra manera.
 
-![Comunicats](imatges/ca/74-comunicats.jpg)
+![Comunicats](imatges/ca/74-comunicats.webp)
 
 ## 16. Llistats, certificats i memòria
 
 Menú **Documents i dades → Llistats i informes**. Cada llistat es pot vore a la pantalla, **imprimir** (o guardar en PDF) i **exportar a CSV** per a obrir-lo amb Excel.
 
-![Llistats i informes](imatges/ca/43-llistats.jpg)
+![Llistats i informes](imatges/ca/43-llistats.webp)
 
 ### Socis per número i membres per funció
 
@@ -640,13 +608,13 @@ Menú **Documents i dades → Llistats i informes**. Cada llistat es pot vore a 
 
 Tria el curs i el grup. Ix cada alumne amb l'edat, el pare, la mare o el tutor/a i els seus telèfons i correus. És el llistat que necessiten els monitors. En groc, els que no autoritzen fotos.
 
-![Alumnes d'un grup amb els telèfons dels tutors](imatges/ca/44-llistat-grup.jpg)
+![Alumnes d'un grup amb els telèfons dels tutors](imatges/ca/44-llistat-grup.webp)
 
 ### Drets d'imatge
 
 Qui pot eixir en fotos i vídeos: el resum (quants autoritzen, quants no i quants falten) i la llista, amb els que no autoritzen en groc. Abans d'un acte, imprimeix-la per a qui fa les fotos. El botó **Fulls de consentiment dels pendents** imprimeix els fulls que falten.
 
-![Drets d'imatge](imatges/ca/45-drets-imatge.jpg)
+![Drets d'imatge](imatges/ca/45-drets-imatge.webp)
 
 ### Etiquetes per a les circulars
 
@@ -655,7 +623,7 @@ Qui pot eixir en fotos i vídeos: el resum (quants autoritzen, quants no i quant
 3. Si el full ja està començat, indica quantes etiquetes **ja s'han gastat**.
 4. Prem **Prepara les etiquetes** i imprimeix amb la **mida real (100 %)** i **sense marges**.
 
-![Etiquetes](imatges/ca/46-etiquetes.jpg)
+![Etiquetes](imatges/ca/46-etiquetes.webp)
 
 > Fes primer una prova en paper normal amb **Mostra les vores** i posa-la damunt del full d'etiquetes a contrallum.
 
@@ -663,7 +631,7 @@ Qui pot eixir en fotos i vídeos: el resum (quants autoritzen, quants no i quant
 
 Tria l'**any** i els **anys que es premien** (per defecte 25 i 50). Ix qui els complix eixe any, com a soci i com a membre d'una secció. Marca **Mostra també la llista completa** per a vore tothom ordenat per antiguitat.
 
-![Antiguitat i insígnies](imatges/ca/47-antiguitat.jpg)
+![Antiguitat i insígnies](imatges/ca/47-antiguitat.webp)
 
 L'antiguitat es compta des de la data d'alta. Per als membres de les seccions, des de la primera alta en qualsevol secció.
 
@@ -671,17 +639,15 @@ L'antiguitat es compta des de la data d'alta. Per als membres de les seccions, d
 
 Tria el curs. Ix el que solen demanar l'ajuntament, la Diputació o la Generalitat: participants en les activitats per edat (amb menors i majors), per activitat i per població, monitors i grups, membres de cada secció (amb els menors), socis per tipus i les altes i baixes de l'any.
 
-![Dades per a la memòria anual](imatges/ca/48-memoria.jpg)
+![Dades per a la memòria anual](imatges/ca/48-memoria.webp)
 
 ### Certificats
 
 A la fitxa d'un **soci**, d'un **membre d'una secció** o d'una **matrícula** hi ha el botó **🖨 Certificat**. Ix un certificat en A4 amb el logotip, les dades de la persona i la data de hui, preparat per a signar. Serveix per a beques, ajudes, la feina…
 
-![Certificat de soci](imatges/ca/49-certificat.jpg)
+![Certificat de soci](imatges/ca/49-certificat.webp)
 
-La primera vegada, a **Configuració → Certificats i fulls de consentiment**, posa qui signa (normalment el secretari/ària), el càrrec i, si voleu el vist i plau, el president/a. Si es deixa buit, s'agafa de la junta actual. Posa també la **població** de l'entitat, que ix al final del certificat.
-
-![Dades dels certificats a la configuració](imatges/ca/40-config-documents.jpg)
+Qui signa els certificats i la població que hi ix els posa l'administrador/a a la configuració (**Manual d'administració**). Si no s'hi ha posat ningú, s'agafa de la junta actual.
 
 ## 17. Importar dades des d'Excel
 
@@ -693,7 +659,7 @@ Si l'entitat ja té els socis o l'alumnat en un Excel, no cal tornar-los a escri
 2. Tria el fitxer: Excel (**.xlsx**) o **CSV**. Si és un .xls antic, obri'l amb Excel i guarda'l com a .xlsx.
 3. Deixa marcat **La primera fila té els títols de les columnes** si és el cas, i prem **Següent**.
 
-![Importar: triar el fitxer](imatges/ca/51-importa.jpg)
+![Importar: triar el fitxer](imatges/ca/51-importa.webp)
 
 Si comences de zero, baixa una **plantilla**, omple-la i puja-la.
 
@@ -703,7 +669,7 @@ Teixit reconeix les columnes habituals (Nom, Cognoms, DNI, Telèfon, Data de nai
 
 Si el full porta el **compte bancari** (IBAN o el número antic de 20 xifres), Teixit crea la domiciliació de cada persona major d'edat; en importar alumnat, la del pare, la mare o el tutor/a. Si hi ha una columna amb la **data de signatura** de la domiciliació, també l'agafa. A les persones que ja tenen una domiciliació amb un altre IBAN no se'ls canvia.
 
-![Importar: què és cada columna](imatges/ca/52-importa-columnes.jpg)
+![Importar: què és cada columna](imatges/ca/52-importa-columnes.webp)
 
 ### Pas 3. Revisar i importar
 
@@ -718,9 +684,9 @@ Abans d'importar res, Teixit mostra cada fila:
 
 A la columna **Avisos** veuràs, per exemple, dates que no s'entenen o persones a qui falten dades obligatòries (quedaran en groc, com sempre).
 
-![Importar: revisió abans d'importar](imatges/ca/53-importa-revisa.jpg)
+![Importar: revisió abans d'importar](imatges/ca/53-importa-revisa.webp)
 
-Prem **Importa**. Abans d'importar, Teixit fa una còpia de seguretat («Abans d'importar»): si el resultat no és el que esperaves, la pots restaurar (apartat 18).
+Prem **Importa**. Abans d'importar, Teixit fa una còpia de seguretat («Abans d'importar»): si el resultat no és el que esperaves, l'administrador/a la pot restaurar (Manual d'administració).
 
 ## 18. Còpies de seguretat
 
@@ -733,60 +699,20 @@ Totes les dades estan en un sol fitxer. Teixit en fa còpies automàticament:
 | Quan prems **Fes una còpia ara** | Manual |
 | Just abans de restaurar | Abans de restaurar |
 | Just abans d'importar dades | Abans d'importar |
+| En obrir per primera vegada una versió nova de Teixit | Abans d'actualitzar |
 
 Menú **Administració → Còpies de seguretat**:
 
-![Còpies de seguretat](imatges/ca/34-copies.jpg)
+![Còpies de seguretat](imatges/ca/34-copies.webp)
 
-### Quantes còpies es guarden
+### Fer i baixar còpies
 
-Les còpies automàtiques no s'acumulen sense fi. Teixit guarda:
+- **Fes una còpia ara**: fa una còpia en el moment. Convé fer-ne una abans d'un canvi gran.
+- **Baixa** (a la llista): descarrega una còpia, per exemple per a guardar-la en un USB.
 
-- **totes** les dels últims 7 dies;
-- **una per setmana** de les últimes 5 setmanes;
-- **una per mes** fins al límit que tries a **Quant de temps es guarden les còpies automàtiques** (1 any si no es canvia).
-
-Amb una còpia cada dia, això són unes vint còpies que arriben a un any arrere. Les manuals i les d'«abans de restaurar» o «abans d'importar» no s'esborren soles. La mateixa rotació es fa a la carpeta externa.
-
-La pantalla diu quant ocupa la base de dades (i quant d'això són documents) i quant ocupen totes les còpies. Si la base de dades passa de 200 MB, normalment pels documents arxivats, Teixit avisa: cada còpia ocupa el mateix, així que cal comprovar que hi ha prou espai a l'ordinador i a la carpeta externa.
-
-### Configurar la carpeta externa (molt important)
-
-Si l'ordinador s'espatlla o el roben, les còpies que hi ha dins es perden amb ell. Cal guardar-les també fora:
-
-1. Connecta un **disc o llapis USB**, o tria una carpeta **sincronitzada amb el núvol** (OneDrive, Google Drive…).
-2. Crea-hi una carpeta, per exemple `Copies Teixit`, i copia'n la ruta des de l'Explorador de Windows (per exemple `E:\Copies Teixit`).
-3. A **Configuració de les còpies**, enganxa la ruta a **Carpeta externa**.
-4. Prem **Desa**.
-
-![Carpeta externa de còpies](imatges/ca/35-copies-carpeta.jpg)
-
-A partir d'ara, cada còpia es guarda també en esta carpeta. Si no està disponible (per exemple, el USB no està connectat) o fa més de 7 dies que no s'hi guarda res, l'inici ho avisa.
-
-### Llista de còpies, restaurar i eliminar
-
-![Llista de còpies](imatges/ca/36-copies-llista.jpg)
-
-- **Baixa**: descarrega aquella còpia.
-- **Restaura** (només l'administrador/a): substitueix totes les dades actuals per les de la còpia. Abans, Teixit guarda una còpia de les dades actuals («Abans de restaurar»), de manera que sempre es pot tornar arrere. Després cal tornar a entrar.
-- **Elimina** (només l'administrador/a): esborra la còpia.
-
-Per a restaurar una còpia guardada fora (per exemple, des del USB), utilitza **Restaura des d'un fitxer**, al final de la pàgina.
+Triar la carpeta externa (USB o núvol), xifrar les còpies, decidir quant de temps es guarden i **restaurar** una còpia ho fa l'administrador/a (**Manual d'administració**).
 
 > Les còpies contenen dades personals, també de menors. Guarda-les en un lloc segur.
-
-### Còpies externes xifrades
-
-Si la carpeta externa és un llapis USB o el núvol, convé xifrar-les: si es perd el USB, ningú podrà obrir les dades sense la contrasenya.
-
-1. A **Configuració de les còpies**, marca **Xifra amb contrasenya les còpies de la carpeta externa**.
-2. Escriu una contrasenya (almenys 8 caràcters) dues vegades i prem **Desa**.
-
-![Còpies externes xifrades](imatges/ca/54-copies-xifrat.jpg)
-
-A partir d'ara, les còpies de la carpeta externa acaben en `.xifrat`. Les de l'ordinador no es xifren. Per a restaurar-ne una, a **Restaura des d'un fitxer** tria el fitxer `.xifrat` i escriu la contrasenya.
-
-> **Apunta la contrasenya en paper** junt amb el codi de recuperació. Si s'oblida, les còpies xifrades no es poden recuperar.
 
 ## 19. Usuaris i contrasenyes
 
@@ -799,58 +725,21 @@ Cada usuari pot canviar la seua quan vulga:
 3. Escriu la **contrasenya nova** dues vegades (almenys 8 caràcters).
 4. Prem **Desa**.
 
-Si no recordes l'actual, no la pots canviar ací: l'administratiu/va ha de demanar-ne una de nova a l'administrador/a, i l'administrador/a pot recuperar l'accés des de l'entrada (vegeu més avall).
+Si no recordes l'actual, no la pots canviar ací: demana a l'administrador/a que et pose una contrasenya nova.
 
-![El meu compte](imatges/ca/38-meu-compte.jpg)
-
-### Gestionar els comptes (administrador/a)
-
-Menú **Administració → Usuaris**. Obri un compte per a:
-
-- canviar-li el **rol** (administrador/a o administratiu/va);
-- posar-li una **contrasenya nova** si l'ha oblidada (deixa-la en blanc per a no canviar-la);
-- desactivar-lo (desmarca **Actiu**) o eliminar-lo.
-
-![Editar un usuari](imatges/ca/37-usuari.jpg)
-
-Sempre ha de quedar almenys un administrador actiu.
-
-### Si l'administrador/a oblida la contrasenya
-
-1. A la pantalla d'entrada, prem **Eres l'administrador/a? Recupera l'accés**.
-2. Escriu el teu **usuari**, el **codi de recuperació** que vas guardar i la **contrasenya nova** dues vegades.
-3. Prem **Canvia la contrasenya**. Entraràs directament al programa.
-4. Teixit mostra un **codi de recuperació nou**, perquè l'anterior ja no val. Imprimeix-lo i guarda'l en lloc de l'antic.
-
-![He oblidat la contrasenya](imatges/ca/00b-recuperacio.jpg)
-
-**Si no trobes el codi**, prem **No tinc el codi de recuperació** a la mateixa pàgina i segueix els passos:
-
-1. Obri l'Explorador de fitxers i ves a la carpeta de dades de Teixit. La pàgina mostra la ruta exacta: copia-la a la barra d'adreces de l'Explorador.
-2. Crea-hi un fitxer nou (botó dret → **Nou → Document de text**) i posa-li de nom `recupera-acces`.
-3. Torna a la pàgina de Teixit i recarrega-la (tecla **F5**). Ja no demanarà el codi: escriu l'usuari i la contrasenya nova.
-
-El fitxer només val durant una hora i s'esborra sol en usar-lo. Este sistema és segur perquè només pot crear el fitxer qui ja té accés a l'ordinador i a les dades.
-
-### Codi de recuperació
-
-Si has perdut el codi o creus que algú l'ha vist, ves a **Administració → Usuaris** i, a baix, prem **Genera un codi nou**. L'anterior deixa de valdre.
-
-Totes les recuperacions, també les que fallen, queden al **Registre d'activitat**.
-
-### Registre d'activitat
-
-Menú **Administració → Registre d'activitat** (només l'administrador/a): qui ha creat, modificat o eliminat cada cosa, les entrades al programa, els documents impresos, els canvis de configuració i les còpies.
+![El meu compte](imatges/ca/38-meu-compte.webp)
 
 ## 20. Ajuda
 
-El menú **Ajuda** mostra este manual dins del programa. Els botons de dalt obrin el manual i la guia d'instal·lació en PDF.
+El menú **Ajuda** mostra este manual dins del programa. Els botons de dalt obrin el manual i la guia d'instal·lació en PDF, el registre de canvis, la privacitat i el resum de la llicència. L'administrador/a hi veu, a més, una pestanya amb el **Manual d'administració**.
 
-![Ajuda](imatges/ca/39-ajuda.jpg)
+**Hi ha versió nova?** obri al navegador la pàgina de l'última versió de Teixit. Teixit no es connecta a Internet ni comprova res sol: compara el número d'eixa pàgina amb el teu, que apareix just davall. Si és més alt, avisa l'administrador/a: la versió nova s'instal·la damunt i les dades es conserven.
+
+![Ajuda](imatges/ca/39-ajuda.webp)
 
 ## 21. Preguntes freqüents
 
-**Ens hem equivocat de tipus d'entitat. Cal tornar a instal·lar?** No. Canvia'l a **Configuració** i, si cal, activa o desactiva els mòduls a **Mòduls i avisos** (apartat 4). Les dades no es perden.
+**Ens hem equivocat de tipus d'entitat. Cal tornar a instal·lar?** No. L'administrador/a el canvia a **Configuració** i, si cal, activa o desactiva els mòduls (Manual d'administració). Les dades no es perden.
 
 **He donat d'alta una persona dues vegades. Què faig?** Si la segona no té res vinculat, obri-la i prem **Elimina**. Si ja té coses vinculades, edita-les perquè apunten a la persona bona i després elimina la repetida.
 
@@ -860,11 +749,11 @@ El menú **Ajuda** mostra este manual dins del programa. Els botons de dalt obri
 
 **No em deixa eliminar una cosa.** Té historial relacionat. Posa-la de baixa o com a inactiva (apartat 3).
 
-**No veig el menú d'activitats (o de loteria, o de roba).** Està desactivat: activa'l a **Administració → Mòduls i avisos** (apartat 4).
+**No veig el menú d'activitats (o de loteria, o de roba).** Està desactivat: l'administrador/a el pot activar a **Administració → Mòduls i avisos**.
 
 **Un alumne no apareix en un grup.** Comprova que té matrícula en el curs actual, en estat Actiu, i que està inscrit en aquell grup (apartat 11.6, pas 5).
 
-**L'administrador/a ha oblidat la contrasenya.** Prem **Recupera l'accés** a la pantalla d'entrada i utilitza el codi de recuperació. Si no el trobes, també hi ha una manera sense codi (apartat 19).
+**L'administrador/a ha oblidat la contrasenya.** Prem **Recupera l'accés** a la pantalla d'entrada i utilitza el codi de recuperació. Si no el trobes, també hi ha una manera sense codi (Manual d'administració).
 
 **Hem de passar a Teixit els socis que tenim en Excel.** Utilitza **Importa dades** (apartat 17): no cal escriure'ls a mà, i les persones que ja hi ha no es dupliquen.
 

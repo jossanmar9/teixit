@@ -98,3 +98,8 @@ h=op2.open(B+'?r=economia').read().decode(); ok('Economia' in h or 'Economía' i
 try:
     h=op2.open(B+'?r=economia_config').read().decode(); ok(False,'administratiu no pot configurar')
 except urllib.error.HTTPError as e: ok(e.code==403, 'administratiu no pot configurar (403)')
+# Manuals: l'administrador/a veu les dues pestanyes; l'usuari/ària, només el manual d'usuari
+adm=re.compile(r'6\. Actuali(?:tz|z)ar Teixit')
+h=G('r=ajuda'); ok('manual=admin' in h and not adm.search(h), 'ajuda: pestanya del manual d\'administració i manual d\'usuari per defecte')
+h=G('r=ajuda&manual=admin'); ok(adm.search(h), 'ajuda: l\'administrador/a veu el manual d\'administració')
+h=op2.open(B+'?r=ajuda&manual=admin').read().decode(); ok('manual=admin' not in h and not adm.search(h) and 'manual-administraci' not in h, 'ajuda: l\'usuari/ària no veu el manual d\'administració')
