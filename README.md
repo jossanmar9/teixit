@@ -9,6 +9,14 @@
 
 # Teixit
 
+> ## ➡️ Teixit continua en [Compàs](https://github.com/jossanmar9/compas)
+>
+> Tot el que feia Teixit (associacions culturals, falles, clubs esportius, AMPA i penyes) s'ha integrat en **[Compàs 2.0](https://github.com/jossanmar9/compas/releases/latest)**, la gestió lliure per a associacions, que a més hi afig colles, comparses, federacions, activitats amb inscripcions, categories d'edat, llicències, càrrecs de festa i subvencions. **Teixit ja no s'actualitza** i este repositori es conserva només com a arxiu.
+>
+> Si heu començat a gastar Teixit, instal·leu Compàs i porteu-hi les persones i els socis amb **Exporta CSV** (a Teixit) i **Importa dades** (a Compàs).
+>
+> *Teixit continúa en Compàs: todo lo que hacía Teixit se ha integrado en [Compàs 2.0](https://github.com/jossanmar9/compas/releases/latest), la gestión libre para asociaciones. Teixit ya no se actualiza y este repositorio se conserva solo como archivo. Si habéis empezado a usar Teixit, instalad Compàs y llevad las personas y los socios con «Exportar CSV» (en Teixit) e «Importar datos» (en Compàs).*
+
 **Gestió lliure per a associacions.** Teixit és un programa per a un ordinador amb Windows o Linux que porta en un sol lloc la gestió interna d'una associació o entitat sense ànim de lucre: les persones i els socis, la junta directiva i les actes, les quotes, els rebuts i les remeses bancàries, la loteria, el llibre de caixa, els documents, els comunicats, les seccions o equips, les activitats i cursos, l'inventari i la roba.
 
 Està pensat per a associacions culturals, **falles, gaiates i fogueres**, **clubs esportius**, **AMPA/AFA** i **penyes** d'un club de futbol o d'un altre esport, i per a qui porta la secretaria o la tresoreria encara que no siga informàtic: s'instal·la com qualsevol altre programa, funciona sense Internet i les dades es queden a l'ordinador de l'entitat.
@@ -23,7 +31,7 @@ Està pensat per a associacions culturals, **falles, gaiates i fogueres**, **clu
 
 Un projecte de **José Vicente Sanjuan**, germà de [Compàs](https://github.com/jossanmar9/compas), el programa per a societats musicals.
 
-🌐 **Web:** [jossanmar9.github.io/teixit](https://jossanmar9.github.io/teixit/) · ⬇️ **Descàrrega:** [última versió](../../releases/latest) · 📖 **Manual:** [en línia](docs/manual-usuari.md) · 🔒 [Privacitat](PRIVACITAT.md)
+⬇️ **Descàrrega:** [última versió](../../releases/latest) · 📖 **Manual:** [en línia](docs/manual-usuari.md) · 🔒 [Privacitat](PRIVACITAT.md)
 
 ## Contingut
 

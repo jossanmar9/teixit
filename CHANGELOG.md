@@ -2,6 +2,10 @@
 
 Tots els canvis destacats de Teixit s'apunten ací. Les versions segueixen el format `MAJOR.MENOR.CORRECCIÓ`.
 
+## Projecte tancat - 2026-10-23
+
+Teixit s'ha integrat en [Compàs 2.0](https://github.com/jossanmar9/compas), la gestió lliure per a associacions. Teixit ja no tindrà versions noves; la 1.1.1 és l'última.
+
 ## [1.1.1] - 2026-10-22
 
 ### Seguretat

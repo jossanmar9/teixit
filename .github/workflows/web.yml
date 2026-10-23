@@ -20,16 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          extensions: gd, mbstring
-          coverage: none
-      # Els PDF dels manuals no es guarden al repositori: es fan ací, amb el Chrome del servidor de GitHub
-      - name: Genera els manuals en PDF
-        run: bash eines/pdf.sh
-      - name: Genera la web
-        run: php eines/web.php _site
+      # Teixit s'ha integrat en Compàs 2.0: la web només envia a la de Compàs
+      - name: Prepara la pàgina de redirecció
+        run: |
+          cp -r eines/web-final _site
+          cp app/assets/icona.png _site/icona.png
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
